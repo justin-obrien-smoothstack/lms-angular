@@ -5,8 +5,8 @@ import { AdministratorComponent } from "./administrator/administrator.component"
 import { OverrideComponent } from "./administrator/override/override.component";
 
 const routes: Routes = [
-  { path: "lms/administrator", component: AdministratorComponent },
-  { path: "lms/administrator/loan", component: OverrideComponent },
+  { path: "lms/admin", component: AdministratorComponent },
+  { path: "lms/admin/loans", component: OverrideComponent },
 ];
 
 @NgModule({
