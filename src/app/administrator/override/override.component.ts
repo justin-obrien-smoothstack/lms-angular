@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { LmsService } from 'src/app/common/o/services/lms.service';
 
 @Component({
   selector: "app-override",
@@ -8,7 +9,7 @@ import { Component, OnInit } from "@angular/core";
 export class OverrideComponent implements OnInit {
   overridableLoans: any;
 
-  constructor(private overrideService: OverrideService) {}
+  constructor(private lmsService: LmsService) {}
 
   ngOnInit() {}
 }
