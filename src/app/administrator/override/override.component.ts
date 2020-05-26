@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { LmsService } from 'src/app/common/o/services/lms.service';
+import { OLmsService } from "src/app/common/o/services/oLms.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-override",
@@ -9,7 +10,23 @@ import { LmsService } from 'src/app/common/o/services/lms.service';
 export class OverrideComponent implements OnInit {
   overridableLoans: any;
 
-  constructor(private lmsService: LmsService) {}
+  constructor(private lmsService: OLmsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.readOverridableLoans();
+  }
+
+  readOverridableLoans() {
+    this.lmsService
+      .get(
+        `${environment.adminBackendUrl}${environment.readOverridableLoansUri}`
+      )
+      .subscribe(
+        (result) => (this.overridableLoans = result),
+        (error) => {
+          this.overridableLoans = [];
+          // do something with a logger here
+        }
+      );
+  }
 }
