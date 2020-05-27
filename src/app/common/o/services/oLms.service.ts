@@ -12,6 +12,10 @@ export class OLmsService {
     return this.httpClient.get(url);
   }
 
+  put(url: string) {
+    return this.httpClient.put(url, "");
+  }
+
   setBorrowerNameOf(input: any) {
     this.httpClient
       .get(
@@ -42,7 +46,9 @@ export class OLmsService {
 
   setBookTitleOf(input: any) {
     this.httpClient
-      .get(`${environment.adminBackendUrl}${environment.readBookUri}/${input.bookId}`)
+      .get(
+        `${environment.adminBackendUrl}${environment.readBookUri}/${input.bookId}`
+      )
       .subscribe(
         (result) => (input.bookTitle = result[0].title),
         (error) => {

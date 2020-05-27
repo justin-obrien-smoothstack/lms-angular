@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
 import { environment } from "src/environments/environment";
+import * as moment from "moment";
 
 @Component({
   selector: "app-override",
@@ -32,5 +33,11 @@ export class OverrideComponent implements OnInit {
           // do something with a logger here
         }
       );
+  }
+
+  doOverride(loan: any) {
+    const dateOut = moment(loan.dateOut).format("YYYY-MM-DDThh_mm_ss"),
+      loanUri = `/loans/book/${loan.bookId}/borrower/${loan.cardNo}/branch/${loan.branchId}/dateout/${dateOut}`;
+    this.lmsService.put(loanUri);
   }
 }
