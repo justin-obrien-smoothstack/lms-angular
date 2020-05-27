@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  adminUrl: "http://localhost:3000/lms/admin",
+  libUrl: "http://localhost:3001/lms/librarian",
+  borrUrl: "http://localhost:3002/lms/borrower",
+  readBanchesURI: "/branches",
+  updateBranchesURI: "/branches"
 };
 
 /*
@@ -14,3 +19,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+//http://localhost:3001/lms/librarian/branches/1/copies
