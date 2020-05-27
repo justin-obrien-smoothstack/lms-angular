@@ -13,9 +13,9 @@
       <td>{{ l.borrowerName }}</td>
       <td>{{ l.branchName }}</td>
       <td>{{ l.bookTitle }}</td>
-      <td>{{ l.dateOut }}</td>
-      <td>{{ l.dueDate }}</td>
-      <td>{{ l.dateIn }}</td>
+      <td>{{ l.dateOut | date: "medium" }}</td>
+      <td>{{ l.dueDate | date: "medium" }}</td>
+      <td>{{ l.dateIn | date: "medium" }}</td>
     </tr>
   </tbody>
 </table>
