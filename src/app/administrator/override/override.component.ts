@@ -8,7 +8,7 @@ import { environment } from "src/environments/environment";
   styleUrls: ["./override.component.css"],
 })
 export class OverrideComponent implements OnInit {
-  overridableLoans: any;
+  overridableLoans: any[];
 
   constructor(private lmsService: OLmsService) {}
 
@@ -22,7 +22,11 @@ export class OverrideComponent implements OnInit {
         `${environment.adminBackendUrl}${environment.readOverridableLoansUri}`
       )
       .subscribe(
-        (result) => (this.overridableLoans = result),
+        (result: object[]) => {
+          this.overridableLoans = result;
+          for (const loan of this.overridableLoans)
+            this.lmsService.processLoan(loan);
+        },
         (error) => {
           this.overridableLoans = [];
           // do something with a logger here

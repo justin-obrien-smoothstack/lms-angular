@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   adminBackendUrl: "http://localhost:3000/lms",
-  readBorrowersUri: "/admin/borrowers",
+  readBookUri: "/admin/books",
+  readBorrowerUri: "/admin/borrower",
+  readBranchUri: "/admin/branches",
   readOverridableLoansUri: "/admin/loans",
 };
 
