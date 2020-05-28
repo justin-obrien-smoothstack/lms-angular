@@ -19,8 +19,15 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.css"],
-            "scripts": []
+            "styles": [
+              "./node_modules/bootswatch/dist/lux/bootstrap.min.css",
+              "src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
