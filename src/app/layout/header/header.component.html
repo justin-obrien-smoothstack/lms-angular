@@ -1,15 +1,41 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#">LMS</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarColor01"
+      aria-controls="navbarColor01"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown" [ngClass]="{'show' : adminShow}" (mouseover)="adminShow=true" (mouseout)="adminShow=false">
-          <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Admin</a>
-          <div class="dropdown-menu " [ngClass]="{'show' : adminShow}"  x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 37px, 0px); top: 0px; left: 0px; will-change: transform;">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            data-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="true"
+            >Admin</a
+          >
+          <div
+            class="dropdown-menu"
+            x-placement="bottom-start"
+            style="
+              position: absolute;
+              transform: translate3d(0px, 37px, 0px);
+              top: 0px;
+              left: 0px;
+              will-change: transform;
+            "
+          >
             <a class="dropdown-item" href="#">Author</a>
             <a class="dropdown-item" href="#">Borrower</a>
             <a class="dropdown-item" href="#">Book</a>
