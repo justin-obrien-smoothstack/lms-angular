@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BorrowerComponent } from './borrower.component';
+import { AdminBranchComponent } from './admin-branch.component';
 
-describe('BorrowerComponent', () => {
-  let component: BorrowerComponent;
-  let fixture: ComponentFixture<BorrowerComponent>;
+describe('AdminBranchComponent', () => {
+  let component: AdminBranchComponent;
+  let fixture: ComponentFixture<AdminBranchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BorrowerComponent ]
+      declarations: [ AdminBranchComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BorrowerComponent);
+    fixture = TestBed.createComponent(AdminBranchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

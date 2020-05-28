@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PublisherComponent } from './publisher.component';
+import { AdminPublisherComponent } from './admin-publisher.component';
 
-describe('PublisherComponent', () => {
-  let component: PublisherComponent;
-  let fixture: ComponentFixture<PublisherComponent>;
+describe('AdminPublisherComponent', () => {
+  let component: AdminPublisherComponent;
+  let fixture: ComponentFixture<AdminPublisherComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PublisherComponent ]
+      declarations: [ AdminPublisherComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PublisherComponent);
+    fixture = TestBed.createComponent(AdminPublisherComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

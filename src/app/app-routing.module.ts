@@ -4,12 +4,13 @@ import { HomeComponent } from "./home/home.component";
 import { ErrorComponent } from "./error/error.component";
 import { LibrarianComponent } from "./librarian/librarian.component";
 import { BorrowerComponent } from "./borrower/borrower.component";
-import { AuthorComponent } from "./administrator/author/author.component";
 import { AdministratorComponent } from "./administrator/administrator.component";
-import { BookComponent } from "./administrator/book/book.component";
-import { BranchComponent } from "./administrator/branch/branch.component";
-import { PublisherComponent } from "./administrator/publisher/publisher.component";
-import { GenreComponent } from "./administrator/genre/genre.component";
+import { AdminAuthorComponent } from "./administrator/admin-author/admin-author.component";
+import { AdminBookComponent } from "./administrator/admin-book/admin-book.component";
+import { AdminBorrowerComponent } from "./administrator/admin-borrower/admin-borrower.component";
+import { AdminBranchComponent } from "./administrator/admin-branch/admin-branch.component";
+import { AdminGenreComponent } from "./administrator/admin-genre/admin-genre.component";
+import { AdminPublisherComponent } from "./administrator/admin-publisher/admin-publisher.component";
 import { OverrideComponent } from "./administrator/override/override.component";
 import { Routes, RouterModule } from "@angular/router";
 
@@ -33,23 +34,23 @@ const routes: Routes = [
       },
       {
         path: "lms/admin/author",
-        component: AuthorComponent,
+        component: AdminAuthorComponent,
       },
       {
         path: "lms/admin/book",
-        component: BookComponent,
+        component: AdminBookComponent,
       },
       {
         path: "lms/admin/borrower",
-        component: BorrowerComponent,
+        component: AdminBorrowerComponent,
       },
       {
         path: "lms/admin/branch",
-        component: BranchComponent,
+        component: AdminBranchComponent,
       },
       {
         path: "lms/admin/genre",
-        component: GenreComponent,
+        component: AdminGenreComponent,
       },
       {
         path: "lms/admin/override",
@@ -57,7 +58,7 @@ const routes: Routes = [
       },
       {
         path: "lms/admin/publisher",
-        component: PublisherComponent,
+        component: AdminPublisherComponent,
       },
       {
         path: "lms/borrower",
