@@ -12,3 +12,13 @@
   margin-left: 5px;
   margin-right: 5px;
 }
+
+.card-text {
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 650px) {
+  .jumbotron {
+    display: none;
+  }
+}

@@ -1,6 +1,6 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">LMS</a>
+    <a class="navbar-brand" routerLink="/lms/home">LMS</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -19,7 +19,7 @@
           <a
             class="nav-link dropdown-toggle"
             data-toggle="dropdown"
-            href="#"
+            routerLink="/lms/admin"
             role="button"
             aria-haspopup="true"
             aria-expanded="true"
@@ -36,20 +36,26 @@
               will-change: transform;
             "
           >
-            <a class="dropdown-item" href="#">Author</a>
-            <a class="dropdown-item" href="#">Borrower</a>
-            <a class="dropdown-item" href="#">Book</a>
-            <a class="dropdown-item" href="#">Branch</a>
-            <a class="dropdown-item" href="#">Genre</a>
-            <a class="dropdown-item" href="#">Publisher</a>
-            <a class="dropdown-item" href="#">Override Loan</a>
+            <a class="dropdown-item" routerLink="/lms/admin/author">Author</a>
+            <a class="dropdown-item" routerLink="/lms/admin/book">Book</a>
+            <a class="dropdown-item" routerLink="/lms/admin/borrower"
+              >Borrower</a
+            >
+            <a class="dropdown-item" routerLink="/lms/admin/branch">Branch</a>
+            <a class="dropdown-item" routerLink="/lms/admin/genre">Genre</a>
+            <a class="dropdown-item" routerLink="/lms/admin/override"
+              >Override Loan</a
+            >
+            <a class="dropdown-item" routerLink="/lms/admin/publisher"
+              >Publisher</a
+            >
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Borrower</a>
+          <a class="nav-link" routerLink="/lms/borrower">Borrower</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Librarian</a>
+          <a class="nav-link" routerLink="/lms/librarian">Librarian</a>
         </li>
       </ul>
     </div>
