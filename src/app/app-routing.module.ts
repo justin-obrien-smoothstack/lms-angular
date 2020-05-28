@@ -4,7 +4,7 @@ import { AppComponent } from "./app.component";
 import { AdministratorComponent } from "./administrator/administrator.component";
 
 const routes: Routes = [
-  { path: "lms/administrator", component: AdministratorComponent },
+  { path: "lms/admin", component: AdministratorComponent },
 ];
 
 @NgModule({
