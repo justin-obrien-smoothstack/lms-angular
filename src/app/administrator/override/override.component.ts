@@ -37,15 +37,16 @@ export class OverrideComponent implements OnInit {
   }
 
   doOverride(loan: any) {
-    const dateOut = moment(loan.dateOut).format("YYYY-MM-DDThh_mm_ss"),
+    const dateOut = moment(loan.dateOut).format("YYYY-MM-DDTHH_mm_ss"),
       overrideUri = `/loans/book/${loan.bookId}/borrower/${loan.cardNo}/branch/${loan.branchId}/dateout/${dateOut}`;
     this.lmsService
       .put(`${environment.adminBackendUrl}${overrideUri}`)
       .subscribe(
-        () => {},
+        () => this.readOverridableLoans(),
         (error) => {
           // do something with a logger here
           alert(error);
+          this.readOverridableLoans();
         }
       );
   }
