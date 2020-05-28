@@ -12,8 +12,8 @@ export class OLmsService {
     return this.httpClient.get(url);
   }
 
-  put(url: string) {
-    return this.httpClient.put(url, "");
+  put(url: string, body: any = "", options: object = {}) {
+    return this.httpClient.put(url, body, options);
   }
 
   setBorrowerNameOf(input: any) {
