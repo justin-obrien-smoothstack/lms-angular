@@ -1,0 +1,12 @@
+.admin-nav .card {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.admin-nav img {
+  margin-bottom: 20px;
+}
+
+.admin-nav li {
+  padding-bottom: 0;
+}
