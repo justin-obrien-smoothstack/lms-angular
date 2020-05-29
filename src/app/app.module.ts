@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -18,6 +19,7 @@ import { LibrarianComponent } from "./librarian/librarian.component";
 import { BorrowerComponent } from "./borrower/borrower.component";
 import { AdministratorComponent } from "./administrator/administrator.component";
 import { OverrideComponent } from "./administrator/override/override.component";
+import { OLmsService } from "src/app/common/o/services/oLms.service";
 
 @NgModule({
   declarations: [
@@ -38,8 +40,8 @@ import { OverrideComponent } from "./administrator/override/override.component";
     AdminGenreComponent,
     AdminPublisherComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  providers: [OLmsService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
