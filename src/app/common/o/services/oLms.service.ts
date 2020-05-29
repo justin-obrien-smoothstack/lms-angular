@@ -15,4 +15,8 @@ export class OLmsService {
   put(url: string, body: any = "", options: object = {}) {
     return this.httpClient.put(url, body, options);
   }
+
+  delete(url: string, options: any = {}) {
+    return this.httpClient.delete(url, options);
+  }
 }
