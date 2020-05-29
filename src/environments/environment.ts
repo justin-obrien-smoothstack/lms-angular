@@ -4,6 +4,11 @@
 
 export const environment = {
   production: false,
+  adminBackendUrl: "http://localhost:3000/lms/admin",
+  readBookUri: "/books",
+  readBorrowerUri: "/borrower",
+  readBranchUri: "/branches",
+  readOverridableLoansUri: "/loans",
 };
 
 /*
