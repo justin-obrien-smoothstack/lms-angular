@@ -1,3 +1,19 @@
-<p>
-  admin-publisher works!
-</p>
+<button type="button">Create new entry</button>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Phone number</th>
+    <th>Books</th>
+    <th>Update</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of publishers">
+      <td>{{ p.publisherName }}</td>
+      <td>{{ p.publisherAddress }}</td>
+      <td>{{ p.publisherPhone }}</td>
+      <td>{{ p.bookIds }}</td>
+    </tr>
+  </tbody>
+</table>
