@@ -12,6 +12,10 @@ export class OLmsService {
     return this.httpClient.get(url);
   }
 
+  post(url: string, body: object = {}) {
+    return this.httpClient.post(url, body);
+  }
+
   put(url: string, body: any = "") {
     return this.httpClient.put(url, body);
   }
