@@ -21,6 +21,7 @@ import { BorrowerComponent } from "./borrower/borrower.component";
 import { AdministratorComponent } from "./administrator/administrator.component";
 import { OverrideComponent } from "./administrator/override/override.component";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
+import { PropertySwapPipe } from './common/o/pipes/property-swap.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { OLmsService } from "src/app/common/o/services/oLms.service";
     AdminBranchComponent,
     AdminGenreComponent,
     AdminPublisherComponent,
+    PropertySwapPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [OLmsService],
