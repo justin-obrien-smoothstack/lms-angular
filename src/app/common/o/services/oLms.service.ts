@@ -12,7 +12,7 @@ export class OLmsService {
     return this.httpClient.get(url);
   }
 
-  post(url: string, body: object = {}) {
+  post(url: string, body: any = "") {
     return this.httpClient.post(url, body);
   }
 
