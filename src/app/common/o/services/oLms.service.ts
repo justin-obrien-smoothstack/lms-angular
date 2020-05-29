@@ -8,11 +8,11 @@ import { environment } from "src/environments/environment";
 export class OLmsService {
   constructor(private httpClient: HttpClient) {}
 
-  get(url: string, options: any = {}) {
-    return this.httpClient.get(url, options);
+  get(url: string) {
+    return this.httpClient.get(url);
   }
 
-  put(url: string, body: any = "", options: object = {}) {
-    return this.httpClient.put(url, body, options);
+  put(url: string, body: any = "") {
+    return this.httpClient.put(url, body);
   }
 }
