@@ -46,4 +46,6 @@ export class AdminPublisherComponent implements OnInit {
         }
       );
   }
+
+  deletePublisher(publisherId: number) {}
 }
