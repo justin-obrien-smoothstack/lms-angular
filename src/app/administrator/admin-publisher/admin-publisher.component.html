@@ -25,7 +25,11 @@
         }}
       </td>
       <td></td>
-      <td><button type="button">Delete entry</button></td>
+      <td>
+        <button type="button" (click)="deletePublisher(p.publisherId)">
+          Delete entry
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

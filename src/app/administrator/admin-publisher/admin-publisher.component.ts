@@ -47,5 +47,19 @@ export class AdminPublisherComponent implements OnInit {
       );
   }
 
-  deletePublisher(publisherId: number) {}
+  deletePublisher(publisherId: number) {
+    this.lmsService
+      .delete(
+        `${environment.adminBackendUrl}${environment.deletePublisherUri}/${publisherId}`
+      )
+      .subscribe(
+        () => {},
+        (error: any) => {
+          // do something with a logger here
+          alert(error);
+        }
+      );
+    this.readPublishers();
+    this.readBooks();
+  }
 }
