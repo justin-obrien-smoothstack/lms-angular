@@ -4,7 +4,6 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-
 import { ErrorComponent } from "./error/error.component";
 import { HomeComponent } from "./home/home.component";
 import { LayoutComponent } from "./layout/layout.component";
