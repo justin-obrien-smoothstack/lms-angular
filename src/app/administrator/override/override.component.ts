@@ -37,6 +37,10 @@ export class OverrideComponent implements OnInit {
   }
 
   doOverride(loan: any) {
+    if (
+      !confirm("Are you sure you want to override the due date of this loan?")
+    )
+      return;
     const dateOut = moment(loan.dateOut).format("YYYY-MM-DDTHH_mm_ss"),
       overrideUri = `/loans/book/${loan.bookId}/borrower/${loan.cardNo}/branch/${loan.branchId}/dateout/${dateOut}`;
     this.lmsService
