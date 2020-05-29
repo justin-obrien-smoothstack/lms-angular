@@ -9,14 +9,23 @@ export class GetPropertyPipe implements PipeTransform {
     keyName: string,
     propertyName: string,
     mapping: any[],
-    defaultValue?: any
+    entityNotFoundDefault?: any,
+    propertyNotAssignedDefault?: any
   ): any[] {
     const output = [];
-    let elementIndex: number;
+    let elementIndex: number, propertyValue: any;
     for (const key of keys) {
       elementIndex = mapping.findIndex((element) => element[keyName] === key);
-      if (elementIndex === -1) output.push(defaultValue);
-      else output.push(mapping[elementIndex][propertyName]);
+      if (elementIndex === -1) {
+        output.push(entityNotFoundDefault);
+        continue;
+      }
+      propertyValue = mapping[elementIndex][propertyName];
+      if (propertyValue === undefined || propertyValue === null) {
+        output.push(propertyNotAssignedDefault);
+        continue;
+      }
+      output.push(mapping[elementIndex][propertyName]);
     }
     return output;
   }
