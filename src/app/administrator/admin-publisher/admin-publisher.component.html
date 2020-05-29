@@ -13,7 +13,17 @@
       <td>{{ p.publisherName }}</td>
       <td>{{ p.publisherAddress }}</td>
       <td>{{ p.publisherPhone }}</td>
-      <td>{{ p.bookIds }}</td>
+      <td>
+        {{
+          p.bookIds
+            | getProperty
+              : "bookId"
+              : "title"
+              : books
+              : "(book not found)"
+              : "(book title not found)"
+        }}
+      </td>
     </tr>
   </tbody>
 </table>

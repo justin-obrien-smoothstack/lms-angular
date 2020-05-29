@@ -15,7 +15,10 @@ export class GetPropertyPipe implements PipeTransform {
     const output = [];
     let elementIndex: number, propertyValue: any;
     for (const key of keys) {
-      elementIndex = mapping.findIndex((element) => element[keyName] === key);
+      elementIndex = mapping.findIndex(
+        (element) =>
+          element !== undefined && element !== null && element[keyName] === key
+      );
       if (elementIndex === -1) {
         output.push(entityNotFoundDefault);
         continue;
