@@ -48,6 +48,7 @@ export class AdminPublisherComponent implements OnInit {
   }
 
   deletePublisher(publisherId: number) {
+    if (!confirm("Are you sure you want to delete this publisher?")) return;
     this.lmsService
       .delete(
         `${environment.adminBackendUrl}${environment.deletePublisherUri}/${publisherId}`
