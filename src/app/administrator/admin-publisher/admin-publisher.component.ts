@@ -38,8 +38,8 @@ export class AdminPublisherComponent implements OnInit {
       .subscribe(
         (result: object[]) => (this.books = result),
         (error: any) => {
-          this.books = [];
           // do something with a logger here
+          this.books = [];
           alert(error);
         }
       );
