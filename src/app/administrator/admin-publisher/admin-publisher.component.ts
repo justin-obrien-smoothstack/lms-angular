@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
-import { GetPropertyPipe } from "src/app/common/o/pipes/get-property.pipe";
 import { environment } from "src/environments/environment";
+import { FormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-admin-publisher",
@@ -11,6 +11,7 @@ import { environment } from "src/environments/environment";
 export class AdminPublisherComponent implements OnInit {
   publishers: any[];
   books: any[];
+  writePublisherForm: FormGroup;
 
   constructor(private lmsService: OLmsService) {}
 
