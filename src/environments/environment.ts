@@ -8,6 +8,9 @@ export const environment = {
   readBookUri: "/books",
   readPublisherUri: "/publishers",
   deletePublisherUri: "/publishers",
+  readBorrowerUri: "/borrower",
+  readBranchUri: "/branches",
+  readOverridableLoansUri: "/loans",
 };
 
 /*
