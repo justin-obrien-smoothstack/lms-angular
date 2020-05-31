@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
 import { environment } from "src/environments/environment";
-import { FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-admin-publisher",
@@ -11,9 +11,17 @@ import { FormGroup } from "@angular/forms";
 export class AdminPublisherComponent implements OnInit {
   publishers: any[];
   books: any[];
-  writePublisherForm: FormGroup;
+  writePublisherForm: FormGroup = this.formBuilder.group({
+    publisherName: [""],
+    publisherAddress: [""],
+    publisherPhone: [""],
+    bookIds: [[]],
+  });
 
-  constructor(private lmsService: OLmsService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private lmsService: OLmsService
+  ) {}
 
   ngOnInit() {
     this.readPublishers();
