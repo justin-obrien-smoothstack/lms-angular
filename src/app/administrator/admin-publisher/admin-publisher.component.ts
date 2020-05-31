@@ -11,6 +11,7 @@ import { OLmsService } from "src/app/common/o/services/oLms.service";
   styleUrls: ["./admin-publisher.component.css"],
 })
 export class AdminPublisherComponent implements OnInit {
+  writePublisherHeader: string;
   publishers: any[];
   books: any[];
   writePublisherForm = this.formBuilder.group({
