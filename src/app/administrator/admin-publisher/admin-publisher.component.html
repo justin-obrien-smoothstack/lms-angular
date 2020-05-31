@@ -52,6 +52,11 @@
             Phone:
             <input class="form-control" formControlName="publisherPhone" />
             Books:
+            <ng-multiselect-dropdown
+              formControlName="books"
+              [data]="books"
+              [settings]="bookDropdownSettings"
+            ></ng-multiselect-dropdown>
           </div>
         </div>
       </div>

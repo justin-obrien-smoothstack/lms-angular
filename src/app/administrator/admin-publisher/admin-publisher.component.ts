@@ -13,6 +13,13 @@ import { OLmsService } from "src/app/common/o/services/oLms.service";
 export class AdminPublisherComponent implements OnInit {
   writePublisherHeader: string;
   writePublisherForm: FormGroup;
+  bookDropdownSettings = {
+    idField: "bookId",
+    textField: "title",
+    itemsShowLimit: 10,
+    allowSearchFilter: true,
+    enableCheckAll: false,
+  };
   publishers: any[];
   books: any[];
 
@@ -57,12 +64,14 @@ export class AdminPublisherComponent implements OnInit {
     let publisherName = "",
       publisherAddress = "",
       publisherPhone = "",
-      bookIds = [];
+      books = [];
     if (publisher) {
       publisherName = publisher.publisherName;
       publisherAddress = publisher.publisherAddress;
       publisherPhone = publisherPhone;
-      bookIds = publisher.bookIds;
+      books = this.books.filter((book) =>
+        publisher.bookIds.includes(book.bookId)
+      );
     }
     this.writePublisherForm = this.formBuilder.group({
       publisherName: [
@@ -71,7 +80,7 @@ export class AdminPublisherComponent implements OnInit {
       ],
       publisherAddress: [publisherAddress, Validators.maxLength(maxLength)],
       publisherPhone: [publisherPhone, Validators.maxLength(maxLength)],
-      bookIds: [bookIds],
+      books: [books],
     });
   }
 
