@@ -9,7 +9,7 @@ export class OLmsService {
   constructor(private httpClient: HttpClient) {}
 
   post(url: string, body: any = "") {
-    return this.httpClient.post(url, body);
+    return this.httpClient.post(url, body, { responseType: "text" });
   }
 
   get(url: string) {
