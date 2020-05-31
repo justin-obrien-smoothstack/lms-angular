@@ -11,7 +11,7 @@ import { OLmsService } from "src/app/common/o/services/oLms.service";
   styleUrls: ["./admin-publisher.component.css"],
 })
 export class AdminPublisherComponent implements OnInit {
-  writePublisherHeader: string;
+  operation: string;
   writePublisherForm: FormGroup;
   bookDropdownSettings = {
     idField: "bookId",
@@ -60,12 +60,32 @@ export class AdminPublisherComponent implements OnInit {
       );
   }
 
+  writePublisher(operation: string) {
+    const publisher = {
+      publisherName: this.writePublisherForm.value.publisherName,
+      publisherAddress: this.writePublisherForm.value.publisherAddress,
+      publisherPhone: this.writePublisherForm.value.publisherPhone,
+      bookIds: this.writePublisherForm.value.books.map(
+        (book: any) => book.bookId
+      ),
+    };
+    switch (operation) {
+      case "Create":
+        this.lmsService.post(
+          environment.adminBackendUrl + environment.createPublisherUri,
+          publisher
+        );
+    }
+  }
+
   initializeWritePublisherForm(publisher: any) {
     let publisherName = "",
       publisherAddress = "",
       publisherPhone = "",
-      books = [];
+      books = [],
+      publisherId: number;
     if (publisher) {
+      publisherId = publisher.publisherId;
       publisherName = publisher.publisherName;
       publisherAddress = publisher.publisherAddress;
       publisherPhone = publisherPhone;
@@ -74,6 +94,7 @@ export class AdminPublisherComponent implements OnInit {
       );
     }
     this.writePublisherForm = this.formBuilder.group({
+      publisherId: [publisherId],
       publisherName: [
         publisherName,
         [Validators.required, Validators.maxLength(maxLength)],
@@ -84,9 +105,9 @@ export class AdminPublisherComponent implements OnInit {
     });
   }
 
-  openWriteModal(header: string, modal: any, publisher: any) {
+  openWriteModal(operation: string, modal: any, publisher: any) {
     this.initializeWritePublisherForm(publisher);
-    this.writePublisherHeader = header;
+    this.operation = operation;
     this.modalService.open(modal);
   }
 }

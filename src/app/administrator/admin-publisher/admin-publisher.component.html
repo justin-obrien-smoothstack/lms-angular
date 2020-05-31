@@ -1,7 +1,4 @@
-<button
-  type="button"
-  (click)="openWriteModal('Create Publisher', writePublisherModal)"
->
+<button type="button" (click)="openWriteModal('Create', writePublisherModal)">
   Create new entry
 </button>
 <table>
@@ -38,7 +35,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5>{{ writePublisherHeader }}</h5>
+          <h5>{{ operation }} Publisher</h5>
           <button type="button" (click)="close()">
             <span>&#215;</span>
           </button>
@@ -58,6 +55,9 @@
               [settings]="bookDropdownSettings"
             ></ng-multiselect-dropdown>
           </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="writePublisher(operation)"></button>
         </div>
       </div>
     </div>
