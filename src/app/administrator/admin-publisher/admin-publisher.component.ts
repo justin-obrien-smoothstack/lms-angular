@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { OLmsService } from "src/app/common/o/services/oLms.service";
 import { environment } from "src/environments/environment";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { maxLength } from "src/app/common/o/constants";
+import { OLmsService } from "src/app/common/o/services/oLms.service";
 
 @Component({
   selector: "app-admin-publisher",
@@ -11,10 +12,10 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 export class AdminPublisherComponent implements OnInit {
   publishers: any[];
   books: any[];
-  writePublisherForm: FormGroup = this.formBuilder.group({
-    publisherName: [""],
-    publisherAddress: [""],
-    publisherPhone: [""],
+  writePublisherForm = this.formBuilder.group({
+    publisherName: ["", [Validators.required, Validators.maxLength(maxLength)]],
+    publisherAddress: ["", Validators.maxLength(maxLength)],
+    publisherPhone: ["", Validators.maxLength(maxLength)],
     bookIds: [[]],
   });
 
