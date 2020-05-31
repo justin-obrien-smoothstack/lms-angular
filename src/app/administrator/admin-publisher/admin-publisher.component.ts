@@ -41,15 +41,13 @@ export class AdminPublisherComponent implements OnInit {
   }
 
   readBooks() {
-    this.books = [];
     this.lmsService
       .get(`${environment.adminBackendUrl}${environment.readBookUri}`)
       .subscribe(
-        (result: any[]) => {
-          for (const book of result) this.books[book.bookId] = book;
-        },
+        (result: object[]) => (this.books = result),
         (error: any) => {
           // do something with a logger here
+          this.books = [];
           alert(error);
         }
       );
