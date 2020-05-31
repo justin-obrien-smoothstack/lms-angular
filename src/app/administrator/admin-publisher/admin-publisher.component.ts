@@ -69,6 +69,7 @@ export class AdminPublisherComponent implements OnInit {
         (book: any) => book.bookId
       ),
     };
+    if (!confirm(`${operation} this publisher?`)) return;
     switch (operation) {
       case "Create":
         this.lmsService.post(
