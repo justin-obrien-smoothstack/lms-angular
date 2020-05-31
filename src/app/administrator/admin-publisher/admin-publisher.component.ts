@@ -78,6 +78,8 @@ export class AdminPublisherComponent implements OnInit {
         );
         break;
     }
+    this.readPublishers();
+    this.readBooks();
   }
 
   initializeWritePublisherForm(publisher: any) {

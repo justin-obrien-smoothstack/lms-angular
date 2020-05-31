@@ -59,7 +59,7 @@
         <div class="modal-footer">
           <button
             type="button"
-            (click)="writePublisher(operation)"
+            (click)="writePublisher(operation); close()"
             [disabled]="writePublisherForm.invalid"
           >
             {{ operation }}
