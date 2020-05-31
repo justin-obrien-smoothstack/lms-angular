@@ -72,10 +72,12 @@ export class AdminPublisherComponent implements OnInit {
     };
     switch (operation) {
       case "Create":
-        this.lmsService.post(
-          environment.adminBackendUrl + environment.createPublisherUri,
-          publisher
-        );
+        this.lmsService
+          .post(
+            environment.adminBackendUrl + environment.createPublisherUri,
+            publisher
+          )
+          .subscribe();
         break;
     }
     this.readPublishers();
