@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { maxLength } from "src/app/common/o/constants";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
@@ -12,14 +12,9 @@ import { OLmsService } from "src/app/common/o/services/oLms.service";
 })
 export class AdminPublisherComponent implements OnInit {
   writePublisherHeader: string;
+  writePublisherForm: FormGroup;
   publishers: any[];
   books: any[];
-  writePublisherForm = this.formBuilder.group({
-    publisherName: ["", [Validators.required, Validators.maxLength(maxLength)]],
-    publisherAddress: ["", Validators.maxLength(maxLength)],
-    publisherPhone: ["", Validators.maxLength(maxLength)],
-    bookIds: [[]],
-  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,7 +55,30 @@ export class AdminPublisherComponent implements OnInit {
       );
   }
 
+  initializeWritePublisherForm(publisher: any) {
+    let publisherName = "",
+      publisherAddress = "",
+      publisherPhone = "",
+      bookIds = [];
+    if (publisher) {
+      publisherName = publisher.publisherName;
+      publisherAddress = publisher.publisherAddress;
+      publisherPhone = publisherPhone;
+      bookIds = publisher.bookIds;
+    }
+    this.writePublisherForm = this.formBuilder.group({
+      publisherName: [
+        publisherName,
+        [Validators.required, Validators.maxLength(maxLength)],
+      ],
+      publisherAddress: [publisherAddress, Validators.maxLength(maxLength)],
+      publisherPhone: [publisherPhone, Validators.maxLength(maxLength)],
+      bookIds: [bookIds],
+    });
+  }
+
   openWriteModal(header: string, modal: any, publisher: any) {
+    this.initializeWritePublisherForm(publisher);
     this.writePublisherHeader = header;
     this.modalService.open(modal);
   }
