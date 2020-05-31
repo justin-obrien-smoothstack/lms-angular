@@ -61,6 +61,7 @@ export class AdminPublisherComponent implements OnInit {
   }
 
   writePublisher(operation: string) {
+    if (!confirm(`${operation} this publisher?`)) return;
     const publisher = {
       publisherName: this.writePublisherForm.value.publisherName,
       publisherAddress: this.writePublisherForm.value.publisherAddress,
@@ -69,7 +70,6 @@ export class AdminPublisherComponent implements OnInit {
         (book: any) => book.bookId
       ),
     };
-    if (!confirm(`${operation} this publisher?`)) return;
     switch (operation) {
       case "Create":
         this.lmsService.post(
