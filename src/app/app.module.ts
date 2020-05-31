@@ -20,7 +20,7 @@ import { BorrowerComponent } from "./borrower/borrower.component";
 import { AdministratorComponent } from "./administrator/administrator.component";
 import { OverrideComponent } from "./administrator/override/override.component";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
-import { GetPropertyPipe } from './get-property.pipe';
+import { GetPropertyPipe } from "src/app/common/o/pipes/get-property.pipe";
 
 @NgModule({
   declarations: [
