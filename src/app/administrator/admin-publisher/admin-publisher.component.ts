@@ -76,6 +76,7 @@ export class AdminPublisherComponent implements OnInit {
           environment.adminBackendUrl + environment.createPublisherUri,
           publisher
         );
+        break;
     }
   }
 
