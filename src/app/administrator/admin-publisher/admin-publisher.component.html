@@ -1,4 +1,9 @@
-<button type="button">Create new entry</button>
+<button
+  type="button"
+  (click)="openWriteModal('Create Publisher', writePublisherModal)"
+>
+  Create new entry
+</button>
 <table>
   <thead>
     <th>Name</th>
@@ -28,7 +33,7 @@
   </tbody>
 </table>
 
-<ng-template #writePublisherModal let-close="close" let-dismiss="dismiss">
+<ng-template #writePublisherModal let-close="close">
   <form [formGroup]="writePublisherForm">
     <div class="modal-dialog">
       <div class="modal-content">

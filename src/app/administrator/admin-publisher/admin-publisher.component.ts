@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { maxLength } from "src/app/common/o/constants";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
@@ -58,5 +58,10 @@ export class AdminPublisherComponent implements OnInit {
           alert(error);
         }
       );
+  }
+
+  openWriteModal(header: string, modal: any, publisher: any) {
+    this.writePublisherHeader = header;
+    this.modalService.open(modal);
   }
 }
