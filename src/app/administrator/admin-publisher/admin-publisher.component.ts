@@ -64,6 +64,7 @@ export class AdminPublisherComponent implements OnInit {
   writePublisher(operation: string) {
     if (!confirm(`${operation} this publisher?`)) return;
     const publisher = {
+      publisherId: this.writePublisherForm.value.publisherId,
       publisherName: this.writePublisherForm.value.publisherName,
       publisherAddress: this.writePublisherForm.value.publisherAddress,
       publisherPhone: this.writePublisherForm.value.publisherPhone,
@@ -80,6 +81,14 @@ export class AdminPublisherComponent implements OnInit {
           )
           .subscribe();
         break;
+      case "Update":
+        this.lmsService
+          .put(
+            environment.adminBackendUrl + environment.updatePublisherUri,
+            publisher
+          )
+          .subscribe(null, (error) => alert(error.error));
+        break;
     }
     this.readPublishers();
     this.readBooks();
@@ -95,7 +104,7 @@ export class AdminPublisherComponent implements OnInit {
       publisherId = publisher.publisherId;
       publisherName = publisher.publisherName;
       publisherAddress = publisher.publisherAddress;
-      publisherPhone = publisherPhone;
+      publisherPhone = publisher.publisherPhone;
       books = this.books.filter((book) =>
         publisher.bookIds.includes(book.bookId)
       );
