@@ -1,5 +1,5 @@
 <button type="button" (click)="openWriteModal('Create', writePublisherModal)">
-  Create new entry
+  Create
 </button>
 <table>
   <thead>
@@ -25,6 +25,14 @@
               : "(book not found)"
               : "(book title not found)"
         }}
+      </td>
+      <td>
+        <button
+          type="button"
+          (click)="openWriteModal('Update', writePublisherModal)"
+        >
+          Update
+        </button>
       </td>
     </tr>
   </tbody>
