@@ -44,10 +44,46 @@
           <div class="form-group">
             Name:
             <input class="form-control" formControlName="publisherName" />
+            <div
+              *ngIf="
+                writePublisherForm.controls.publisherName.errors &&
+                writePublisherForm.controls.publisherName.dirty &&
+                writePublisherForm.controls.publisherName.errors.required
+              "
+            >
+              Required
+            </div>
+            <div
+              *ngIf="
+                writePublisherForm.controls.publisherName.errors &&
+                writePublisherForm.controls.publisherName.dirty &&
+                writePublisherForm.controls.publisherName.errors.maxlength
+              "
+            >
+              Maximum length is {{ maxLength }} characters
+            </div>
             Address:
             <input class="form-control" formControlName="publisherAddress" />
+            <div
+              *ngIf="
+                writePublisherForm.controls.publisherAddress.errors &&
+                writePublisherForm.controls.publisherAddress.dirty &&
+                writePublisherForm.controls.publisherAddress.errors.maxlength
+              "
+            >
+              Maximum length is {{ maxLength }} characters
+            </div>
             Phone:
             <input class="form-control" formControlName="publisherPhone" />
+            <div
+              *ngIf="
+                writePublisherForm.controls.publisherPhone.errors &&
+                writePublisherForm.controls.publisherPhone.dirty &&
+                writePublisherForm.controls.publisherPhone.errors.maxlength
+              "
+            >
+              Maximum length is {{ maxLength }} characters
+            </div>
             Books:
             <ng-multiselect-dropdown
               formControlName="books"

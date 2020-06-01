@@ -11,6 +11,7 @@ import { OLmsService } from "src/app/common/o/services/oLms.service";
   styleUrls: ["./admin-publisher.component.css"],
 })
 export class AdminPublisherComponent implements OnInit {
+  maxLength = maxLength;
   operation: string;
   writePublisherForm: FormGroup;
   bookDropdownSettings = {
@@ -115,5 +116,13 @@ export class AdminPublisherComponent implements OnInit {
     this.initializeWritePublisherForm(publisher);
     this.operation = operation;
     this.modalService.open(modal);
+  }
+
+  errorsDirty(control: string) {
+    // debugger;
+    return (
+      this.writePublisherForm.controls[control].errors &&
+      this.writePublisherForm.controls[control].dirty
+    );
   }
 }
