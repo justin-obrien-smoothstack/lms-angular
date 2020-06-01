@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
-import { LmsService } from "../../common/service/lms.service";
-import { environment } from "../../environments/environment";
+import { LmsService } from "../../../common/service/lms.service";
+import { environment } from "../../../environments/environment";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import {
   FormBuilder,
@@ -10,31 +10,31 @@ import {
 } from "@angular/forms";
 
 @Component({
-  selector: 'app-librarian',
-  templateUrl: './librarian.component.html',
-  styleUrls: ['./librarian.component.css']
+  selector: 'app-branches',
+  templateUrl: './branches.component.html',
+  styleUrls: ['./branches.component.css']
 })
+// the library branch has book copies which the librarian can change 
 
-// the librarian has the right to change the  number of copies held by a branch at any given time. 
-export class LibrarianComponent implements OnInit {
+export class BranchesComponent implements OnInit {
   branches: any;
+  books: any;
   branchId: number;
+  selectedBranch: any;
   branchName: string;
   branchAddress: string;
-  selectedBranch: any;
-  bookCopies: any;
-  books: any;
   totalBooks: any;
 
   private modalRef: NgbModalRef;
   closeResult: any; 
   searchString: any;
   updateBranchForm: FormGroup;
-  addBookCopiesForm: FormGroup;
   searchBranchForm: FormGroup;
   dropdownSettings: any;
   errMsg: any;
-  constructor(private lmsService: LmsService,
+
+  constructor(    
+    private lmsService: LmsService,
     private modalService: NgbModal,
     private fb: FormBuilder
     ) {
@@ -42,18 +42,16 @@ export class LibrarianComponent implements OnInit {
         singleSelection: false,
         idField: "bookId",
         textField: "title",
-        inputField: "noOfCopies",
         itemsShowLimit: 5,
         allowSearchFilter: true,
+      }
      }
-    }
-     
 
   ngOnInit() {
     this.loadAllBranches();
     this.loadAllBooks();
     this.initializeFormGroup();
-    }
+  }
 
   loadAllBranches() {
     this.lmsService
@@ -61,15 +59,6 @@ export class LibrarianComponent implements OnInit {
       .subscribe(
         (res) => {
           this.branches = res;
-          this.branches.forEach(branch => {
-            branch.books = [];
-            branch.bookCopies.forEach(element => {
-              branch.books.push({
-                title: element.title,
-                noOfCopies: element.noOfCopies,
-              });
-            });
-          });
         },
         (error) => {
           debugger;
@@ -77,7 +66,7 @@ export class LibrarianComponent implements OnInit {
       );
   }
 
-    loadAllBooks() {
+  loadAllBooks() {
     this.lmsService
       .getAll(`${environment.adminUrl}${environment.readBooksURI}`)
       .subscribe(
@@ -88,6 +77,53 @@ export class LibrarianComponent implements OnInit {
           debugger;
         }
       );
+  }
+
+  updateBranch() {
+    const branch = {
+      branchId: this.updateBranchForm.value.branchId,
+      branchName: this.updateBranchForm.value.branchName,
+      branchAddress: this.updateBranchForm.value.branchAddress, 
+    }
+    if (!branch.branchId) {
+      this.lmsService
+      .postAll(`${environment.adminUrl}${environment.createBranchURI}`, branch)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.loadAllBranches();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
+      this.lmsService
+      .putAll(`${environment.adminUrl}${environment.updateBranchesURI}`, branch)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.loadAllBranches();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+    
+  }
+
+  deleteBranch(branch) {
+    this.lmsService
+    .deleteAll(`${environment.adminUrl}${environment.deleteBranchesURI}/${branch}`)
+    .subscribe(
+      (res) => {
+        this.loadAllBranches();
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 
   initializeFormGroup() {
@@ -104,44 +140,6 @@ export class LibrarianComponent implements OnInit {
       ]),
       branchId: new FormControl(this.branchId),
     });
-  }
-
-
-  updateBranch() {
-    const branch = {
-      branchId: this.updateBranchForm.value.branchId,
-      branchName: this.updateBranchForm.value.branchName,
-      branchAddress: this.updateBranchForm.value.branchAddress, 
-    }
-    this.lmsService
-    .postAll(`${environment.libUrl}${environment.updateBranchesURI}`, branch)
-    .subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  updateBookCopies(branch) {
-    const bookCopies = {
-      bookId: this.addBookCopiesForm.value.bookId,
-      branchId: this.addBookCopiesForm.value.branchId,
-      noOfCopies: this.addBookCopiesForm.value.noOfCopies,
-
-    }
-    this.lmsService
-    .putAll(`${environment.libUrl}${environment.updateBranchesURI}/${branch}/copies`,bookCopies)
-    .subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
   }
 
   open(content, obj) {
@@ -166,5 +164,4 @@ export class LibrarianComponent implements OnInit {
       }
     );
   }
-
 }
