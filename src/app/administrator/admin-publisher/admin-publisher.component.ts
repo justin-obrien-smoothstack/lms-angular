@@ -119,7 +119,6 @@ export class AdminPublisherComponent implements OnInit {
   }
 
   errorsDirty(control: string) {
-    // debugger;
     return (
       this.writePublisherForm.controls[control].errors &&
       this.writePublisherForm.controls[control].dirty
