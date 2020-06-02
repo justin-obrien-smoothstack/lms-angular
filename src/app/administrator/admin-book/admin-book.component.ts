@@ -8,7 +8,12 @@ import { environment } from "src/environments/environment";
   styleUrls: ["./admin-book.component.css"],
 })
 export class AdminBookComponent implements OnInit {
-  constructor() {}
+  books: any[];
+  authors: any[];
+  genres: any[];
+  publishers: any[];
+
+  constructor(private lmsService: OLmsService) {}
 
   ngOnInit() {}
 }
