@@ -9,7 +9,7 @@ export const environment = {
   readBookUri: "/books",
   readBorrowerUri: "/borrower",
   readBranchUri: "/branches",
-  readGenresUri: "/genres",
+  readGenreUri: "/genres",
   readPublisherUri: "/publishers",
   readOverridableLoansUri: "/loans",
 };
