@@ -25,7 +25,7 @@ export class AdminBookComponent implements OnInit {
         (error: any) => {
           // do something with a logger here
           this.books = [];
-          alert(error);
+          alert(error.error);
         }
       );
   }
@@ -38,7 +38,7 @@ export class AdminBookComponent implements OnInit {
         (error: any) => {
           // do something with a logger here
           this.authors = [];
-          alert(error);
+          alert(error.error);
         }
       );
   }
@@ -51,7 +51,7 @@ export class AdminBookComponent implements OnInit {
         (error: any) => {
           // do something with a logger here
           this.genres = [];
-          alert(error);
+          alert(error.error);
         }
       );
   }
@@ -64,7 +64,7 @@ export class AdminBookComponent implements OnInit {
         (error: any) => {
           // do something with a logger here
           this.publishers = [];
-          alert(error);
+          alert(error.error);
         }
       );
   }
