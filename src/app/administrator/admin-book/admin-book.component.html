@@ -42,7 +42,9 @@
               : "(publisher name not found)"
         }}
       </td>
-      <td><button type="button">Delete</button></td>
+      <td>
+        <button type="button" (click)="deleteBook(b.bookId)">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>

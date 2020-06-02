@@ -73,4 +73,22 @@ export class AdminBookComponent implements OnInit {
         }
       );
   }
+
+  deleteBook(bookId: number) {
+    if (!confirm("Delete this book?")) return;
+    this.lmsService
+      .delete(
+        `${environment.adminBackendUrl}${environment.deleteBookUri}/${bookId}`
+      )
+      .subscribe(null, (error: any) => {
+        // do something with a logger here
+        alert(error.error);
+      })
+      .add(() => {
+        this.readBooks();
+        this.readAuthors();
+        this.readGenres();
+        this.readPublishers();
+      });
+  }
 }
