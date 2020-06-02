@@ -4,6 +4,7 @@
     <th>Authors</th>
     <th>Genres</th>
     <th>Publisher</th>
+    <th>Delete</th>
   </thead>
   <tbody>
     <tr *ngFor="let b of books">
@@ -41,6 +42,7 @@
               : "(publisher name not found)"
         }}
       </td>
+      <td><button type="button">Delete</button></td>
     </tr>
   </tbody>
 </table>
