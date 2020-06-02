@@ -15,7 +15,12 @@ export class AdminBookComponent implements OnInit {
 
   constructor(private lmsService: OLmsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.readBooks();
+    this.readAuthors();
+    this.readGenres();
+    this.readPublishers();
+  }
 
   readBooks() {
     this.lmsService
