@@ -5,5 +5,42 @@
     <th>Genres</th>
     <th>Publisher</th>
   </thead>
-  <tbody></tbody>
+  <tbody>
+    <tr *ngFor="let b of books">
+      <td>{{ b.title }}</td>
+      <td>
+        {{
+          b.authorIds
+            | getProperty
+              : "authorId"
+              : "authorName"
+              : authors
+              : "(author not found)"
+              : "(author name not found)"
+        }}
+      </td>
+      <td>
+        {{
+          b.genreIds
+            | getProperty
+              : "genre_id"
+              : "genre_name"
+              : genres
+              : "(genre not found)"
+              : "(genre name not found)"
+        }}
+      </td>
+      <td>
+        {{
+          (b.pubId ? [b.pubId] : [])
+            | getProperty
+              : "publisherId"
+              : "publisherName"
+              : publishers
+              : "(publisher not found)"
+              : "(publisher name not found)"
+        }}
+      </td>
+    </tr>
+  </tbody>
 </table>
