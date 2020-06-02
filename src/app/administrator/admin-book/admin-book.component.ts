@@ -16,4 +16,56 @@ export class AdminBookComponent implements OnInit {
   constructor(private lmsService: OLmsService) {}
 
   ngOnInit() {}
+
+  readBooks() {
+    this.lmsService
+      .get(environment.adminBackendUrl + environment.readBookUri)
+      .subscribe(
+        (result: object[]) => (this.books = result),
+        (error: any) => {
+          // do something with a logger here
+          this.books = [];
+          alert(error);
+        }
+      );
+  }
+
+  readAuthors() {
+    this.lmsService
+      .get(environment.adminBackendUrl + environment.readAuthorUri)
+      .subscribe(
+        (result: object[]) => (this.authors = result),
+        (error: any) => {
+          // do something with a logger here
+          this.authors = [];
+          alert(error);
+        }
+      );
+  }
+
+  readGenres() {
+    this.lmsService
+      .get(environment.adminBackendUrl + environment.readGenreUri)
+      .subscribe(
+        (result: object[]) => (this.genres = result),
+        (error: any) => {
+          // do something with a logger here
+          this.genres = [];
+          alert(error);
+        }
+      );
+  }
+
+  readPublishers() {
+    this.lmsService
+      .get(environment.adminBackendUrl + environment.readPublisherUri)
+      .subscribe(
+        (result: object[]) => (this.publishers = result),
+        (error: any) => {
+          // do something with a logger here
+          this.publishers = [];
+          alert(error);
+        }
+      );
+  }
 }
