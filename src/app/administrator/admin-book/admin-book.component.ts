@@ -150,4 +150,10 @@ export class AdminBookComponent implements OnInit {
       genres: [genres],
     });
   }
+
+  openWriteModal(operation: string, modal: any, book: any) {
+    this.initializeWriteBookForm(book);
+    this.operation = operation;
+    this.modalService.open(modal);
+  }
 }
