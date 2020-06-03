@@ -135,4 +135,19 @@ export class AdminBookComponent implements OnInit {
         break;
     }
   }
+
+  initializeWriteBookForm(book: any) {
+    let title: string,
+      publisher: any,
+      authors = [],
+      genres = [],
+      bookId: number;
+    this.writeBookForm = this.formBuilder.group({
+      bookId: [bookId],
+      title: [title, [Validators.required, Validators.maxLength(maxLength)]],
+      publisher: [publisher],
+      authors: [authors],
+      genres: [genres],
+    });
+  }
 }
