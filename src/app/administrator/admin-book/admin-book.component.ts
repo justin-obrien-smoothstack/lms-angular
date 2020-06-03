@@ -73,4 +73,9 @@ export class AdminBookComponent implements OnInit {
         }
       );
   }
+
+  writeBook(operation: string) {
+    if (!confirm(operation + "this book?")) return;
+    const book = {};
+  }
 }
