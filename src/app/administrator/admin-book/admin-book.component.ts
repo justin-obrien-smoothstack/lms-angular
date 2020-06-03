@@ -108,6 +108,31 @@ export class AdminBookComponent implements OnInit {
 
   writeBook(operation: string) {
     if (!confirm(operation + " this book?")) return;
-    const book = {};
+    const book = {
+      bookId: this.writeBookForm.value.bookId,
+      title: this.writeBookForm.value.title,
+      pubId: this.writeBookForm.value.publisher.map(
+        (publisher: any) => publisher.publisherId
+      ),
+      authorIds: this.writeBookForm.value.authors.map(
+        (author: any) => author.authorId
+      ),
+      genreIds: this.writeBookForm.value.genres.map(
+        (genre: any) => genre.genre_id
+      ),
+    };
+    switch (operation) {
+      case "Create":
+        this.lmsService
+          .post(environment.adminBackendUrl + environment.createBookUri, book)
+          .subscribe()
+          .add(() => {
+            this.readBooks();
+            this.readAuthors();
+            this.readGenres();
+            this.readPublishers();
+          });
+        break;
+    }
   }
 }
