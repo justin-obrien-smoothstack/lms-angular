@@ -29,7 +29,7 @@ export class LibrarianComponent implements OnInit {
   totalBooks: any;
 
   private modalRef: NgbModalRef;
-  closeResult: any; 
+  closeResult: any;
   searchString: any;
   updateBranchForm: FormGroup;
   addBookCopiesForm: FormGroup;
@@ -39,22 +39,22 @@ export class LibrarianComponent implements OnInit {
   constructor(private lmsService: LmsService,
     private modalService: NgbModal,
     private fb: FormBuilder
-    ) {
-      this.dropdownSettings = {
-        singleSelection: true,
-        idField: "bookId",
-        textField: "title",
-        itemsShowLimit: 5,
-        allowSearchFilter: true,
-     }
+  ) {
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: "bookId",
+      textField: "title",
+      itemsShowLimit: 5,
+      allowSearchFilter: true,
     }
-     
+  }
+
 
   ngOnInit() {
     this.loadAllBranches();
     this.loadAllBooks();
     this.initializeFormGroup();
-    }
+  }
 
   loadAllBranches() {
     this.lmsService
@@ -78,7 +78,7 @@ export class LibrarianComponent implements OnInit {
       );
   }
 
-    loadAllBooks() {
+  loadAllBooks() {
     this.lmsService
       .get(`${environment.adminBackendUrl}${environment.readBookUri}`)
       .subscribe(
@@ -116,18 +116,18 @@ export class LibrarianComponent implements OnInit {
     const branch = {
       branchId: this.updateBranchForm.value.branchId,
       branchName: this.updateBranchForm.value.branchName,
-      branchAddress: this.updateBranchForm.value.branchAddress, 
+      branchAddress: this.updateBranchForm.value.branchAddress,
     }
     this.lmsService
-    .post(`${environment.libUrl}${environment.updateBanchUri}`, branch)
-    .subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+      .post(`${environment.libUrl}${environment.updateBanchUri}`, branch)
+      .subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
 
@@ -177,7 +177,7 @@ export class LibrarianComponent implements OnInit {
         this.closeResult = `Dismissed`;
       }
     );
-  }    
+  }
 
   updateBookCopies() {
     const bookCopies = {
@@ -188,15 +188,15 @@ export class LibrarianComponent implements OnInit {
     }
     bookCopies.bookId = bookCopies.books[0].bookId;
     this.lmsService
-    .put(`${environment.libUrl}${environment.updateBanchUri}/${bookCopies.branchId}/copies`,bookCopies)
-    .subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
+      .put(`${environment.libUrl}${environment.updateBanchUri}/${bookCopies.branchId}/copies`, bookCopies)
+      .subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
   }
 
 

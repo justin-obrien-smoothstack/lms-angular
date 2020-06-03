@@ -13,6 +13,9 @@ export const environment = {
   deleteBranchUri: "/branches",
   readAuthorsUri: "/authors",
   readBookUri: "/books",
+  readBorrowerUri: "/borrower",
+  readBranchUri: "/branches",
+  readOverridableLoansUri: "/loans",
 };
 
 /*

@@ -1,0 +1,24 @@
+.footer {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  line-height: 50px;
+  color: white;
+  background-color: #1a1a1a;
+  margin-top: auto;
+}
+
+.footer-nav {
+  font-size: 0.875rem;
+  grid-row: 1;
+}
+
+.footer-link {
+  color: white;
+}
+
+.footer-logo {
+  grid-row: 2;
+}
