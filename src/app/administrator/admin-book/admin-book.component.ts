@@ -41,7 +41,11 @@ export class AdminBookComponent implements OnInit {
   genres: any[];
   publishers: any[];
 
-  constructor(private lmsService: OLmsService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private modalService: NgbModal,
+    private lmsService: OLmsService
+  ) {}
 
   ngOnInit() {
     this.readBooks();
