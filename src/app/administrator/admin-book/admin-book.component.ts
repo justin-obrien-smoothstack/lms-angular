@@ -156,4 +156,11 @@ export class AdminBookComponent implements OnInit {
     this.operation = operation;
     this.modalService.open(modal);
   }
+
+  errorsDirty(control: string) {
+    return (
+      this.writeBookForm.controls[control].errors &&
+      this.writeBookForm.controls[control].dirty
+    );
+  }
 }
