@@ -37,7 +37,7 @@ const routes: Routes = [
       },
       {
         path: "lms/admin/author",
-        component: AdminAuthorComponent,
+        component: AuthorComponent,
       },
       {
         path: "lms/admin/book",
@@ -49,7 +49,7 @@ const routes: Routes = [
       },
       {
         path: "lms/admin/branch",
-        component: AdminBranchComponent,
+        component: BranchesComponent,
       },
       {
         path: "lms/admin/genre",
