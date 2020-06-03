@@ -55,7 +55,7 @@ export class BranchesComponent implements OnInit {
 
   loadAllBranches() {
     this.lmsService
-      .getAll(`${environment.adminUrl}${environment.readBanchesURI}`)
+      .get(`${environment.adminBackendUrl}${environment.readBanchUri}`)
       .subscribe(
         (res) => {
           this.branches = res;
@@ -68,7 +68,7 @@ export class BranchesComponent implements OnInit {
 
   loadAllBooks() {
     this.lmsService
-      .getAll(`${environment.adminUrl}${environment.readBooksURI}`)
+      .get(`${environment.adminBackendUrl}${environment.readBookUri}`)
       .subscribe(
         (res) => {
           this.totalBooks = res;
@@ -87,7 +87,7 @@ export class BranchesComponent implements OnInit {
     }
     if (!branch.branchId) {
       this.lmsService
-      .postAll(`${environment.adminUrl}${environment.createBranchURI}`, branch)
+      .post(`${environment.adminBackendUrl}${environment.createBranchURI}`, branch)
       .subscribe(
         (res) => {
           console.log(res);
@@ -99,7 +99,7 @@ export class BranchesComponent implements OnInit {
       );
     } else {
       this.lmsService
-      .putAll(`${environment.adminUrl}${environment.updateBranchesURI}`, branch)
+      .put(`${environment.adminBackendUrl}${environment.updateBanchUri}`, branch)
       .subscribe(
         (res) => {
           console.log(res);
@@ -115,7 +115,7 @@ export class BranchesComponent implements OnInit {
 
   deleteBranch(branch) {
     this.lmsService
-    .deleteAll(`${environment.adminUrl}${environment.deleteBranchesURI}/${branch}`)
+    .delete(`${environment.adminBackendUrl}${environment.deleteBranchUri}/${branch}`)
     .subscribe(
       (res) => {
         this.loadAllBranches();

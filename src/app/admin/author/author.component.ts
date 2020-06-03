@@ -70,7 +70,7 @@ export class AuthorComponent implements OnInit {
 
   loadAllAuthors() {
     this.lmsService
-      .getAll(`${environment.adminUrl}${environment.readAuthorsURI}`)
+      .get(`${environment.adminBackendUrl}${environment.readAuthorsUri}`)
       .subscribe(
         (res) => {
           this.authors = res;
@@ -89,7 +89,7 @@ export class AuthorComponent implements OnInit {
 
   loadAllBooks() {
     this.lmsService
-      .getAll(`${environment.adminUrl}${environment.readBooksURI}`)
+      .get(`${environment.adminBackendUrl}${environment.readBookUri}`)
       .subscribe(
         (res) => {
           this.totalBooks = res;
@@ -102,7 +102,7 @@ export class AuthorComponent implements OnInit {
 
   deleteAuthor(authorId) {
     this.lmsService
-      .deleteAll(`${environment.adminUrl}${environment.readAuthorsURI}/${authorId}`)
+      .delete(`${environment.adminBackendUrl}${environment.readAuthorsUri}/${authorId}`)
       .subscribe(
         (res) => {
           this.loadAllAuthors();
@@ -123,7 +123,7 @@ export class AuthorComponent implements OnInit {
     if (!author.authorId)
     {
       this.lmsService
-      .postAll(`${environment.adminUrl}${environment.readAuthorsURI}`, author)
+      .post(`${environment.adminBackendUrl}${environment.readAuthorsUri}`, author)
       .subscribe(
         (res) => {
           this.loadAllAuthors();
@@ -136,7 +136,7 @@ export class AuthorComponent implements OnInit {
     }
     else {
       this.lmsService
-        .putAll(`${environment.adminUrl}${environment.readAuthorsURI}`, author)
+        .put(`${environment.adminBackendUrl}${environment.readAuthorsUri}`, author)
         .subscribe(
           (res) => {
             this.loadAllAuthors();

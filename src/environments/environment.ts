@@ -4,11 +4,15 @@
 
 export const environment = {
   production: false,
-  adminUrl: "http://localhost:3000/lms/admin",
+  adminBackendUrl: "http://localhost:3000/lms/admin",
   libUrl: "http://localhost:3001/lms/librarian",
   borrUrl: "http://localhost:3002/lms/borrower",
-  readBanchesURI: "/branches",
-  updateBranchesURI: "/branches"
+  readBanchUri: "/branches",
+  updateBanchUri: "/branches",
+  createBranchURI: "/branches",
+  deleteBranchUri: "/branches",
+  readAuthorsUri: "/authors",
+  readBookUri: "/books",
 };
 
 /*

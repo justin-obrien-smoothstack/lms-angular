@@ -1,40 +1,41 @@
-<table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Branch</th>
-      <th scope="col">Address</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Books</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let b of branches; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>{{ b.branchName }}</td>
-      <td>{{ b.branchAddress }}</td>
-      <td>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          (click)="open(updateBranchModal, b)"
-        >
-          Edit
-        </button>
-      </td>
-      <td>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          (click)="open(updateBranchModal, b)"
-        >
-          Add Books
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
+<div class="container marketing">
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Branch</th>
+        <th scope="col">Address</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Books</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of branches; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ b.branchName }}</td>
+        <td>{{ b.branchAddress }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="openUpdate(updateBranchModal, b)"
+          >
+            Edit
+          </button>
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="openAdd(updateBookCopiesModal, b)"
+          >
+            Add Books
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <ng-template #updateBranchModal let-c="close" let-d="dismiss">
   <form [formGroup]="updateBranchForm">
@@ -54,7 +55,7 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            Enter Branch Name:
+            Enter Branch Name and address:
             <input
               class="form-control"
               id="branchName"
@@ -77,7 +78,7 @@
             >
               <div
                 [hidden]="
-                  !updateBranchForm.controls['branchName'].errors.required ||
+                  !updateBranchForm.controls['branchName'].errors.required
                 "
               >
                 Branch Name is required
@@ -134,8 +135,8 @@
   </form>
 </ng-template>
 
-<ng-template #updateBranchModal let-c="close" let-d="dismiss">
-  <form [formGroup]="updateBranchForm">
+<ng-template #updateBookCopiesModal let-c="close" let-d="dismiss">
+  <form [formGroup]="addBookCopiesForm">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -151,14 +152,23 @@
           </button>
         </div>
         <div class="modal-body">
-          <div clas="form-group">
-            Add books
-            <input>
-          </input>
+          <div class="form-group">
+            <ng-multiselect-dropdown
+              [placeholder]="'Select Books(s)'"
+              [data]="totalBooks"
+              formControlName="books"
+              [settings]="dropdownSettings"
+              (onSelect)="onItemSelect($event)"
+              (onSelectAll)="onSelectAll($event)"
+            >
+            </ng-multiselect-dropdown>
+            <input
+              class="form-control"
+              id="noOfCopies"
+              formControlName="noOfCopies"
+              type="number"
+            />
           </div>
-
-
-
         </div>
         <div class="modal-footer">
           <button
@@ -172,8 +182,8 @@
           <button
             type="button"
             class="btn btn-primary"
-            (click)="updateBranch()"
-            [disabled]="updateBranchForm.invalid"
+            (click)="updateBookCopies()"
+            [disabled]="addBookCopiesForm.invalid"
           >
             Save changes
           </button>
