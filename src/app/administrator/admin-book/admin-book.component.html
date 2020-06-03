@@ -44,3 +44,61 @@
     </tr>
   </tbody>
 </table>
+
+<ng-template #writeBookModal let-close="close">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h5>{{ operation }} Book</h5>
+      <button type="button" (click)="close()"><span>&#215;</span></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="writeBookForm">
+        <div class="form-group">
+          Title:
+          <input class="form-control" formControlName="title" />
+          <div
+            *ngIf="
+              errorsDirty('title') &&
+              writeBookForm.controls.title.errors.required
+            "
+          >
+            Required
+          </div>
+          <div
+            *ngIf="
+              errorsDirty('title') &&
+              writeBookForm.controls.title.errors.maxlength
+            "
+          >
+            Maximum length is {{ maxLength }} characters
+          </div>
+          Publisher:
+          <ng-multiselect-dropdown
+            formControlName="publisher"
+            [data]="publishers"
+            [settings]="publisherDropdownSettings"
+          ></ng-multiselect-dropdown>
+          <ng-multiselect-dropdown
+            formControlName="authors"
+            [data]="authors"
+            [settings]="authorDropdownSettings"
+          ></ng-multiselect-dropdown>
+          <ng-multiselect-dropdown
+            formControlName="genres"
+            [data]="genres"
+            [settings]="genreDropdownSettings"
+          ></ng-multiselect-dropdown>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <button
+          type="button"
+          (click)="writeBook(operation); close()"
+          [disabled]="writeBookForm.invalid"
+        >
+          {{ operation }}
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
