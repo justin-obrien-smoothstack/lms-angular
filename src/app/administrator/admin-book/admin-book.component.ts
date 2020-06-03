@@ -11,6 +11,31 @@ import { OLmsService } from "src/app/common/o/services/oLms.service";
   styleUrls: ["./admin-book.component.css"],
 })
 export class AdminBookComponent implements OnInit {
+  maxLength = maxLength;
+  operation: string;
+  writeBookForm: FormGroup;
+  publisherDropdownSettings = {
+    idField: "publisherId",
+    textField: "publisherName",
+    itemsShowLimit: 10,
+    allowSearchFilter: true,
+    enableCheckAll: false,
+    singleSelection: true,
+  };
+  authorDropdownSettings = {
+    idField: "authorId",
+    textField: "authorName",
+    itemsShowLimit: 10,
+    allowSearchFilter: true,
+    enableCheckAll: false,
+  };
+  genreDropdownSettings = {
+    idField: "genre_id",
+    textField: "genre_name",
+    itemsShowLimit: 10,
+    allowSearchFilter: true,
+    enableCheckAll: false,
+  };
   books: any[];
   authors: any[];
   genres: any[];
