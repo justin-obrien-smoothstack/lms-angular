@@ -61,21 +61,6 @@ import { OLmsService } from "src/app/common/o/services/oLms.service";
 
   bootstrap: [
     AppComponent,
-    // ErrorComponent,
-    // HomeComponent,
-    // LayoutComponent,
-    // HeaderComponent,
-    // FooterComponent,
-    // LibrarianComponent,
-    // BorrowerComponent,
-    // AdministratorComponent,
-    // OverrideComponent,
-    // AdminAuthorComponent,
-    // AdminBookComponent,
-    // AdminBorrowerComponent,
-    // AdminBranchComponent,
-    // AdminGenreComponent,
-    // AdminPublisherComponent,
   ],
 
 

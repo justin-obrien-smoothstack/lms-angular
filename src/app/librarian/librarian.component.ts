@@ -119,7 +119,7 @@ export class LibrarianComponent implements OnInit {
       branchAddress: this.updateBranchForm.value.branchAddress,
     }
     this.lmsService
-      .post(`${environment.libUrl}${environment.updateBanchUri}`, branch)
+      .put(`${environment.libUrl}${environment.updateBanchUri}`, branch)
       .subscribe(
         (res) => {
           console.log(res);
