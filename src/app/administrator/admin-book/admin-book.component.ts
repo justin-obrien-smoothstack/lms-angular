@@ -133,6 +133,17 @@ export class AdminBookComponent implements OnInit {
             this.readPublishers();
           });
         break;
+      case "Update":
+        this.lmsService
+          .put(environment.adminBackendUrl + environment.updateBookUri, book)
+          .subscribe()
+          .add(() => {
+            this.readBooks();
+            this.readAuthors();
+            this.readGenres();
+            this.readPublishers();
+          });
+        break;
     }
   }
 
