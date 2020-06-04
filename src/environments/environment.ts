@@ -13,6 +13,7 @@ export const environment = {
   readGenreUri: "/genre",
   readPublisherUri: "/publishers",
   readOverridableLoansUri: "/loans",
+  updateBookUri: "/book",
 };
 
 /*
