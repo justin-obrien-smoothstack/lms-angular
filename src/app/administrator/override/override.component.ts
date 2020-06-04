@@ -30,7 +30,7 @@ export class OverrideComponent implements OnInit {
         },
         (error) => {
           this.overridableLoans = [];
-          alert(error);
+          alert(error.error);
         }
       );
   }
@@ -45,7 +45,7 @@ export class OverrideComponent implements OnInit {
     this.lmsService
       .put(`${environment.adminBackendUrl}${overrideUri}`)
       .subscribe(null, (error) => {
-        alert(error);
+        alert(error.error);
       })
       .add(this.readOverridableLoans());
   }
