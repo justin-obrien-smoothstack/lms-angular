@@ -111,7 +111,9 @@ export class AdminBookComponent implements OnInit {
     const book = {
       bookId: this.writeBookForm.value.bookId,
       title: this.writeBookForm.value.title,
-      pubId: this.writeBookForm.value.publisher.publisherId,
+      pubId: this.writeBookForm.value.publisher
+        ? this.writeBookForm.value.publisher.publisherId
+        : null,
       authorIds: this.writeBookForm.value.authors.map(
         (author: any) => author.authorId
       ),
