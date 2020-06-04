@@ -7,6 +7,7 @@
     <th>Authors</th>
     <th>Genres</th>
     <th>Publisher</th>
+    <th>Update</th>
   </thead>
   <tbody>
     <tr *ngFor="let b of books">
@@ -43,6 +44,14 @@
               : "(publisher not found)"
               : "(publisher name not found)"
         }}
+      </td>
+      <td>
+        <button
+          type="button"
+          (click)="openWriteModal('Update', writeBookModal)"
+        >
+          Update
+        </button>
       </td>
     </tr>
   </tbody>
