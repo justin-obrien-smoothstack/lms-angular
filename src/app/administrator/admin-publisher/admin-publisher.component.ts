@@ -48,13 +48,9 @@ export class AdminPublisherComponent implements OnInit {
       .delete(
         `${environment.adminBackendUrl}${environment.deletePublisherUri}/${publisherId}`
       )
-      .subscribe(
-        () => {},
-        (error: any) => {
-          // do something with a logger here
-          alert(error);
-        }
-      )
+      .subscribe(null, (error: any) => {
+        alert(error.error);
+      })
       .add(() => {
         this.readPublishers();
         this.readBooks();
