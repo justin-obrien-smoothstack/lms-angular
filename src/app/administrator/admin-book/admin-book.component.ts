@@ -111,8 +111,8 @@ export class AdminBookComponent implements OnInit {
     const book = {
       bookId: this.writeBookForm.value.bookId,
       title: this.writeBookForm.value.title,
-      pubId: this.writeBookForm.value.publisher
-        ? this.writeBookForm.value.publisher.publisherId
+      pubId: this.writeBookForm.value.publisher[0]
+        ? this.writeBookForm.value.publisher[0].publisherId
         : null,
       authorIds: this.writeBookForm.value.authors.map(
         (author: any) => author.authorId
@@ -156,9 +156,11 @@ export class AdminBookComponent implements OnInit {
     if (book) {
       bookId = book.bookId;
       title = book.title;
-      publisher = this.publishers.find(
-        (publisher) => publisher.publisherId === book.pubId
-      );
+      publisher = [
+        this.publishers.find(
+          (publisher) => publisher.publisherId === book.pubId
+        ),
+      ];
       authors = this.authors.filter((author) =>
         book.authorIds.includes(author.authorId)
       );
