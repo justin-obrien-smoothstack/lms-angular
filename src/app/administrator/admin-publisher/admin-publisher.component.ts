@@ -99,9 +99,9 @@ export class AdminPublisherComponent implements OnInit {
   }
 
   initializeWritePublisherForm(publisher: any) {
-    let publisherName = "",
-      publisherAddress = "",
-      publisherPhone = "",
+    let publisherName: string,
+      publisherAddress = null,
+      publisherPhone = null,
       books = [],
       publisherId: number;
     if (publisher) {
