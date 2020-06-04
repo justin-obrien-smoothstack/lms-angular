@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
+import { GetPropertyPipe } from "src/app/common/o/pipes/get-property.pipe";
 import { environment } from "src/environments/environment";
 
 @Component({
