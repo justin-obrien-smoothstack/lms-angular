@@ -30,7 +30,6 @@ export class OverrideComponent implements OnInit {
         },
         (error) => {
           this.overridableLoans = [];
-          // do something with a logger here
           alert(error);
         }
       );
@@ -45,13 +44,9 @@ export class OverrideComponent implements OnInit {
       overrideUri = `/loans/book/${loan.bookId}/borrower/${loan.cardNo}/branch/${loan.branchId}/dateout/${dateOut}`;
     this.lmsService
       .put(`${environment.adminBackendUrl}${overrideUri}`)
-      .subscribe(
-        () => this.readOverridableLoans(),
-        (error) => {
-          // do something with a logger here
-          alert(error);
-          this.readOverridableLoans();
-        }
-      );
+      .subscribe(null, (error) => {
+        alert(error);
+      })
+      .add(this.readOverridableLoans());
   }
 }
