@@ -54,8 +54,10 @@ export class AdminPublisherComponent implements OnInit {
           // do something with a logger here
           alert(error);
         }
-      );
-    this.readPublishers();
-    this.readBooks();
+      )
+      .add(() => {
+        this.readPublishers();
+        this.readBooks();
+      });
   }
 }
