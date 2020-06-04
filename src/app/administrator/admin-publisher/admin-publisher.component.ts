@@ -77,7 +77,7 @@ export class AdminPublisherComponent implements OnInit {
             environment.adminBackendUrl + environment.createPublisherUri,
             publisher
           )
-          .subscribe();
+          .subscribe(null, (error) => alert(error.error));
         break;
       case "Update":
         this.lmsService
