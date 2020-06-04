@@ -156,10 +156,9 @@ export class AdminBookComponent implements OnInit {
     if (book) {
       bookId = book.bookId;
       title = book.title;
-      publisher =
-        this.publishers.find(
-          (publisher) => publisher.publisherId === book.pubId
-        ) || null;
+      publisher = this.publishers.find(
+        (publisher) => publisher.publisherId === book.pubId
+      );
       authors = this.authors.filter((author) =>
         book.authorIds.includes(author.authorId)
       );
