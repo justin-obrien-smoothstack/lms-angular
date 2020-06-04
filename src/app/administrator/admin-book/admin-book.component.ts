@@ -111,9 +111,7 @@ export class AdminBookComponent implements OnInit {
     const book = {
       bookId: this.writeBookForm.value.bookId,
       title: this.writeBookForm.value.title,
-      pubId: this.writeBookForm.value.publisher.map(
-        (publisher: any) => publisher.publisherId
-      ),
+      pubId: this.writeBookForm.value.publisher.publisherId,
       authorIds: this.writeBookForm.value.authors.map(
         (author: any) => author.authorId
       ),
@@ -153,6 +151,10 @@ export class AdminBookComponent implements OnInit {
       authors = [],
       genres = [],
       bookId: number;
+    if(book){
+      title=book.title;
+      publisher=
+    }
     this.writeBookForm = this.formBuilder.group({
       bookId: [bookId],
       title: [title, [Validators.required, Validators.maxLength(maxLength)]],
