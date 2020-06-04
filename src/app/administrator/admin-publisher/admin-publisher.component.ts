@@ -41,9 +41,8 @@ export class AdminPublisherComponent implements OnInit {
       .subscribe(
         (result: object[]) => (this.publishers = result),
         (error: any) => {
-          // do something with a logger here
           this.publishers = [];
-          alert(error);
+          alert(error.error);
         }
       );
   }
@@ -54,9 +53,8 @@ export class AdminPublisherComponent implements OnInit {
       .subscribe(
         (result: object[]) => (this.books = result),
         (error: any) => {
-          // do something with a logger here
           this.books = [];
-          alert(error);
+          alert(error.error);
         }
       );
   }
