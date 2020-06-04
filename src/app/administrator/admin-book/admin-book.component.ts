@@ -147,13 +147,23 @@ export class AdminBookComponent implements OnInit {
 
   initializeWriteBookForm(book: any) {
     let title: string,
-      publisher: any,
+      publisher = null,
       authors = [],
       genres = [],
       bookId: number;
-    if(book){
-      title=book.title;
-      publisher=
+    if (book) {
+      bookId = book.bookId;
+      title = book.title;
+      publisher =
+        this.publishers.find(
+          (publisher) => (publisher.publisherId = book.pubId)
+        ) || null;
+      authors = this.authors.filter((author) =>
+        book.authorIds.includes(author.authorId)
+      );
+      genres = this.genres.filter((genre) =>
+        book.genreIds.includes(genre.genre_id)
+      );
     }
     this.writeBookForm = this.formBuilder.group({
       bookId: [bookId],
