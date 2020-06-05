@@ -20,6 +20,10 @@ export class OLmsService {
     return this.httpClient.put(url, body);
   }
 
+  delete(url: string) {
+    return this.httpClient.delete(url);
+  }
+
   setBorrowerNameOf(input: any) {
     this.httpClient
       .get(

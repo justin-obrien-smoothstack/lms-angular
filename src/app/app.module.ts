@@ -25,6 +25,7 @@ import { AdministratorComponent } from "./administrator/administrator.component"
 import { OverrideComponent } from "./administrator/override/override.component";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
 import { GetPropertyPipe } from "src/app/common/o/pipes/get-property.pipe";
+import { NiceSpacingPipe } from "./common/o/pipes/nice-spacing.pipe";
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { GetPropertyPipe } from "src/app/common/o/pipes/get-property.pipe";
     AdminGenreComponent,
     AdminPublisherComponent,
     GetPropertyPipe,
+    NiceSpacingPipe,
   ],
   imports: [
     BrowserModule,
