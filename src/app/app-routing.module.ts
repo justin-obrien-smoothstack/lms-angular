@@ -15,6 +15,9 @@ import { AdminGenreComponent } from "./administrator/admin-genre/admin-genre.com
 import { AdminPublisherComponent } from "./administrator/admin-publisher/admin-publisher.component";
 import { OverrideComponent } from "./administrator/override/override.component";
 import { Routes, RouterModule } from "@angular/router";
+import { AppComponent } from "./app.component";
+import { AdministratorComponent } from "./administrator/administrator.component";
+import { OverrideComponent } from "./administrator/override/override.component";
 
 const routes: Routes = [
   {
