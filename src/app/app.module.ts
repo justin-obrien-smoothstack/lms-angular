@@ -1,6 +1,9 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
+import { ReactiveFormsModule } from "@angular/forms";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -21,6 +24,7 @@ import { AdministratorComponent } from "./administrator/administrator.component"
 import { OverrideComponent } from "./administrator/override/override.component";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
 import { GetPropertyPipe } from "src/app/common/o/pipes/get-property.pipe";
+import { NiceSpacingPipe } from './common/o/pipes/nice-spacing.pipe';
 
 @NgModule({
   declarations: [
@@ -41,8 +45,16 @@ import { GetPropertyPipe } from "src/app/common/o/pipes/get-property.pipe";
     AdminGenreComponent,
     AdminPublisherComponent,
     GetPropertyPipe,
+    NiceSpacingPipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    NgbModule,
+    NgMultiSelectDropDownModule,
+  ],
   providers: [OLmsService],
   bootstrap: [AppComponent],
 })
