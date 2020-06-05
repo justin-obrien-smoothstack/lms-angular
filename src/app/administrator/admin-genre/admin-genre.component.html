@@ -1,3 +1,50 @@
-<p>
-  admin-genre works!
-</p>
+<!-- <button type="button" (click)="openWriteModal('Create', writeGenreModal)">
+  Create
+</button> -->
+
+<div class="genre-header">
+  <h1 class="genre-title">Genres</h1>
+  <div class="create-button">
+    <button type="button" class="btn btn-success">
+      Create New Genre
+    </button>
+  </div>
+</div>
+
+<div class="genre-table">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Genre</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let genre of genres
+            | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize
+        "
+      >
+        <td scope="row">{{ genre.genre_name }}</td>
+        <td>
+          <button type="button" class="btn btn-info btn-sm">
+            Update
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger btn-sm">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ngb-pagination
+    [collectionSize]="genres.length"
+    [(page)]="page"
+    aria-label="Default pagination"
+  >
+  </ngb-pagination>
+</div>
