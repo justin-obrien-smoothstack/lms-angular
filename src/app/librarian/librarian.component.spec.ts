@@ -1,3 +1,4 @@
+
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -135,10 +136,44 @@ describe('LibrarianComponent', () => {
   });
 
   it('should add book copies', () => {
+    const mockBookCopies = {
+      books: [
+        {
+          bookId: 1,
+          title: "title",
+        }
+      ],
+      noOfCopies: 1,
+      bookCopies: {
+        bookId: 1,
+        branchId: 1,
+        noOfCopies: 1
+      },
+      branchId: 1,
+    };
 
+    component.openAdd("AddBookCopiesForm", mockBookCopies);
+    component.addBookCopies();
   });
 
   it('should remove book copies', () => {
+    const mockBookCopies = {
+      books: [
+        {
+          bookId: 1,
+          title: "title",
+        }
+      ],
+      noOfCopies: 1,
+      bookCopies: {
+        bookId: 1,
+        branchId: 1,
+        noOfCopies: 1
+      },
+      branchId: 1,
+    };
 
+    component.openAdd("AddBookCopiesForm", mockBookCopies);
+    component.subtractBookCopies();
   });
 });
