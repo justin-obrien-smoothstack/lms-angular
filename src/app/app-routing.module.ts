@@ -1,6 +1,8 @@
 import { NgModule } from "@angular/core";
 import { LayoutComponent } from "./layout/layout.component";
 import { HomeComponent } from "./home/home.component";
+import { HeaderComponent } from "./layout/header/header.component";
+import { FooterComponent } from "./layout/footer/footer.component";
 import { ErrorComponent } from "./error/error.component";
 import { LibrarianComponent } from "./librarian/librarian.component";
 import { BorrowerComponent } from "./borrower/borrower.component";

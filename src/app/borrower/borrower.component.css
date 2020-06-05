@@ -1,0 +1,72 @@
+.login-page {
+  max-width: 600px;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.borrower-login-title {
+  text-align: center;
+}
+
+.btn-borrower-login {
+  font-size: 1.1rem;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.form-requirement {
+  margin: 5px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+/* Dashboard after login */
+
+.borrower-page h2 {
+  text-align: center;
+}
+
+.borrower-page .table th,
+.borrower-page .table td {
+  padding: 0.8rem;
+}
+
+.borrower-dashboard {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.return-dashboard {
+  flex-grow: 1;
+}
+
+.check-out-dashboard {
+  flex-grow: 4;
+  min-width: 600px;
+  margin-left: 30px;
+}
+
+.book-filters {
+  display: flex;
+}
+
+.branch-select {
+  width: 40%;
+}
+
+.book-search {
+  margin-right: 10px;
+  width: 40%;
+}
+
+.borrower-info {
+  flex: 1 1 100%;
+  text-align: center;
+}

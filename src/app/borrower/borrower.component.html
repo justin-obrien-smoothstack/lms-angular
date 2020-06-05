@@ -1,3 +1,176 @@
-<p>
-  borrower works!
-</p>
+<div class="login-page" [ngClass]="{ show: !loggedIn, hide: loggedIn }">
+  <h1 class="borrower-login-title">Borrower Login</h1>
+  <div class="form-group">
+    <label class="col-form-label col-form-label-lg" for="inputLarge"
+      >Enter your card number:</label
+    >
+    <form [formGroup]="borrowerLogin">
+      <input
+        class="form-control form-control-lg"
+        type="text"
+        formControlName="cardNumber"
+        placeholder="Card Number"
+        (keyup)="borrowerNotFound = false"
+        (keyup.enter)="onBorrowerLogin()"
+      />
+      <div
+        class="form-requirement"
+        *ngIf="borrowerLogin.get('cardNumber').invalid"
+      >
+        Card Number is required.
+      </div>
+
+      <div
+        class="form-requirement"
+        *ngIf="borrowerLogin.get('cardNumber').errors?.pattern"
+      >
+        Input must be a number.
+      </div>
+
+      <div
+        class="form-requirement"
+        *ngIf="borrowerLogin.get('cardNumber').errors?.min"
+      >
+        Minimum required number is 1.
+      </div>
+
+      <div class="form-requirement" *ngIf="borrowerNotFound">
+        That card number is not in our database.
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary btn-borrower-login"
+        (click)="onBorrowerLogin()"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class="borrower-page" *ngIf="loggedIn">
+  <div class="borrower-info">
+    <h1>{{ borrower.name }}</h1>
+    <h3>Card Number: {{ borrower.cardNo }}</h3>
+    <button type="button" class="btn btn-primary" (click)="loggedIn = false">
+      Logout
+    </button>
+  </div>
+
+  <hr />
+  <div
+    class="borrower-dashboard"
+    [ngClass]="{ show: loggedIn, hide: !loggedIn }"
+  >
+    <div class="return-dashboard">
+      <h2>Your Loans</h2>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Book</th>
+            <th scope="col">Branch</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Return</th>
+          </tr>
+        </thead>
+
+        <tr class="table-light" *ngFor="let loan of borrower.loans">
+          <th scope="row">{{ loan.bookTitle }}</th>
+          <td>{{ loan.branchName }}</td>
+          <td>{{ loan.dueDate }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-primary btn-sm"
+              (click)="returnBook(loan)"
+              *ngIf="loan.dateIn === null"
+            >
+              Return
+            </button>
+            <p class="text-success" *ngIf="loan.dateIn !== null">Returned</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="check-out-dashboard">
+      <h2>Available Books</h2>
+
+      <div class="book-filters">
+        <div class="book-search">
+          <label class="col-form-label" for="inputDefault"
+            >Search by Book Title</label
+          >
+          <input
+            (change)="page = 1"
+            type="text"
+            class="form-control"
+            [(ngModel)]="bookSearch"
+            placeholder="Search by title"
+            id="inputDefault"
+          />
+        </div>
+        <div class="branch-select">
+          <label class="col-form-label" for="inputDefault">
+            Filter by Branch
+          </label>
+          <select
+            class="custom-select"
+            [(ngModel)]="selectedBranch"
+            (change)="page = 1"
+          >
+            <option selected="All Branches">All Branches</option>
+            <option *ngFor="let branch of branches" value="{{ branch }}">
+              {{ branch }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Book</th>
+            <th scope="col">Branch</th>
+            <th scope="col">Copies Available</th>
+            <th scope="col">Check Out</th>
+          </tr>
+        </thead>
+
+        <tr
+          class="table-primary"
+          *ngFor="
+            let bookRef of availableBooks
+              | sortCopiesByTitle: bookSearch:filterMetadata
+              | sortCopiesByBranch: selectedBranch:filterMetadata
+              | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize
+          "
+        >
+          <th scope="row">{{ bookRef.bookTitle }}</th>
+          <td>{{ bookRef.branchName }}</td>
+          <td>{{ bookRef.noOfCopies }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-primary btn-sm"
+              (click)="checkOutBook(bookRef)"
+              *ngIf="bookRef.noOfCopies !== 0"
+            >
+              Check Out
+            </button>
+            <p class="text-danger" *ngIf="bookRef.noOfCopies == 0">
+              None Available
+            </p>
+          </td>
+        </tr>
+      </table>
+      <ngb-pagination
+        [collectionSize]="filterMetadata.count"
+        [(page)]="page"
+        aria-label="Default pagination"
+      >
+      </ngb-pagination>
+    </div>
+  </div>
+</div>
