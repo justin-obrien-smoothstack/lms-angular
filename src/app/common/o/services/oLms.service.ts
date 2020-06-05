@@ -13,7 +13,7 @@ export class OLmsService {
   }
 
   post(url: string, body: any = "") {
-    return this.httpClient.post(url, body);
+    return this.httpClient.post(url, body, { responseType: "text" });
   }
 
   put(url: string, body: any = "") {
@@ -23,6 +23,7 @@ export class OLmsService {
   delete(url: string) {
     return this.httpClient.delete(url);
   }
+
   setBorrowerNameOf(input: any) {
     this.httpClient
       .get(
