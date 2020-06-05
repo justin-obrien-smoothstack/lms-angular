@@ -103,7 +103,6 @@ export class BorrowerComponent implements OnInit {
   }
 
   returnBook(loan) {
-    console.log(loan);
     let formattedLoan = {
       bookId: loan.bookId,
       branchId: loan.branchId,
