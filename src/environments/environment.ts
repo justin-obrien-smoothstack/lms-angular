@@ -7,11 +7,15 @@ export const environment = {
   adminBackendUrl: "http://localhost:3000/lms/admin",
   createPublisherUri: "/publisher",
   updatePublisherUri: "/publisher",
+  readAuthorUri: "/authors",
   readBookUri: "/books",
   readPublisherUri: "/publishers",
   readBorrowerUri: "/borrower",
   readBranchUri: "/branches",
+  readGenreUri: "/genre",
+  readPublisherUri: "/publishers",
   readOverridableLoansUri: "/loans",
+  deleteBookUri: "/books",
 };
 
 /*
