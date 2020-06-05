@@ -36,7 +36,8 @@ export class LibrarianComponent implements OnInit {
   searchBranchForm: FormGroup;
   dropdownSettings: any;
   errMsg: any;
-  constructor(private lmsService: LmsService,
+  constructor(
+    private lmsService: LmsService,
     private modalService: NgbModal,
     private fb: FormBuilder
   ) {
@@ -119,10 +120,11 @@ export class LibrarianComponent implements OnInit {
       branchAddress: this.updateBranchForm.value.branchAddress,
     }
     this.lmsService
-      .post(`${environment.libUrl}${environment.updateBanchUri}`, branch)
+      .put(`${environment.libUrl}${environment.updateBanchUri}`, branch)
       .subscribe(
         (res) => {
           console.log(res);
+          this.modalService.dismissAll();
         },
         (error) => {
           console.log(error);
@@ -158,7 +160,6 @@ export class LibrarianComponent implements OnInit {
     if (obj !== null) {
       this.addBookCopiesForm = this.fb.group({
         books: [obj.books],
-        // bookId: [obj.books.bookId],
         bookId: obj.bookCopies.bookId,
         branchId: obj.branchId,
         noOfCopies: obj.bookCopies.noOfCopies,
@@ -192,6 +193,7 @@ export class LibrarianComponent implements OnInit {
       .subscribe(
         (res) => {
           console.log(res);
+          this.modalService.dismissAll();
         },
         (error) => {
           console.log(error);

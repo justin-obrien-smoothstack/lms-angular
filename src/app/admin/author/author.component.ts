@@ -22,7 +22,7 @@ export class AuthorComponent implements OnInit {
   authorId: number;
   books: any;
   totalBooks: any;
-  
+
   private modalRef: NgbModalRef;
   errMsg: any;
   closeResult: any;
@@ -35,7 +35,7 @@ export class AuthorComponent implements OnInit {
     private lmsService: LmsService,
     private modalService: NgbModal,
     private fb: FormBuilder
-  ) { 
+  ) {
     this.dropdownSettings = {
       singleSelection: false,
       idField: "bookId",
@@ -74,12 +74,6 @@ export class AuthorComponent implements OnInit {
       .subscribe(
         (res) => {
           this.authors = res;
-          this.authors.forEach(author => {
-            author.showBooks = [];
-            author.books.forEach(element => {
-              author.showBooks.push(element.title);
-            });
-          });
         },
         (error) => {
           debugger;
@@ -120,19 +114,18 @@ export class AuthorComponent implements OnInit {
       books: this.updateAuthorForm.value.books,
     };
 
-    if (!author.authorId)
-    {
+    if (!author.authorId) {
       this.lmsService
-      .post(`${environment.adminBackendUrl}${environment.readAuthorsUri}`, author)
-      .subscribe(
-        (res) => {
-          this.loadAllAuthors();
-          this.modalService.dismissAll();
-        },
-        (error) => {
-          debugger;
-        }
-      )
+        .post(`${environment.adminBackendUrl}${environment.readAuthorsUri}`, author)
+        .subscribe(
+          (res) => {
+            this.loadAllAuthors();
+            this.modalService.dismissAll();
+          },
+          (error) => {
+            debugger;
+          }
+        )
     }
     else {
       this.lmsService
