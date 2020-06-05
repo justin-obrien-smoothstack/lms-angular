@@ -96,10 +96,18 @@ export class LibrarianComponent implements OnInit {
         Validators.minLength(3),
       ]),
       bookId: new FormControl(this.bookId),
-      noOfCopies: new FormControl(this.noOfCopies),
       branchId: new FormControl(this.branchId),
       books: new FormControl(this.books),
     });
+    this.addBookCopiesForm = new FormGroup({
+      bookId: new FormControl(this.bookId),
+      noOfCopies: new FormControl(this.noOfCopies, [
+        Validators.required,
+        Validators.min(1),
+      ]),
+      branchId: new FormControl(this.branchId),
+      books: new FormControl(this.books),
+    })
   }
 
 
@@ -172,7 +180,7 @@ export class LibrarianComponent implements OnInit {
     let bookCopies = {
       books: this.addBookCopiesForm.value.books,
       bookId: this.addBookCopiesForm.value.bookId,
-      branchId: this.addBookCopiesForm.value.bookCopies.branchId,
+      branchId: this.addBookCopiesForm.value.branchId,
       noOfCopies: this.addBookCopiesForm.value.noOfCopies,
       originalBookCopies: this.addBookCopiesForm.value.bookCopies,
       sign: '+',
@@ -198,7 +206,7 @@ export class LibrarianComponent implements OnInit {
     let bookCopies = {
       books: this.addBookCopiesForm.value.books,
       bookId: this.addBookCopiesForm.value.bookId,
-      branchId: this.addBookCopiesForm.value.bookCopies.branchId,
+      branchId: this.addBookCopiesForm.value.branchId,
       noOfCopies: this.addBookCopiesForm.value.noOfCopies,
       originalBookCopies: this.addBookCopiesForm.value.bookCopies,
       sign: '-',
