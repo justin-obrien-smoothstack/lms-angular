@@ -21,6 +21,9 @@ export class AdminPublisherComponent implements OnInit {
     allowSearchFilter: true,
     enableCheckAll: false,
   };
+  currentPage = 1;
+  rowsPerPage = 10;
+  totalRows = 0;
   publishers: any[];
   books: any[];
 
