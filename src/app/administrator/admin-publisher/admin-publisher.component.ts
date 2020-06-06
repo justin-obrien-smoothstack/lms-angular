@@ -23,8 +23,7 @@ export class AdminPublisherComponent implements OnInit {
   };
   currentPage = 1;
   rowsPerPage = 10;
-  totalRows = 0;
-  publishers: any[];
+  publishers = [];
   books: any[];
 
   constructor(
