@@ -34,7 +34,11 @@
           </button>
         </td>
         <td>
-          <button type="button" class="btn btn-danger btn-sm">
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            (click)="deleteGenre(genre.genre_id)"
+          >
             Delete
           </button>
         </td>
@@ -48,3 +52,75 @@
   >
   </ngb-pagination>
 </div>
+
+<ng-template #writeGenreModal let-close="close">
+  <form [formGroup]="writeGenreModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>{{ operation }} Publisher</h5>
+          <button type="button" (click)="close()">
+            <span>&#215;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            Name:
+            <input class="form-control" formControlName="publisherName" />
+            <div
+              *ngIf="
+                errorsDirty('publisherName') &&
+                writePublisherForm.controls.publisherName.errors.required
+              "
+            >
+              Required
+            </div>
+            <div
+              *ngIf="
+                errorsDirty('publisherName') &&
+                writePublisherForm.controls.publisherName.errors.maxlength
+              "
+            >
+              Maximum length is {{ maxLength }} characters
+            </div>
+            Address:
+            <input class="form-control" formControlName="publisherAddress" />
+            <div
+              *ngIf="
+                errorsDirty('publisherAddress') &&
+                writePublisherForm.controls.publisherAddress.errors.maxlength
+              "
+            >
+              Maximum length is {{ maxLength }} characters
+            </div>
+            Phone:
+            <input class="form-control" formControlName="publisherPhone" />
+            <div
+              *ngIf="
+                errorsDirty('publisherPhone') &&
+                writePublisherForm.controls.publisherPhone.errors.maxlength
+              "
+            >
+              Maximum length is {{ maxLength }} characters
+            </div>
+            Books:
+            <ng-multiselect-dropdown
+              formControlName="books"
+              [data]="books"
+              [settings]="bookDropdownSettings"
+            ></ng-multiselect-dropdown>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            (click)="writePublisher(operation); close()"
+            [disabled]="writePublisherForm.invalid"
+          >
+            {{ operation }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>

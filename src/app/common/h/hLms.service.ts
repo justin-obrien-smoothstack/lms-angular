@@ -12,8 +12,16 @@ export class HLmsService {
     return this.httpClient.get(url);
   }
 
-  put(url: string, loan: any) {
-    return this.httpClient.put(url, loan);
+  put(url: string, input: any) {
+    return this.httpClient.put(url, input);
+  }
+
+  post(url: string, input: any) {
+    return this.httpClient.put(url, input);
+  }
+
+  delete(url: string) {
+    return this.httpClient.delete(url);
   }
 
   readBorrower(cardNumber) {
