@@ -38,6 +38,8 @@
     </tr>
   </tbody>
 </table>
+<ngb-pagination [collectionSize]="publishers.length" [(page)]="currentPage">
+</ngb-pagination>
 
 <ng-template #writePublisherModal let-close="close">
   <form [formGroup]="writePublisherForm">
