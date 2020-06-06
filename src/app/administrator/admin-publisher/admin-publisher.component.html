@@ -11,7 +11,12 @@
     <th>Delete</th>
   </thead>
   <tbody>
-    <tr *ngFor="let p of publishers">
+    <tr
+      *ngFor="
+        let p of publishers
+          | slice: (currentPage - 1) * rowsPerPage:currentPage * rowsPerPage
+      "
+    >
       <td>{{ p.publisherName }}</td>
       <td>{{ p.publisherAddress }}</td>
       <td>{{ p.publisherPhone }}</td>
