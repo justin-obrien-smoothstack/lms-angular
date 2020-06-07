@@ -9,14 +9,12 @@ export const environment = {
   updatePublisherUri: "/publisher",
   readAuthorUri: "/authors",
   readBookUri: "/books",
-  readPublisherUri: "/publishers",
-  deletePublisherUri: "/publishers",
   readBorrowerUri: "/borrower",
   readBranchUri: "/branches",
   readGenreUri: "/genre",
   readPublisherUri: "/publishers",
   readOverridableLoansUri: "/loans",
-  deleteBookUri: "/books",
+  deletePublisherUri: "/publishers",
 };
 
 /*
