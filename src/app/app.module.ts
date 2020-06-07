@@ -6,7 +6,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
 import { SlicePipe } from "@angular/common";
-import { maxLength } from "src/app/common/o/constants";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
