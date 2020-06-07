@@ -37,7 +37,6 @@ export class OLmsService {
               : "(borrower name not found)"),
         (error: any) => {
           input.borrowerName = "(error retrieving borrower name)";
-          // do something with logger here
         }
       );
   }
@@ -55,7 +54,6 @@ export class OLmsService {
               : "(branch name not found)"),
         (error: any) => {
           input.branchName = "(error retrieving branch name)";
-          // do something with logger here
         }
       );
   }
@@ -69,7 +67,6 @@ export class OLmsService {
         (books) => (input.bookTitle = books[0].title),
         (error) => {
           input.bookTitle = "(error retrieving book title)";
-          // do something with logger here
         }
       );
   }
