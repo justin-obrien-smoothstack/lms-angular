@@ -10,6 +10,7 @@ export const environment = {
   readAuthorUri: "/authors",
   readBookUri: "/books",
   readPublisherUri: "/publishers",
+  deletePublisherUri: "/publishers",
   readBorrowerUri: "/borrower",
   readBranchUri: "/branches",
   readGenreUri: "/genre",
