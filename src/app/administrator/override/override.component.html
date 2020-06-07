@@ -1,32 +1,37 @@
-<table class="table">
-  <thead>
-    <th>Borrower</th>
-    <th>Branch</th>
-    <th>Book</th>
-    <th>Date Out</th>
-    <th>Due Date</th>
-    <th>Date In</th>
-    <th>Override Due Date</th>
-  </thead>
-  <tbody>
-    <tr
-      *ngFor="
-        let l of overridableLoans
-          | slice: (currentPage - 1) * rowsPerPage:currentPage * rowsPerPage
-      "
-    >
-      <td>{{ l.borrowerName }}</td>
-      <td>{{ l.branchName }}</td>
-      <td>{{ l.bookTitle }}</td>
-      <td>{{ l.dateOut | date: "medium" }}</td>
-      <td>{{ l.dueDate | date: "medium" }}</td>
-      <td>{{ l.dateIn | date: "medium" }}</td>
-      <td>
-        <button type="button" (click)="doOverride(l)">Extend by 1 week</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<h1 class="lms-title">Loans with overridable due dates</h1>
+
+<div class="lms-table">
+  <table class="table table-hover">
+    <thead>
+      <th>Borrower</th>
+      <th>Branch</th>
+      <th>Book</th>
+      <th>Date Out</th>
+      <th>Due Date</th>
+      <th>Date In</th>
+      <th>Override Due Date</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let l of overridableLoans">
+        <td>{{ l.borrowerName }}</td>
+        <td>{{ l.branchName }}</td>
+        <td>{{ l.bookTitle }}</td>
+        <td>{{ l.dateOut | date: "medium" }}</td>
+        <td>{{ l.dueDate | date: "medium" }}</td>
+        <td>{{ l.dateIn | date: "medium" }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-dark btn-sm"
+            (click)="doOverride(l)"
+          >
+            Extend by 1 week
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <ngb-pagination
   [collectionSize]="overridableLoans.length"
   [(page)]="currentPage"
