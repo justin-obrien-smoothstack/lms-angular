@@ -9,7 +9,12 @@
     <th>Override Due Date</th>
   </thead>
   <tbody>
-    <tr *ngFor="let l of overridableLoans">
+    <tr
+      *ngFor="
+        let l of overridableLoans
+          | slice: (currentPage - 1) * rowsPerPage:currentPage * rowsPerPage
+      "
+    >
       <td>{{ l.borrowerName }}</td>
       <td>{{ l.branchName }}</td>
       <td>{{ l.bookTitle }}</td>
@@ -22,3 +27,8 @@
     </tr>
   </tbody>
 </table>
+<ngb-pagination
+  [collectionSize]="overridableLoans.length"
+  [(page)]="currentPage"
+>
+</ngb-pagination>
