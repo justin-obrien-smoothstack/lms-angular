@@ -8,7 +8,9 @@ import { environment } from "src/environments/environment";
   styleUrls: ["./admin-book.component.css"],
 })
 export class AdminBookComponent implements OnInit {
-  books: any[];
+  currentPage = 1;
+  rowsPerPage = 10;
+  books = [];
   authors: any[];
   genres: any[];
   publishers: any[];

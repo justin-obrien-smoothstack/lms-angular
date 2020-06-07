@@ -7,7 +7,12 @@
     <th>Delete</th>
   </thead>
   <tbody>
-    <tr *ngFor="let b of books">
+    <tr
+      *ngFor="
+        let b of books
+          | slice: (currentPage - 1) * rowsPerPage:currentPage * rowsPerPage
+      "
+    >
       <td>{{ b.title }}</td>
       <td>
         {{
@@ -50,3 +55,5 @@
     </tr>
   </tbody>
 </table>
+<ngb-pagination [collectionSize]="books.length" [(page)]="currentPage">
+</ngb-pagination>

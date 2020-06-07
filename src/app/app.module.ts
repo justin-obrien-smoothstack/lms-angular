@@ -4,6 +4,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
+import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
+import { SlicePipe } from "@angular/common";
 import { maxLength } from "src/app/common/o/constants";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -55,8 +57,9 @@ import { NiceSpacingPipe } from "./common/o/pipes/nice-spacing.pipe";
     ReactiveFormsModule,
     NgbModule,
     NgMultiSelectDropDownModule,
+    NgbPaginationModule,
   ],
-  providers: [OLmsService],
+  providers: [SlicePipe, OLmsService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
