@@ -36,7 +36,9 @@ export class AdminBookComponent implements OnInit {
     allowSearchFilter: true,
     enableCheckAll: false,
   };
-  books: any[];
+  currentPage = 1;
+  rowsPerPage = 10;
+  books = [];
   authors: any[];
   genres: any[];
   publishers: any[];
@@ -188,5 +190,23 @@ export class AdminBookComponent implements OnInit {
       this.writeBookForm.controls[control].errors &&
       this.writeBookForm.controls[control].dirty
     );
+  }
+
+  deleteBook(bookId: number) {
+    if (!confirm("Delete this book?")) return;
+    this.lmsService
+      .delete(
+        `${environment.adminBackendUrl}${environment.deleteBookUri}/${bookId}`
+      )
+      .subscribe(null, (error: any) => {
+        // do something with a logger here
+        alert(error.error);
+      })
+      .add(() => {
+        this.readBooks();
+        this.readAuthors();
+        this.readGenres();
+        this.readPublishers();
+      });
   }
 }

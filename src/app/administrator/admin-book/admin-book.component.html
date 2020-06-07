@@ -8,9 +8,15 @@
     <th>Genres</th>
     <th>Publisher</th>
     <th>Update</th>
+    <th>Delete</th>
   </thead>
   <tbody>
-    <tr *ngFor="let b of books">
+    <tr
+      *ngFor="
+        let b of books
+          | slice: (currentPage - 1) * rowsPerPage:currentPage * rowsPerPage
+      "
+    >
       <td>{{ b.title }}</td>
       <td>
         {{
@@ -54,6 +60,9 @@
         >
           Update
         </button>
+      </td>
+      <td>
+        <button type="button" (click)="deleteBook(b.bookId)">Delete</button>
       </td>
     </tr>
   </tbody>
@@ -120,3 +129,5 @@
     </div>
   </form>
 </ng-template>
+<ngb-pagination [collectionSize]="books.length" [(page)]="currentPage">
+</ngb-pagination>

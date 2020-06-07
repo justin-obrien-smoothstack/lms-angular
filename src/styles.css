@@ -12,3 +12,7 @@ body {
 .push {
   height: 100px;
 }
+
+.navbar-nav li:hover > .dropdown-menu {
+  display: block;
+}

@@ -1,3 +1,124 @@
-<p>
-  admin-publisher works!
-</p>
+<button type="button" (click)="openWriteModal('Create', writePublisherModal)">
+  Create
+</button>
+<table class="table">
+  <thead>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Phone number</th>
+    <th>Books</th>
+    <th>Update</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="
+        let p of publishers
+          | slice: (currentPage - 1) * rowsPerPage:currentPage * rowsPerPage
+      "
+    >
+      <td>{{ p.publisherName }}</td>
+      <td>{{ p.publisherAddress }}</td>
+      <td>{{ p.publisherPhone }}</td>
+      <td>
+        {{
+          p.bookIds
+            | getProperty
+              : "bookId"
+              : "title"
+              : books
+              : "(book not found)"
+              : "(book title not found)"
+            | niceSpacing
+        }}
+      </td>
+      <td>
+        <button
+          type="button"
+          (click)="openWriteModal('Update', writePublisherModal, p)"
+        >
+          Update
+        </button>
+      </td>
+      <td>
+        <button type="button" (click)="deletePublisher(p.publisherId)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ngb-pagination [collectionSize]="publishers.length" [(page)]="currentPage">
+</ngb-pagination>
+
+<ng-template #writePublisherModal let-close="close">
+  <form [formGroup]="writePublisherForm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>{{ operation }} Publisher</h5>
+          <button type="button" (click)="close()">
+            <span>&#215;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            Name:
+            <input class="form-control" formControlName="publisherName" />
+            <div
+              *ngIf="
+                errorsDirty('publisherName') &&
+                writePublisherForm.controls.publisherName.errors.required
+              "
+            >
+              Required
+            </div>
+            <div
+              *ngIf="
+                errorsDirty('publisherName') &&
+                writePublisherForm.controls.publisherName.errors.maxlength
+              "
+            >
+              Maximum length is {{ maxLength }} characters
+            </div>
+            Address:
+            <input class="form-control" formControlName="publisherAddress" />
+            <div
+              *ngIf="
+                errorsDirty('publisherAddress') &&
+                writePublisherForm.controls.publisherAddress.errors.maxlength
+              "
+            >
+              Maximum length is {{ maxLength }} characters
+            </div>
+            Phone:
+            <input class="form-control" formControlName="publisherPhone" />
+            <div
+              *ngIf="
+                errorsDirty('publisherPhone') &&
+                writePublisherForm.controls.publisherPhone.errors.maxlength
+              "
+            >
+              Maximum length is {{ maxLength }} characters
+            </div>
+            Books:
+            <ng-multiselect-dropdown
+              formControlName="books"
+              [data]="books"
+              [settings]="bookDropdownSettings"
+            ></ng-multiselect-dropdown>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            (click)="writePublisher(operation); close()"
+            [disabled]="writePublisherForm.invalid"
+          >
+            {{ operation }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
