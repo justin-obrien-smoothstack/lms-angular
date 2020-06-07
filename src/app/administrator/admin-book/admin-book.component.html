@@ -1,7 +1,16 @@
-<button type="button" (click)="openWriteModal('Create', writeBookModal)">
-  Create
-</button>
-<table class="table">
+<div class="lms-header">
+  <h1 class="lms-title">Books</h1>
+  <div class="create-button">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="openWriteModal('Create', writeBookModal)"
+    >
+      Create New Book
+    </button>
+  </div>
+</div>
+<table class="table table-hover">
   <thead>
     <th>Title</th>
     <th>Authors</th>
@@ -56,13 +65,20 @@
       <td>
         <button
           type="button"
+          class="btn btn-info btn-sm"
           (click)="openWriteModal('Update', writeBookModal, b)"
         >
           Update
         </button>
       </td>
       <td>
-        <button type="button" (click)="deleteBook(b.bookId)">Delete</button>
+        <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          (click)="deleteBook(b.bookId)"
+        >
+          Delete
+        </button>
       </td>
     </tr>
   </tbody>
