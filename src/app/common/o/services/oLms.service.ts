@@ -30,10 +30,13 @@ export class OLmsService {
         `${environment.adminBackendUrl}${environment.readBorrowerUri}/${input.cardNo}`
       )
       .subscribe(
-        (result: any[]) => (input.borrowerName = result[0].name),
+        (borrowers: any[]) =>
+          (input.borrowerName =
+            borrowers[0].name !== null
+              ? borrowers[0].name
+              : "(borrower name not found)"),
         (error: any) => {
           input.borrowerName = "(error retrieving borrower name)";
-          // do something with logger here
         }
       );
   }
@@ -44,10 +47,13 @@ export class OLmsService {
         `${environment.adminBackendUrl}${environment.readBranchUri}/${input.branchId}`
       )
       .subscribe(
-        (result: any[]) => (input.branchName = result[0].branchName),
+        (branches: any[]) =>
+          (input.branchName =
+            branches[0].branchName !== null
+              ? branches[0].branchName
+              : "(branch name not found)"),
         (error: any) => {
           input.branchName = "(error retrieving branch name)";
-          // do something with logger here
         }
       );
   }
@@ -58,10 +64,9 @@ export class OLmsService {
         `${environment.adminBackendUrl}${environment.readBookUri}/${input.bookId}`
       )
       .subscribe(
-        (result) => (input.bookTitle = result[0].title),
+        (books) => (input.bookTitle = books[0].title),
         (error) => {
           input.bookTitle = "(error retrieving book title)";
-          // do something with logger here
         }
       );
   }

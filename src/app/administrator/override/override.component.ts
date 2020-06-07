@@ -30,24 +30,20 @@ export class OverrideComponent implements OnInit {
         },
         (error) => {
           this.overridableLoans = [];
-          // do something with a logger here
-          alert(error);
+          alert(error.error);
         }
       );
   }
 
   doOverride(loan: any) {
+    if (!confirm("Override the due date of this loan?")) return;
     const dateOut = moment(loan.dateOut).format("YYYY-MM-DDTHH_mm_ss"),
       overrideUri = `/loans/book/${loan.bookId}/borrower/${loan.cardNo}/branch/${loan.branchId}/dateout/${dateOut}`;
     this.lmsService
       .put(`${environment.adminBackendUrl}${overrideUri}`)
-      .subscribe(
-        () => this.readOverridableLoans(),
-        (error) => {
-          // do something with a logger here
-          alert(error);
-          this.readOverridableLoans();
-        }
-      );
+      .subscribe(null, (error) => {
+        alert(error.error);
+      })
+      .add(this.readOverridableLoans());
   }
 }
