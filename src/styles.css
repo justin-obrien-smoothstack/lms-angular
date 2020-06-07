@@ -17,12 +17,6 @@ body {
   display: block;
 }
 
-.lms-table {
-  /* max-width: 800px; */
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .lms-table .table th,
 .lms-table .table td {
   padding: 0.8rem;
