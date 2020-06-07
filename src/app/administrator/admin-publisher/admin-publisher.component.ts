@@ -21,7 +21,9 @@ export class AdminPublisherComponent implements OnInit {
     allowSearchFilter: true,
     enableCheckAll: false,
   };
-  publishers: any[];
+  currentPage = 1;
+  rowsPerPage = 10;
+  publishers = [];
   books: any[];
 
   constructor(
@@ -58,6 +60,21 @@ export class AdminPublisherComponent implements OnInit {
         }
       );
   }
+
+  deletePublisher(publisherId: number) {
+    if (!confirm("Delete this publisher?")) return;
+    this.lmsService
+      .delete(
+        `${environment.adminBackendUrl}${environment.deletePublisherUri}/${publisherId}`
+      )
+      .subscribe(null, (error: any) => {
+        alert(error.error);
+      })
+      .add(() => {
+        this.readPublishers();
+        this.readBooks();
+      });
+    }
 
   writePublisher(operation: string) {
     if (!confirm(`${operation} this publisher?`)) return;
