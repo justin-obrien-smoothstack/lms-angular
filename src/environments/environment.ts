@@ -14,7 +14,7 @@ export const environment = {
   readGenreUri: "/genre",
   readPublisherUri: "/publishers",
   readOverridableLoansUri: "/loans",
-  deleteBookUri: "/books",
+  deletePublisherUri: "/publishers",
 };
 
 /*
