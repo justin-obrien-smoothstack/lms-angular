@@ -9,7 +9,9 @@ import * as moment from "moment";
   styleUrls: ["./override.component.css"],
 })
 export class OverrideComponent implements OnInit {
-  overridableLoans: any[];
+  currentPage = 1;
+  rowsPerPage = 10;
+  overridableLoans = [];
 
   constructor(private lmsService: OLmsService) {}
 
