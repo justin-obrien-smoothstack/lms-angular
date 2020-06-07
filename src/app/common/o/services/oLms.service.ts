@@ -8,12 +8,20 @@ import { environment } from "src/environments/environment";
 export class OLmsService {
   constructor(private httpClient: HttpClient) {}
 
+  post(url: string, body: any = "") {
+    return this.httpClient.post(url, body, { responseType: "text" });
+  }
+
   get(url: string) {
     return this.httpClient.get(url);
   }
 
-  put(url: string, body: any = "", options: object = {}) {
-    return this.httpClient.put(url, body, options);
+  put(url: string, body: any = "") {
+    return this.httpClient.put(url, body);
+  }
+
+  delete(url: string) {
+    return this.httpClient.delete(url);
   }
 
   setBorrowerNameOf(input: any) {
