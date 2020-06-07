@@ -43,9 +43,12 @@ export class OverrideComponent implements OnInit {
       overrideUri = `/loans/book/${loan.bookId}/borrower/${loan.cardNo}/branch/${loan.branchId}/dateout/${dateOut}`;
     this.lmsService
       .put(`${environment.adminBackendUrl}${overrideUri}`)
-      .subscribe(null, (error) => {
-        alert(error.error);
-      })
-      .add(this.readOverridableLoans());
+      .subscribe(
+        () => this.readOverridableLoans(),
+        (error) => {
+          alert(error.error);
+          this.readOverridableLoans();
+        }
+      );
   }
 }

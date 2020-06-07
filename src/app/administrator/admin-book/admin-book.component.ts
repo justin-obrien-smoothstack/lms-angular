@@ -198,15 +198,20 @@ export class AdminBookComponent implements OnInit {
       .delete(
         `${environment.adminBackendUrl}${environment.deleteBookUri}/${bookId}`
       )
-      .subscribe(null, (error: any) => {
-        // do something with a logger here
-        alert(error.error);
-      })
-      .add(() => {
-        this.readBooks();
-        this.readAuthors();
-        this.readGenres();
-        this.readPublishers();
-      });
+      .subscribe(
+        () => {
+          this.readBooks();
+          this.readAuthors();
+          this.readGenres();
+          this.readPublishers();
+        },
+        (error: any) => {
+          alert(error.error);
+          this.readBooks();
+          this.readAuthors();
+          this.readGenres();
+          this.readPublishers();
+        }
+      );
   }
 }
