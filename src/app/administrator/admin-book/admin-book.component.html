@@ -1,3 +1,52 @@
-<p>
-  admin-book works!
-</p>
+<table class="table">
+  <thead>
+    <th>Title</th>
+    <th>Authors</th>
+    <th>Genres</th>
+    <th>Publisher</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let b of books">
+      <td>{{ b.title }}</td>
+      <td>
+        {{
+          b.authorIds
+            | getProperty
+              : "authorId"
+              : "authorName"
+              : authors
+              : "(author not found)"
+              : "(author name not found)"
+            | niceSpacing
+        }}
+      </td>
+      <td>
+        {{
+          b.genreIds
+            | getProperty
+              : "genre_id"
+              : "genre_name"
+              : genres
+              : "(genre not found)"
+              : "(genre name not found)"
+            | niceSpacing
+        }}
+      </td>
+      <td>
+        {{
+          (b.pubId ? [b.pubId] : [])
+            | getProperty
+              : "publisherId"
+              : "publisherName"
+              : publishers
+              : "(publisher not found)"
+              : "(publisher name not found)"
+        }}
+      </td>
+      <td>
+        <button type="button" (click)="deleteBook(b.bookId)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
