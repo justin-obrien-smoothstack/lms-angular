@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   adminBackendUrl: "http://localhost:3000/lms/admin",
+  createBookUri: "/book",
   createPublisherUri: "/publisher",
   updatePublisherUri: "/publisher",
   readAuthorUri: "/authors",
@@ -14,6 +15,7 @@ export const environment = {
   readGenreUri: "/genre",
   readPublisherUri: "/publishers",
   readOverridableLoansUri: "/loans",
+  updateBookUri: "/book",
   deletePublisherUri: "/publishers",
 };
 
