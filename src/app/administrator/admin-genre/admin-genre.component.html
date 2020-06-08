@@ -63,14 +63,14 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5>{{ operation }} Genre</h5>
-          <button type="button" (click)="close()">
+          <button type="button" (click)="close()" class="btn btn-primary">
             <span>&#215;</span>
           </button>
         </div>
 
         <div class="modal-body">
           <div class="form-group">
-            Genre:
+            <label class="col-form-label">Genre:</label>
             <input class="form-control" formControlName="name" />
             <div
               *ngIf="
@@ -93,6 +93,7 @@
         <div class="modal-footer">
           <button
             type="button"
+            class="btn btn-primary"
             (click)="writeGenre(operation); close()"
             [disabled]="writeGenreForm.invalid"
           >
