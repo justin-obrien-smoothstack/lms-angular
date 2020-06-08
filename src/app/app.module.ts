@@ -1,5 +1,11 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
+import { HttpClientModule } from "@angular/common/http";
+import { SlicePipe } from "@angular/common";
+import { HLmsService } from "src/app/common/h/hLms.service";
+import { ReactiveFormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -38,8 +44,15 @@ import { OverrideComponent } from "./administrator/override/override.component";
     AdminGenreComponent,
     AdminPublisherComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgbPaginationModule,
+    ReactiveFormsModule,
+    NgbModule,
+  ],
+  providers: [SlicePipe, HLmsService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
