@@ -17,7 +17,7 @@ export class HLmsService {
   }
 
   post(url: string, input: any) {
-    return this.httpClient.put(url, input);
+    return this.httpClient.post(url, input);
   }
 
   delete(url: string) {

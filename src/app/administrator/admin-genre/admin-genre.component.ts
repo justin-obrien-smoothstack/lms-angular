@@ -13,6 +13,7 @@ export class AdminGenreComponent implements OnInit {
   genres: any;
   writeGenreForm: FormGroup;
   operation: string;
+  maxLength = 45;
 
   // Pagination
   page = 1;
@@ -41,12 +42,10 @@ export class AdminGenreComponent implements OnInit {
       );
   }
 
-  deleteGenre(genreId) {
+  deleteGenre(id) {
     if (!confirm("Delete this genre?")) return;
     this.lmsService
-      .delete(
-        `${environment.adminBackendUrl}${environment.readGenreUri}/${genreId}`
-      )
+      .delete(`${environment.adminBackendUrl}${environment.readGenreUri}/${id}`)
       .subscribe(null, (error: any) => {
         // do something with a logger here
         alert(error.error);
@@ -57,10 +56,10 @@ export class AdminGenreComponent implements OnInit {
   }
 
   writeGenre(operation: string) {
-    if (!confirm(`${operation} this publisher?`)) return;
+    if (!confirm(`${operation} this genre?`)) return;
     const genre = {
-      genreId: this.writeGenreForm.value.genreId,
-      genreName: this.writeGenreForm.value.genreName,
+      id: this.writeGenreForm.value.id,
+      name: this.writeGenreForm.value.name,
     };
     switch (operation) {
       case "Create":
@@ -81,18 +80,19 @@ export class AdminGenreComponent implements OnInit {
           .subscribe(null, (error) => alert(error.error));
         break;
     }
+    this.loadAllGenres();
   }
 
   initializeWriteGenreForm(genre: any) {
-    let genreName: string, genreId: number;
+    let name: string, id: number;
     if (genre) {
-      genreId = genre.genreId;
-      genreName = genre.genreName;
+      id = genre.genre_id;
+      name = genre.name;
     }
     this.writeGenreForm = this.formBuilder.group({
-      genreId: [genreId],
-      genreName: [
-        genreName,
+      id: [id],
+      name: [
+        name,
         [
           Validators.required,
           Validators.maxLength(45),
