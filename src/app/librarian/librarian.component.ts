@@ -35,7 +35,8 @@ export class LibrarianComponent implements OnInit {
   searchBranchForm: FormGroup;
   dropdownSettings: any;
   errMsg: any;
-  constructor(private lmsService: LmsService,
+  constructor(
+    private lmsService: LmsService,
     private modalService: NgbModal,
     private fb: FormBuilder
   ) {

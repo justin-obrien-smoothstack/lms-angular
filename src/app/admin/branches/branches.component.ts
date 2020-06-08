@@ -23,33 +23,31 @@ export class BranchesComponent implements OnInit {
   selectedBranch: any;
   branchName: string;
   branchAddress: string;
-  totalBooks: any;
 
   private modalRef: NgbModalRef;
-  closeResult: any; 
+  closeResult: any;
   searchString: any;
   updateBranchForm: FormGroup;
   searchBranchForm: FormGroup;
   dropdownSettings: any;
   errMsg: any;
 
-  constructor(    
+  constructor(
     private lmsService: LmsService,
     private modalService: NgbModal,
     private fb: FormBuilder
-    ) {
-      this.dropdownSettings = {
-        singleSelection: false,
-        idField: "bookId",
-        textField: "title",
-        itemsShowLimit: 5,
-        allowSearchFilter: true,
-      }
-     }
+  ) {
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: "bookId",
+      textField: "title",
+      itemsShowLimit: 5,
+      allowSearchFilter: true,
+    }
+  }
 
   ngOnInit() {
     this.loadAllBranches();
-    this.loadAllBooks();
     this.initializeFormGroup();
   }
 
@@ -66,64 +64,55 @@ export class BranchesComponent implements OnInit {
       );
   }
 
-  loadAllBooks() {
-    this.lmsService
-      .get(`${environment.adminBackendUrl}${environment.readBookUri}`)
-      .subscribe(
-        (res) => {
-          this.totalBooks = res;
-        },
-        (error) => {
-          debugger;
-        }
-      );
-  }
-
   updateBranch() {
     const branch = {
       branchId: this.updateBranchForm.value.branchId,
       branchName: this.updateBranchForm.value.branchName,
-      branchAddress: this.updateBranchForm.value.branchAddress, 
+      branchAddress: this.updateBranchForm.value.branchAddress,
     }
     if (!branch.branchId) {
       this.lmsService
-      .post(`${environment.adminBackendUrl}${environment.createBranchURI}`, branch)
-      .subscribe(
-        (res) => {
-          console.log(res);
-          this.loadAllBranches();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        .post(`${environment.adminBackendUrl}${environment.createBranchURI}`, branch)
+        .subscribe(
+          (res) => {
+            console.log(res);
+            this.loadAllBranches();
+            this.modalService.dismissAll();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     } else {
       this.lmsService
-      .put(`${environment.adminBackendUrl}${environment.updateBanchUri}`, branch)
-      .subscribe(
-        (res) => {
-          console.log(res);
-          this.loadAllBranches();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        .put(`${environment.adminBackendUrl}${environment.updateBanchUri}`, branch)
+        .subscribe(
+          (res) => {
+            console.log(res);
+            this.loadAllBranches();
+            this.modalService.dismissAll();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     }
-    
+
   }
 
   deleteBranch(branch) {
     this.lmsService
-    .delete(`${environment.adminBackendUrl}${environment.deleteBranchUri}/${branch}`)
-    .subscribe(
-      (res) => {
-        this.loadAllBranches();
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
+      .delete(`${environment.adminBackendUrl}${environment.deleteBranchUri}/${branch}`)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.loadAllBranches();
+          this.modalService.dismissAll();
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
   }
 
   initializeFormGroup() {
