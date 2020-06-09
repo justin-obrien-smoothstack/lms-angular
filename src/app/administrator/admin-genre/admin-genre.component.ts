@@ -68,7 +68,10 @@ export class AdminGenreComponent implements OnInit {
             `${environment.adminBackendUrl}${environment.readGenreUri}`,
             genre
           )
-          .subscribe(null, (error) => alert(error.error));
+          .subscribe(null, (error) => alert(error.error))
+          .add(() => {
+            this.loadAllGenres();
+          });
 
         break;
       case "Update":
@@ -77,10 +80,12 @@ export class AdminGenreComponent implements OnInit {
             `${environment.adminBackendUrl}${environment.readGenreUri}`,
             genre
           )
-          .subscribe(null, (error) => alert(error.error));
+          .subscribe(null, (error) => alert(error.error))
+          .add(() => {
+            this.loadAllGenres();
+          });
         break;
     }
-    this.loadAllGenres();
   }
 
   initializeWriteGenreForm(genre: any) {

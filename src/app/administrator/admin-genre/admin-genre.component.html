@@ -50,6 +50,7 @@
     </tbody>
   </table>
   <ngb-pagination
+    *ngIf="genres"
     [collectionSize]="genres.length"
     [(page)]="page"
     aria-label="Default pagination"
