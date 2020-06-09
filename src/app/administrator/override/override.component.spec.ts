@@ -3,15 +3,15 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 import { HttpClientModule } from "@angular/common/http";
 import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
+import { of } from "rxjs";
 
 import { OverrideComponent } from "./override.component";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
-import { of } from "rxjs";
 
 describe("OverrideComponent", () => {
-  let lmsService: OLmsService;
   let component: OverrideComponent;
   let fixture: ComponentFixture<OverrideComponent>;
+  let lmsService: OLmsService;
 
   const mockLoans = [
       {
