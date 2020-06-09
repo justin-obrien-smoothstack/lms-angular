@@ -40,8 +40,20 @@ describe("OverrideComponent", () => {
       { branchId: 2, branchName: null, branchAddress: null },
     ],
     mockBooks = [
-      { bookId: 1, title: "Mock Book 1", pubId: null },
-      { bookId: 2, title: "Mock Book 2", pubId: null },
+      {
+        bookId: 1,
+        title: "Mock Book 1",
+        pubId: null,
+        authorIds: [],
+        genreIds: [],
+      },
+      {
+        bookId: 2,
+        title: "Mock Book 2",
+        pubId: null,
+        authorIds: [],
+        genreIds: [],
+      },
     ],
     mockLoansProcessed = [
       {
