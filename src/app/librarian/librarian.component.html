@@ -1,3 +1,120 @@
-<p>
-  librarian works!
-</p>
+<div class="container marketing">
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Branch</th>
+        <th scope="col">Address</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Books</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of branches; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ b.branchName }}</td>
+        <td>{{ b.branchAddress }}</td>
+        <td>
+          <button type="button" class="btn btn-secondary" (click)="openUpdate(updateBranchModal, b)">
+            Edit
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-secondary" (click)="openAdd(updateBookCopiesModal, b)">
+            Add Books
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #updateBranchModal let-c="close" let-d="dismiss">
+  <form [formGroup]="updateBranchForm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateBranchDetailsModal">Update Branch</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="c()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            Enter Branch Name and address:
+            <input class="form-control" id="branchName" formControlName="branchName" [ngClass]="{
+                'is-invalid': updateBranchForm.controls['branchName'].errors
+              }" />
+            <input class="form-control" id="branchAddress" formControlName="branchAddress" [ngClass]="{
+              'is-invalid': updateBranchForm.controls['branchAddress'].errors
+            }" />
+            <div *ngIf="updateBranchForm.controls['branchName'].errors" class="error-msg">
+              <div [hidden]="
+                  !updateBranchForm.controls['branchName'].errors.required
+                ">
+                Branch Name is required
+              </div>
+              <div [hidden]="
+                  !updateBranchForm.controls['branchAddress'].errors.required
+                ">
+                Branch address is required
+              </div>
+              <div [hidden]="
+                  updateBranchForm.controls['branchName'].errors.maxLength ||
+                  updateBranchForm.controls['branchName'].errors.minLength ||
+                  updateBranchForm.controls['branchAddress'].errors.maxLength ||
+                  updateBranchForm.controls['branchAddress'].errors.minLength
+                ">
+                Text fields should be between 3-45 chars in length
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c()">
+            Close
+          </button>
+          <button type="button" class="btn btn-primary" (click)="updateBranch()" [disabled]="updateBranchForm.invalid">
+            Save changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template #updateBookCopiesModal let-c="close" let-d="dismiss">
+  <form [formGroup]="addBookCopiesForm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateBookCopies">Add Books</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="c()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <ng-multiselect-dropdown [placeholder]="'Select Books(s)'" [data]="totalBooks" formControlName="books"
+              [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+            <input class="form-control" id="noOfCopies" formControlName="noOfCopies" type="number" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c()">
+            Close
+          </button>
+          <button type="button" class="btn btn-primary" (click)="addBookCopies()"
+            [disabled]="addBookCopiesForm.invalid">
+            Add
+          </button>
+          <button type="button" class="btn btn-primary" (click)="subtractBookCopies()"
+            [disabled]="addBookCopiesForm.invalid">
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
