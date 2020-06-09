@@ -1,7 +1,16 @@
-<button type="button" (click)="openWriteModal('Create', writePublisherModal)">
-  Create
-</button>
-<table class="table">
+<div class="lms-header">
+  <h1 class="lms-title">Publishers</h1>
+  <div class="create-button">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="openWriteModal('Create', writePublisherModal)"
+    >
+      Create New Publisher
+    </button>
+  </div>
+</div>
+<table class="table table-hover">
   <thead>
     <th>Name</th>
     <th>Address</th>
@@ -35,9 +44,19 @@
       <td>
         <button
           type="button"
+          class="btn btn-info btn-sm"
           (click)="openWriteModal('Update', writePublisherModal, p)"
         >
           Update
+        </button>
+      </td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          (click)="deletePublisher(p.publisherId)"
+        >
+          Delete
         </button>
       </td>
     </tr>
