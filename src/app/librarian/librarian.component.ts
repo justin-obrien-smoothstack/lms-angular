@@ -24,7 +24,6 @@ export class LibrarianComponent implements OnInit {
   branchName: string;
   branchAddress: string;
   selectedBranch: any;
-  bookCopies: any;
   books: any;
   totalBooks: any;
 
@@ -63,15 +62,7 @@ export class LibrarianComponent implements OnInit {
       .subscribe(
         (res) => {
           this.branches = res;
-          this.branches.forEach(branch => {
-            branch.books = [];
-            branch.bookCopies.forEach(element => {
-              branch.books.push({
-                title: element.title,
-                noOfCopies: element.noOfCopies,
-              });
-            });
-          });
+          console.log(this.branches[0].bookCopies);
         },
         (error) => {
           debugger;
@@ -106,10 +97,18 @@ export class LibrarianComponent implements OnInit {
         Validators.minLength(3),
       ]),
       bookId: new FormControl(this.bookId),
-      noOfCopies: new FormControl(this.noOfCopies),
       branchId: new FormControl(this.branchId),
       books: new FormControl(this.books),
     });
+    this.addBookCopiesForm = new FormGroup({
+      bookId: new FormControl(this.bookId),
+      noOfCopies: new FormControl(this.noOfCopies, [
+        Validators.required,
+        Validators.min(1),
+      ]),
+      branchId: new FormControl(this.branchId),
+      books: new FormControl(this.books),
+    })
   }
 
 
@@ -123,11 +122,10 @@ export class LibrarianComponent implements OnInit {
       .put(`${environment.libUrl}${environment.updateBanchUri}`, branch)
       .subscribe(
         (res) => {
-          console.log(res);
           this.modalService.dismissAll();
         },
         (error) => {
-          console.log(error);
+          this.modalService.dismissAll();
         }
       );
   }
@@ -135,7 +133,6 @@ export class LibrarianComponent implements OnInit {
 
   openUpdate(content, obj) {
     if (obj !== null) {
-      //this is edit/update mode
       this.updateBranchForm = this.fb.group({
         branchId: obj.branchId,
         branchName: obj.branchName,
@@ -160,9 +157,9 @@ export class LibrarianComponent implements OnInit {
     if (obj !== null) {
       this.addBookCopiesForm = this.fb.group({
         books: [obj.books],
+        noOfCopies: [obj.noOfCopies],
         bookId: obj.bookCopies.bookId,
         branchId: obj.branchId,
-        noOfCopies: obj.bookCopies.noOfCopies,
         bookCopies: obj.bookCopies,
       })
     }
@@ -180,23 +177,55 @@ export class LibrarianComponent implements OnInit {
     );
   }
 
-  updateBookCopies() {
-    const bookCopies = {
+  addBookCopies() {
+    let bookCopies = {
       books: this.addBookCopiesForm.value.books,
       bookId: this.addBookCopiesForm.value.bookId,
-      branchId: this.addBookCopiesForm.value.bookCopies.branchId,
+      branchId: this.addBookCopiesForm.value.branchId,
       noOfCopies: this.addBookCopiesForm.value.noOfCopies,
+      originalBookCopies: this.addBookCopiesForm.value.bookCopies,
+      sign: '+',
     }
     bookCopies.bookId = bookCopies.books[0].bookId;
+    console.log(`copies -> ${bookCopies.noOfCopies}`);
+    console.log(`branch -> ${bookCopies.branchId}`);
+    console.log(`bookId -> ${bookCopies.bookId}`);
+
     this.lmsService
       .put(`${environment.libUrl}${environment.updateBanchUri}/${bookCopies.branchId}/copies`, bookCopies)
       .subscribe(
         (res) => {
-          console.log(res);
           this.modalService.dismissAll();
         },
         (error) => {
-          console.log(error);
+          alert(error);
+        }
+      )
+  }
+
+  subtractBookCopies() {
+    let bookCopies = {
+      books: this.addBookCopiesForm.value.books,
+      bookId: this.addBookCopiesForm.value.bookId,
+      branchId: this.addBookCopiesForm.value.branchId,
+      noOfCopies: this.addBookCopiesForm.value.noOfCopies,
+      originalBookCopies: this.addBookCopiesForm.value.bookCopies,
+      sign: '-',
+    }
+
+    bookCopies.bookId = bookCopies.books[0].bookId;
+    console.log(`copies -> ${bookCopies.noOfCopies}`);
+    console.log(`branch -> ${bookCopies.branchId}`);
+    console.log(`bookId -> ${bookCopies.bookId}`);
+
+    this.lmsService
+      .put(`${environment.libUrl}${environment.updateBanchUri}/${bookCopies.branchId}/copies`, bookCopies)
+      .subscribe(
+        (res) => {
+          this.modalService.dismissAll();
+        },
+        (error) => {
+          alert(error);
         }
       )
   }
