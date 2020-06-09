@@ -1,28 +1,12 @@
-import { Observable, from, of, observable, throwError } from "rxjs";
-import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { of } from "rxjs";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { HLmsService } from "src/app/common/h/hLms.service";
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  Validators,
-} from "@angular/forms";
+import { FormBuilder } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { FormsModule } from "@angular/forms";
-import { Pipe, PipeTransform } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
-import {
-  async,
-  ComponentFixture,
-  TestBed,
-  tick,
-  fakeAsync,
-} from "@angular/core/testing";
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from "@angular/common/http/testing";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 //Mock modal reference class
 export class MockNgbModalRef {
