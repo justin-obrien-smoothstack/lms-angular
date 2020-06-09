@@ -12,10 +12,17 @@ export const environment = {
   createBranchURI: "/branches",
   deleteBranchUri: "/branches",
   readAuthorsUri: "/authors",
+  createBookUri: "/book",
+  createPublisherUri: "/publisher",
+  updatePublisherUri: "/publisher",
   readBookUri: "/books",
   readBorrowerUri: "/borrower",
-  readBranchUri: "/branches",
+  readGenreUri: "/genre",
+  readPublisherUri: "/publishers",
   readOverridableLoansUri: "/loans",
+  updateBookUri: "/book",
+  deleteBookUri: "/books",
+  deletePublisherUri: "/publishers",
 };
 
 /*

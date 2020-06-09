@@ -8,6 +8,11 @@ import { BranchesComponent } from './admin/branches/branches.component';
 import { AuthorComponent } from './admin/author/author.component';
 import { LmsService } from '../common/service/lms.service';
 import { HttpClientModule } from "@angular/common/http";
+import { ReactiveFormsModule } from "@angular/forms";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
+import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
+import { SlicePipe } from "@angular/common";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -27,6 +32,8 @@ import { BorrowerComponent } from "./borrower/borrower.component";
 import { AdministratorComponent } from "./administrator/administrator.component";
 import { OverrideComponent } from "./administrator/override/override.component";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
+import { GetPropertyPipe } from "src/app/common/o/pipes/get-property.pipe";
+import { NiceSpacingPipe } from "./common/o/pipes/nice-spacing.pipe";
 
 @NgModule({
   declarations: [
@@ -56,13 +63,14 @@ import { OLmsService } from "src/app/common/o/services/oLms.service";
     HttpClientModule,
     NgbModule,
     NgMultiSelectDropDownModule,
+    NgbPaginationModule,
   ],
-  providers: [OLmsService, LmsService],
+  providers: [OLmsService, LmsService, SlicePipe],
 
   bootstrap: [
     AppComponent,
+    GetPropertyPipe,
+    NiceSpacingPipe,
   ],
-
-
 })
 export class AppModule { }
