@@ -18,7 +18,7 @@
       <th scope="row">{{ a.authorId }}</th>
       <td>{{ a.authorName }}</td>
       <td>
-        <span *ngFor="let b of a.books">{{ b.title }} |</span>
+        <span *ngFor="let b of a.books">{{ b.title }}</span>
       </td>
       <td>
         <button type="button" class="btn btn-secondary" (click)="open(updateAuthorModal, a)">
