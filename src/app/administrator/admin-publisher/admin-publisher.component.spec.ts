@@ -104,6 +104,7 @@ describe("AdminPublisherComponent", () => {
     );
     spyOn(lmsService, "post").and.returnValue(of(null));
     spyOn(lmsService, "put").and.returnValue(of(null));
+    spyOn(lmsService, "delete").and.returnValue(of(null));
   });
 
   it("should create", () => {
@@ -185,4 +186,20 @@ describe("AdminPublisherComponent", () => {
     expect(lmsService.post).not.toHaveBeenCalled();
     expect(lmsService.put).not.toHaveBeenCalled();
   });
+
+  it("should send a request to the backend's delete URL", fakeAsync(() => {
+    spyOn(window, "confirm").and.returnValue(true);
+    component.deletePublisher(1);
+    tick();
+    expect(lmsService.delete).toHaveBeenCalledWith(
+      environment.adminBackendUrl + environment.deletePublisherUri + "/1"
+    );
+  }));
+
+  it("should not send a request to the backend's delete URL", fakeAsync(() => {
+    spyOn(window, "confirm").and.returnValue(false);
+    component.deletePublisher(1);
+    tick();
+    expect(lmsService.delete).not.toHaveBeenCalled();
+  }));
 });
