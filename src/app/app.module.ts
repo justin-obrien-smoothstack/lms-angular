@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HLmsService } from "src/app/common/h/hLms.service";
 import { HttpClientModule } from "@angular/common/http";
 import { SlicePipe } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -27,6 +28,7 @@ import {
   SortCopiesByTitlePipe,
   SortCopiesByBranchPipe,
 } from "./common/h/sort-copies.pipe";
+import { OLmsService } from "src/app/common/o/services/oLms.service";
 
 @NgModule({
   declarations: [
@@ -57,7 +59,7 @@ import {
     HttpClientModule,
     NgbPaginationModule,
   ],
-  providers: [HLmsService, SlicePipe],
+  providers: [HLmsService, SlicePipe, OLmsService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

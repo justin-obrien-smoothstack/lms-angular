@@ -11,6 +11,9 @@ export const environment = {
   returnBookUri: "/returnBook",
   checkOutBookUri: "/checkOutBook",
   copiesUri: "/copies",
+  readBorrowerUri: "/borrower",
+  readOverridableLoansUri: "/loans",
+
 };
 
 /*
