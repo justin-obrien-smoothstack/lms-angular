@@ -166,6 +166,7 @@
         </tr>
       </table>
       <ngb-pagination
+        *ngIf="availableBooks"
         [collectionSize]="filterMetadata.count"
         [(page)]="page"
         aria-label="Default pagination"
