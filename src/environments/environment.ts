@@ -4,16 +4,28 @@
 
 export const environment = {
   production: false,
-  borrowerBackendUrl: "http://localhost:3002/lms/borrower",
   adminBackendUrl: "http://localhost:3000/lms/admin",
+  libUrl: "http://localhost:3001/lms/librarian",
+  borrUrl: "http://localhost:3002/lms/borrower",
+  readBanchUri: "/branches",
+  updateBanchUri: "/branches",
+  createBranchURI: "/branches",
+  deleteBranchUri: "/branches",
+  readAuthorsUri: "/authors",
+  createBookUri: "/book",
+  createPublisherUri: "/publisher",
+  updatePublisherUri: "/publisher",
   readBookUri: "/books",
-  readBranchUri: "/branches",
+  readBorrowerUri: "/borrower",
+  readGenreUri: "/genre",
+  readPublisherUri: "/publishers",
+  readOverridableLoansUri: "/loans",
+  updateBookUri: "/book",
+  deleteBookUri: "/books",
+  deletePublisherUri: "/publishers",
   returnBookUri: "/returnBook",
   checkOutBookUri: "/checkOutBook",
   copiesUri: "/copies",
-  readBorrowerUri: "/borrower",
-  readOverridableLoansUri: "/loans",
-  readGenreUri: "/genre",
 };
 
 /*
@@ -24,3 +36,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+//http://localhost:3001/lms/librarian/branches/1/copies

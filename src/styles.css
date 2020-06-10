@@ -12,3 +12,27 @@ body {
 .push {
   height: 100px;
 }
+
+.navbar-nav li:hover > .dropdown-menu {
+  display: block;
+}
+
+.lms-table {
+  /* max-width: 800px; */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lms-table .table th,
+.lms-table .table td {
+  padding: 0.8rem;
+}
+
+.lms-title {
+  text-align: center;
+}
+
+.create-button {
+  text-align: center;
+  margin: 10px;
+}

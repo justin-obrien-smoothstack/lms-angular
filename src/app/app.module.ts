@@ -1,11 +1,15 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
-import { HttpClientModule } from "@angular/common/http";
-import { SlicePipe } from "@angular/common";
-import { HLmsService } from "src/app/common/h/hLms.service";
 import { ReactiveFormsModule } from "@angular/forms";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
+import { HLmsService } from "src/app/common/h/hLms.service";
+import { BranchesComponent } from "./admin/branches/branches.component";
+import { AuthorComponent } from "./admin/author/author.component";
+import { LmsService } from "../common/service/lms.service";
+import { HttpClientModule } from "@angular/common/http";
+import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
+import { SlicePipe } from "@angular/common";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -24,35 +28,42 @@ import { LibrarianComponent } from "./librarian/librarian.component";
 import { BorrowerComponent } from "./borrower/borrower.component";
 import { AdministratorComponent } from "./administrator/administrator.component";
 import { OverrideComponent } from "./administrator/override/override.component";
+import { OLmsService } from "src/app/common/o/services/oLms.service";
+import { GetPropertyPipe } from "src/app/common/o/pipes/get-property.pipe";
+import { NiceSpacingPipe } from "./common/o/pipes/nice-spacing.pipe";
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorComponent,
-    HomeComponent,
+    LibrarianComponent,
     LayoutComponent,
     HeaderComponent,
     FooterComponent,
-    LibrarianComponent,
-    BorrowerComponent,
-    AdministratorComponent,
-    OverrideComponent,
+    BranchesComponent,
+    AuthorComponent,
+    HomeComponent,
     AdminAuthorComponent,
-    AdminBookComponent,
-    AdminBorrowerComponent,
     AdminBranchComponent,
     AdminGenreComponent,
+    AdminBookComponent,
+    AdminBorrowerComponent,
     AdminPublisherComponent,
+    AdministratorComponent,
+    OverrideComponent,
+    BorrowerComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    NgbPaginationModule,
     ReactiveFormsModule,
+    HttpClientModule,
     NgbModule,
+    NgMultiSelectDropDownModule,
+    NgbPaginationModule,
   ],
-  providers: [SlicePipe, HLmsService],
-  bootstrap: [AppComponent],
+  providers: [OLmsService, LmsService, SlicePipe, HLmsService],
+
+  bootstrap: [AppComponent, GetPropertyPipe, NiceSpacingPipe],
 })
 export class AppModule {}
