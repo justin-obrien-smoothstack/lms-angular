@@ -36,12 +36,15 @@ export class AdminBorrowerComponent implements OnInit {
         (res) => {
           this.borrowers = res;
         },
-        (error) => {}
+        (error) => {
+          alert(error.error);
+        }
       );
   }
 
   deleteBorrower(id) {
     if (!confirm("Delete this borrower?")) return;
+    let oldData = this.borrowers;
     this.lmsService
       .delete(
         `${environment.adminBackendUrl}${environment.readBorrowerUri}/${id}`
@@ -51,7 +54,7 @@ export class AdminBorrowerComponent implements OnInit {
         alert(error.error);
       })
       .add(() => {
-        this.loadAllBorrowers();
+        this.updateData(oldData);
       });
   }
 
@@ -63,6 +66,7 @@ export class AdminBorrowerComponent implements OnInit {
       address: this.writeBorrowerForm.value.address,
       phone: this.writeBorrowerForm.value.phone,
     };
+    let oldData = this.borrowers;
     switch (operation) {
       case "Create":
         borrower.cardNo = 0;
@@ -83,7 +87,7 @@ export class AdminBorrowerComponent implements OnInit {
           .subscribe(null, (error) => alert(error.error));
         break;
     }
-    this.loadAllBorrowers();
+    this.updateData(oldData);
   }
 
   initializeWriteBorrowerForm(borrower: any) {
@@ -116,5 +120,16 @@ export class AdminBorrowerComponent implements OnInit {
       this.writeBorrowerForm.controls[control].errors &&
       this.writeBorrowerForm.controls[control].dirty
     );
+  }
+
+  timeout(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async updateData(oldData: any) {
+    while (this.borrowers == oldData) {
+      await this.timeout(300);
+      this.loadAllBorrowers();
+    }
   }
 }

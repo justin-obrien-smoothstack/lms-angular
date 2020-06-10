@@ -37,13 +37,14 @@ export class AdminGenreComponent implements OnInit {
           this.genres = res;
         },
         (error) => {
-          debugger;
+          alert(error.error);
         }
       );
   }
 
   deleteGenre(id) {
     if (!confirm("Delete this genre?")) return;
+    let oldData = this.genres;
     this.lmsService
       .delete(`${environment.adminBackendUrl}${environment.readGenreUri}/${id}`)
       .subscribe(null, (error: any) => {
@@ -51,7 +52,7 @@ export class AdminGenreComponent implements OnInit {
         alert(error.error);
       })
       .add(() => {
-        this.loadAllGenres();
+        this.updateData(oldData);
       });
   }
 
@@ -61,6 +62,7 @@ export class AdminGenreComponent implements OnInit {
       id: this.writeGenreForm.value.id,
       name: this.writeGenreForm.value.name,
     };
+    let oldData = this.genres;
     switch (operation) {
       case "Create":
         this.lmsService
@@ -70,7 +72,7 @@ export class AdminGenreComponent implements OnInit {
           )
           .subscribe(null, (error) => alert(error.error))
           .add(() => {
-            this.loadAllGenres();
+            this.updateData(oldData);
           });
 
         break;
@@ -82,7 +84,7 @@ export class AdminGenreComponent implements OnInit {
           )
           .subscribe(null, (error) => alert(error.error))
           .add(() => {
-            this.loadAllGenres();
+            this.updateData(oldData);
           });
         break;
     }
@@ -118,5 +120,16 @@ export class AdminGenreComponent implements OnInit {
       this.writeGenreForm.controls[control].errors &&
       this.writeGenreForm.controls[control].dirty
     );
+  }
+
+  timeout(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async updateData(oldData: any) {
+    while (this.genres == oldData) {
+      await this.timeout(300);
+      this.loadAllGenres();
+    }
   }
 }

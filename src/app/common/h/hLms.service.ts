@@ -75,7 +75,6 @@ export class HLmsService {
         (result) => (input.bookTitle = result[0].title),
         (error) => {
           input.bookTitle = "(error retrieving book title)";
-          // do something with logger here
         }
       );
   }

@@ -82,7 +82,9 @@ export class BorrowerComponent implements OnInit {
       .catch((err) => {
         if (err.status == 404) {
           this.borrowerNotFound = true;
+          return;
         }
+        alert(err.error);
       });
   }
 
@@ -98,7 +100,7 @@ export class BorrowerComponent implements OnInit {
         this.changePaginationCount();
       })
       .catch((err) => {
-        console.log(err);
+        alert(err.error);
       });
   }
 
@@ -116,7 +118,7 @@ export class BorrowerComponent implements OnInit {
         this.readBorrower(this.borrower.cardNo);
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.error);
       });
     this.loadAllBooks();
   }
@@ -135,7 +137,7 @@ export class BorrowerComponent implements OnInit {
         this.readBorrower(this.borrower.cardNo);
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.error);
       });
     this.loadAllBooks();
   }
