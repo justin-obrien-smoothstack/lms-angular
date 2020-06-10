@@ -127,24 +127,40 @@ export class AdminBookComponent implements OnInit {
       case "Create":
         this.lmsService
           .post(environment.adminBackendUrl + environment.createBookUri, book)
-          .subscribe()
-          .add(() => {
-            this.readBooks();
-            this.readAuthors();
-            this.readGenres();
-            this.readPublishers();
-          });
+          .subscribe(
+            () => {
+              this.readBooks();
+              this.readAuthors();
+              this.readGenres();
+              this.readPublishers();
+            },
+            (error) => {
+              alert(error.error);
+              this.readBooks();
+              this.readAuthors();
+              this.readGenres();
+              this.readPublishers();
+            }
+          );
         break;
       case "Update":
         this.lmsService
           .put(environment.adminBackendUrl + environment.updateBookUri, book)
-          .subscribe()
-          .add(() => {
-            this.readBooks();
-            this.readAuthors();
-            this.readGenres();
-            this.readPublishers();
-          });
+          .subscribe(
+            () => {
+              this.readBooks();
+              this.readAuthors();
+              this.readGenres();
+              this.readPublishers();
+            },
+            (error) => {
+              alert(error.error);
+              this.readBooks();
+              this.readAuthors();
+              this.readGenres();
+              this.readPublishers();
+            }
+          );
         break;
     }
   }
