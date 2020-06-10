@@ -151,7 +151,7 @@ describe('AuthorComponent', () => {
     component.initializeFormGroup();
     const mockAuthorUpdated = [
       {
-        auhtorId: 1,
+        authorId: 1,
         authorName: "authorUpdated",
         books: [{ bookId: 1, title: "book1" }, { bookId: 2, title: "book2" }]
       }
@@ -161,6 +161,10 @@ describe('AuthorComponent', () => {
     spyOn(component, "loadAllAuthors").and.returnValue(of(mockAuthorUpdated));
 
     component.open("updateAuthorModal", mockAuthorUpdated);
+    component.updateAuthorForm.value.authorId = 1;
+    component.updateAuthorForm.value.authroName = "authorUpdated";
+    component.updateAuthorForm.value.books = [{ bookId: 1, title: "book1" }, { bookId: 2, title: "book2" }];
+
     component.updateAuthor();
     expect(component.authors).toEqual(mockAuthorUpdated);
   });
