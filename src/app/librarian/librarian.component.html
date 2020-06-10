@@ -34,7 +34,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Update Branch</h5>
+          <h5 class="modal-title" id="updateBranchDetailsModal">Update Branch</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="c()">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -68,15 +68,6 @@
                 Text fields should be between 3-45 chars in length
               </div>
             </div>
-            <!-- <ng-multiselect-dropdown
-              [placeholder]="'Select Books(s)'"
-              [data]="totalBooks"
-              formControlName="books"
-              [settings]="dropdownSettings"
-              (onSelect)="onItemSelect($event)"
-              (onSelectAll)="onSelectAll($event)"
-            >
-            </ng-multiselect-dropdown> -->
           </div>
         </div>
         <div class="modal-footer">
@@ -97,7 +88,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Books</h5>
+          <h5 class="modal-title" id="updateBookCopies">Add Books</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="c()">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -114,9 +105,13 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c()">
             Close
           </button>
-          <button type="button" class="btn btn-primary" (click)="updateBookCopies()"
+          <button type="button" class="btn btn-primary" (click)="addBookCopies()"
             [disabled]="addBookCopiesForm.invalid">
-            Save changes
+            Add
+          </button>
+          <button type="button" class="btn btn-primary" (click)="subtractBookCopies()"
+            [disabled]="addBookCopiesForm.invalid">
+            Remove
           </button>
         </div>
       </div>
