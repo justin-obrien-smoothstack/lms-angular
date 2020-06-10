@@ -6,7 +6,7 @@ import { environment } from "src/environments/environment";
   providedIn: "root",
 })
 export class OLmsService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   post(url: string, body: any = "") {
     return this.httpClient.post(url, body, { responseType: "text" });

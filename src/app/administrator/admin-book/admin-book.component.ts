@@ -47,7 +47,7 @@ export class AdminBookComponent implements OnInit {
     private formBuilder: FormBuilder,
     private modalService: NgbModal,
     private lmsService: OLmsService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.readBooks();
@@ -71,7 +71,7 @@ export class AdminBookComponent implements OnInit {
 
   readAuthors() {
     this.lmsService
-      .get(environment.adminBackendUrl + environment.readAuthorUri)
+      .get(environment.adminBackendUrl + environment.readAuthorsUri)
       .subscribe(
         (result: object[]) => (this.authors = result),
         (error: any) => {

@@ -26,6 +26,8 @@ export class LibrarianComponent implements OnInit {
   selectedBranch: any;
   books: any;
   totalBooks: any;
+  currentPage: number = 1;
+  rowsPerPage: number = 10;
 
   private modalRef: NgbModalRef;
   closeResult: any;
@@ -64,7 +66,7 @@ export class LibrarianComponent implements OnInit {
           console.log(this.branches[0].bookCopies);
         },
         (error) => {
-          debugger;
+          alert(error);
         }
       );
   }
@@ -77,7 +79,7 @@ export class LibrarianComponent implements OnInit {
           this.totalBooks = res;
         },
         (error) => {
-          debugger;
+          alert(error);
         }
       );
   }
@@ -120,9 +122,10 @@ export class LibrarianComponent implements OnInit {
       .subscribe(
         (res) => {
           this.modalService.dismissAll();
+          this.loadAllBranches();
         },
         (error) => {
-          this.modalService.dismissAll();
+          alert(error);
         }
       );
   }
@@ -183,10 +186,6 @@ export class LibrarianComponent implements OnInit {
       sign: "+",
     };
     bookCopies.bookId = bookCopies.books[0].bookId;
-    console.log(`copies -> ${bookCopies.noOfCopies}`);
-    console.log(`branch -> ${bookCopies.branchId}`);
-    console.log(`bookId -> ${bookCopies.bookId}`);
-
     this.lmsService
       .put(
         `${environment.libUrl}${environment.updateBanchUri}/${bookCopies.branchId}/copies`,
@@ -213,10 +212,6 @@ export class LibrarianComponent implements OnInit {
     };
 
     bookCopies.bookId = bookCopies.books[0].bookId;
-    console.log(`copies -> ${bookCopies.noOfCopies}`);
-    console.log(`branch -> ${bookCopies.branchId}`);
-    console.log(`bookId -> ${bookCopies.bookId}`);
-
     this.lmsService
       .put(
         `${environment.libUrl}${environment.updateBanchUri}/${bookCopies.branchId}/copies`,
