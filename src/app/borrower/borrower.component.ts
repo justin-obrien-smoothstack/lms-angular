@@ -98,7 +98,7 @@ export class BorrowerComponent implements OnInit {
         this.changePaginationCount();
       })
       .catch((err) => {
-        console.log(error);
+        console.log(err);
       });
   }
 

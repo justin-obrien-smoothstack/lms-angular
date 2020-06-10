@@ -8,17 +8,13 @@ import {
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BorrowerComponent } from "./borrower.component";
 import { HLmsService } from "../common/h/hLms.service";
-import { Observable, from, of, observable, throwError } from "rxjs";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import {
   SortCopiesByBranchPipe,
   SortCopiesByTitlePipe,
 } from "../common/h/sort-copies.pipe";
 import { HttpClientModule } from "@angular/common/http";
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from "@angular/common/http/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 describe("BorrowerComponent", () => {
   let component: BorrowerComponent;
@@ -52,49 +48,6 @@ describe("BorrowerComponent", () => {
   it("should create", () => {
     expect(component).toBeTruthy();
   });
-
-  it("should get a borrower", fakeAsync(() => {
-    let mockBorrower = {
-      cardNo: 3,
-      name: "Esta Aldin",
-      address: "570 Rowland Circle",
-      phone: "906-381-0555",
-      loans: [
-        {
-          bookId: 14,
-          branchId: 1,
-          cardNo: 3,
-          dateOut: "2020-04-23T16:31:12.000Z",
-          dueDate: "2020-05-14T09:11:47.000Z",
-          dateIn: null,
-        },
-        {
-          bookId: 15,
-          branchId: 6,
-          cardNo: 3,
-          dateOut: "2020-04-27T16:38:08.000Z",
-          dueDate: "2020-05-14T15:54:56.000Z",
-          dateIn: null,
-        },
-        {
-          bookId: 17,
-          branchId: 6,
-          cardNo: 3,
-          dateOut: "2020-04-20T15:13:14.000Z",
-          dueDate: "2020-04-23T18:42:22.000Z",
-          dateIn: null,
-        },
-      ],
-    };
-
-    spyOn(service, "readBorrower").and.returnValue(
-      Promise.resolve(mockBorrower)
-    );
-    component.readBorrower(3);
-    tick();
-    expect(service).toBeTruthy();
-    expect(component.borrower).toEqual(mockBorrower);
-  }));
 
   it("should get a borrower", fakeAsync(() => {
     let mockBorrower = {
@@ -223,14 +176,6 @@ describe("BorrowerComponent", () => {
     expect(component.availableBooks).toEqual(mockBookCopies);
   }));
 
-  // it('should return a book', fakeAsync(() => {
-  //   let inputLoan = {bookId: 2, branchId: 5, cardNo: 6,
-  //     dateIn: null,
-  //     dateOut: "2020-04-24T17:58:05.000Z",
-  //     dueDate: "05/11/2020"}
-
-  // }));
-
   it("should process the borrower loans", fakeAsync(() => {
     let formattedLoans = [
       {
@@ -267,7 +212,6 @@ describe("BorrowerComponent", () => {
     component.borrower = { loans: unformattedLoans };
     component.gatherLoanData();
     tick();
-    console.log(component.borrower.loans);
     expect(component.borrower).toEqual({ loans: formattedLoans });
   }));
 });
