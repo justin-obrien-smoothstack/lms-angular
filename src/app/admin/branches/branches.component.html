@@ -14,7 +14,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let b of branches; let i = index">
+    <tr *ngFor="
+    let b of branches
+      | slice: (currentPage - 1) * rowsPerPage:currentPage * rowsPerPage; let i = index
+  ">
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ b.branchName }}</td>
       <td>{{ b.branchAddress }}</td>
@@ -86,3 +89,6 @@
     </div>
   </form>
 </ng-template>
+
+<ngb-pagination [collectionSize]="branches.length" [(page)]="currentPage">
+</ngb-pagination>

@@ -23,6 +23,8 @@ export class BranchesComponent implements OnInit {
   selectedBranch: any;
   branchName: string;
   branchAddress: string;
+  currentPage: number = 1;
+  rowsPerPage: number = 10;
 
   private modalRef: NgbModalRef;
   closeResult: any;

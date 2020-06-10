@@ -22,6 +22,8 @@ export class AuthorComponent implements OnInit {
   authorId: number;
   books: any;
   totalBooks: any;
+  currentPage: number = 1;
+  rowsPerPage: number = 10;
 
   private modalRef: NgbModalRef;
   errMsg: any;
