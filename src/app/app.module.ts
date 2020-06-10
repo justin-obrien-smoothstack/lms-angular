@@ -8,9 +8,6 @@ import { BranchesComponent } from './admin/branches/branches.component';
 import { AuthorComponent } from './admin/author/author.component';
 import { LmsService } from '../common/service/lms.service';
 import { HttpClientModule } from "@angular/common/http";
-import { ReactiveFormsModule } from "@angular/forms";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
 import { SlicePipe } from "@angular/common";
 
@@ -55,6 +52,8 @@ import { NiceSpacingPipe } from "./common/o/pipes/nice-spacing.pipe";
     AdministratorComponent,
     OverrideComponent,
     BorrowerComponent,
+    GetPropertyPipe,
+    NiceSpacingPipe,
   ],
   imports: [
     BrowserModule,
@@ -69,8 +68,6 @@ import { NiceSpacingPipe } from "./common/o/pipes/nice-spacing.pipe";
 
   bootstrap: [
     AppComponent,
-    GetPropertyPipe,
-    NiceSpacingPipe,
   ],
 })
 export class AppModule { }
