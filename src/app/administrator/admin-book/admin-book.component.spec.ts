@@ -21,17 +21,12 @@ import { OLmsService } from "src/app/common/o/services/oLms.service";
 import { GetPropertyPipe } from "src/app/common/o/pipes/get-property.pipe";
 import { NiceSpacingPipe } from "src/app/common/o/pipes/nice-spacing.pipe";
 
-export class MockModalRef {
-  result = new Promise((resolve) => resolve(null));
-}
-
 describe("AdminBookComponent", () => {
   let component: AdminBookComponent;
   let fixture: ComponentFixture<AdminBookComponent>;
   let lmsService: OLmsService;
   let modalService: NgbModal;
   let formBuilder: FormBuilder;
-  let mockModalRef = new MockModalRef();
 
   const mockBooks = [
       {
@@ -98,7 +93,7 @@ describe("AdminBookComponent", () => {
   });
 
   it("should open a modal window if book is not given", () => {
-    spyOn(modalService, "open").and.returnValue(mockModalRef);
+    spyOn(modalService, "open").and.returnValue(null);
     component.openWriteModal("Create", "writeBookModal", undefined);
     expect(modalService.open).toHaveBeenCalled();
     expect(component.writeBookForm.value.bookId).toBeNull();
@@ -115,7 +110,7 @@ describe("AdminBookComponent", () => {
       of(mockGenres),
       of(mockPublishers)
     );
-    spyOn(modalService, "open").and.returnValue(mockModalRef);
+    spyOn(modalService, "open").and.returnValue(null);
     component.ngOnInit();
     component.openWriteModal("Update", "writeBookModal", component.books[0]);
     expect(modalService.open).toHaveBeenCalled();

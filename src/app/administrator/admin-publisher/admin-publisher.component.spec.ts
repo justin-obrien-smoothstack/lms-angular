@@ -21,17 +21,12 @@ import { OLmsService } from "src/app/common/o/services/oLms.service";
 import { GetPropertyPipe } from "src/app/common/o/pipes/get-property.pipe";
 import { NiceSpacingPipe } from "src/app/common/o/pipes/nice-spacing.pipe";
 
-export class MockModalRef {
-  result = new Promise((resolve) => resolve(null));
-}
-
 describe("AdminPublisherComponent", () => {
   let component: AdminPublisherComponent;
   let fixture: ComponentFixture<AdminPublisherComponent>;
   let lmsService: OLmsService;
   let modalService: NgbModal;
   let formBuilder: FormBuilder;
-  let mockModalRef = new MockModalRef();
 
   const mockPublishers = [
       {
@@ -110,7 +105,7 @@ describe("AdminPublisherComponent", () => {
   });
 
   it("should open a modal window if publisher is not given", () => {
-    spyOn(modalService, "open").and.returnValue(mockModalRef);
+    spyOn(modalService, "open").and.returnValue(null);
     component.openWriteModal("Create", "writePublisherModal", undefined);
     expect(modalService.open).toHaveBeenCalled();
     expect(component.writePublisherForm.value.publisherId).toBeNull();
@@ -121,7 +116,7 @@ describe("AdminPublisherComponent", () => {
   });
 
   it("should open a modal window if publisher is given", () => {
-    spyOn(modalService, "open").and.returnValue(mockModalRef);
+    spyOn(modalService, "open").and.returnValue(null);
     component.ngOnInit();
     component.openWriteModal(
       "Update",
@@ -142,6 +137,13 @@ describe("AdminPublisherComponent", () => {
     expect(component.writePublisherForm.value.books).toEqual(
       mockBooks.slice(0, 2)
     );
+  });
+
+  xit("should send a request to the backend's create URL", () => {
+    spyOn(window, "confirm").and.returnValue(true);
+    spyOn(lmsService, "post").and.returnValue(of(null));
+    component.writePublisher("Create");
+    expect(lmsService.post).toHaveBeenCalledWith();
   });
 
   it("should not send a request to the backend's create or update URLs", () => {
