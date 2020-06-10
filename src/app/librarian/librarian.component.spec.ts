@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { LibrarianComponent } from "./librarian.component";
-import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 describe("LibrarianComponent", () => {
   let component: LibrarianComponent;
@@ -10,7 +9,6 @@ describe("LibrarianComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [LibrarianComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
 

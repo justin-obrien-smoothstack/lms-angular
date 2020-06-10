@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { BranchesComponent } from "./branches.component";
-import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 describe("BranchesComponent", () => {
   let component: BranchesComponent;
@@ -10,7 +9,6 @@ describe("BranchesComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [BranchesComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
 
