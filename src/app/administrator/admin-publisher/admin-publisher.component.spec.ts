@@ -99,6 +99,10 @@ describe("AdminPublisherComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AdminPublisherComponent);
     fixture.detectChanges();
+    spyOn(lmsService, "get").and.returnValues(
+      of(mockPublishers),
+      of(mockBooks)
+    );
   });
 
   it("should create", () => {
@@ -117,10 +121,6 @@ describe("AdminPublisherComponent", () => {
   });
 
   it("should open a modal window if publisher is given", () => {
-    spyOn(lmsService, "get").and.returnValues(
-      of(mockPublishers),
-      of(mockBooks)
-    );
     spyOn(modalService, "open").and.returnValue(mockModalRef);
     component.ngOnInit();
     component.openWriteModal(
@@ -142,5 +142,15 @@ describe("AdminPublisherComponent", () => {
     expect(component.writePublisherForm.value.books).toEqual(
       mockBooks.slice(0, 2)
     );
+  });
+
+  it("should not send a request to the backend's create or update URLs", () => {
+    spyOn(window, "confirm").and.returnValue(false);
+    spyOn(lmsService, "post").and.returnValue(of(null));
+    spyOn(lmsService, "put").and.returnValue(of(null));
+    component.writePublisher("Create");
+    component.writePublisher("Update");
+    expect(lmsService.post).not.toHaveBeenCalled();
+    expect(lmsService.put).not.toHaveBeenCalled();
   });
 });
