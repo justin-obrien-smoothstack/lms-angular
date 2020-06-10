@@ -87,8 +87,11 @@
               "src/styles.css"
             ],
             "scripts": [],
-            "assets": ["src/favicon.ico", "src/assets"],
-            "codeCoverage": tru
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "codeCoverage": true
           }
         },
         "lint": {
