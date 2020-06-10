@@ -1,4 +1,10 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import {
+  async,
+  fakeAsync,
+  ComponentFixture,
+  TestBed,
+  tick,
+} from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 import { environment } from "src/environments/environment";
@@ -114,12 +120,13 @@ describe("OverrideComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("should load overridable loans on initialization", () => {
+  it("should load overridable loans on initialization", fakeAsync(() => {
     component.ngOnInit();
+    tick();
     expect(component.overridableLoans).toEqual(mockLoansProcessed);
-  });
+  }));
 
-  it("should send a PUT request to the backend's override URL", () => {
+  it("should send a PUT request to the backend's override URL", fakeAsync(() => {
     const mockLoan = mockLoansProcessed[0],
       overrideUri = `/loans/book/${mockLoan.bookId}/borrower/${
         mockLoan.cardNo
@@ -129,10 +136,11 @@ describe("OverrideComponent", () => {
     spyOn(window, "confirm").and.returnValue(true);
     spyOn(lmsService, "put").and.returnValue(of(null));
     component.doOverride(mockLoan);
+    tick();
     expect(lmsService.put).toHaveBeenCalledWith(
       environment.adminBackendUrl + overrideUri
     );
-  });
+  }));
 
   it("should not send a PUT request to the backend's override URL", () => {
     spyOn(window, "confirm").and.returnValue(false);

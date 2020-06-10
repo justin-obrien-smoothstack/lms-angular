@@ -95,10 +95,15 @@ describe("AdminPublisherComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AdminPublisherComponent);
     fixture.detectChanges();
+    spyOn(modalService, "open").and.returnValue(null);
     spyOn(lmsService, "get").and.returnValues(
+      of(mockPublishers),
+      of(mockBooks),
       of(mockPublishers),
       of(mockBooks)
     );
+    spyOn(lmsService, "post").and.returnValue(of(null));
+    spyOn(lmsService, "put").and.returnValue(of(null));
   });
 
   it("should create", () => {
@@ -106,7 +111,6 @@ describe("AdminPublisherComponent", () => {
   });
 
   it("should open a modal window if publisher is not given", () => {
-    spyOn(modalService, "open").and.returnValue(null);
     component.openWriteModal("Create", "writePublisherModal", undefined);
     expect(modalService.open).toHaveBeenCalled();
     expect(component.writePublisherForm.value.publisherId).toBeNull();
@@ -116,9 +120,9 @@ describe("AdminPublisherComponent", () => {
     expect(component.writePublisherForm.value.books).toEqual([]);
   });
 
-  it("should open a modal window if publisher is given", () => {
-    spyOn(modalService, "open").and.returnValue(null);
+  it("should open a modal window if publisher is given", fakeAsync(() => {
     component.ngOnInit();
+    tick();
     component.openWriteModal(
       "Update",
       "writePublisherModal",
@@ -138,17 +142,17 @@ describe("AdminPublisherComponent", () => {
     expect(component.writePublisherForm.value.books).toEqual(
       mockBooks.slice(0, 2)
     );
-  });
+  }));
 
-  it("should send a POST request to the backend's create URL", () => {
+  it("should send a POST request to the backend's create URL", fakeAsync(() => {
     spyOn(window, "confirm").and.returnValue(true);
-    spyOn(lmsService, "post").and.returnValue(of(null));
     component.initializeWritePublisherForm(null);
     component.writePublisherForm.value.publisherName = "New Mock Publisher";
     component.writePublisherForm.value.publisherAddress = "New Mock Address";
     component.writePublisherForm.value.publisherPhone = "New Mock Phone";
     component.writePublisherForm.value.books = mockBooks.slice(2, 4);
     component.writePublisher("Create");
+    tick();
     expect(lmsService.post).toHaveBeenCalledWith(
       environment.adminBackendUrl + environment.createPublisherUri,
       {
@@ -159,12 +163,23 @@ describe("AdminPublisherComponent", () => {
         bookIds: [3, 4],
       }
     );
-  });
+  }));
+
+  it("should send a PUT request to the backend's update URL", fakeAsync(() => {
+    spyOn(window, "confirm").and.returnValue(true);
+    component.ngOnInit();
+    tick();
+    component.initializeWritePublisherForm(mockPublishers[0]);
+    component.writePublisher("Update");
+    tick();
+    expect(lmsService.put).toHaveBeenCalledWith(
+      environment.adminBackendUrl + environment.createPublisherUri,
+      mockPublishers[0]
+    );
+  }));
 
   it("should not send a request to the backend's create or update URLs", () => {
     spyOn(window, "confirm").and.returnValue(false);
-    spyOn(lmsService, "post").and.returnValue(of(null));
-    spyOn(lmsService, "put").and.returnValue(of(null));
     component.writePublisher("Create");
     component.writePublisher("Update");
     expect(lmsService.post).not.toHaveBeenCalled();
