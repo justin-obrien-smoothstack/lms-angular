@@ -20,6 +20,7 @@ import { AdminBookComponent } from "./admin-book.component";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
 import { GetPropertyPipe } from "src/app/common/o/pipes/get-property.pipe";
 import { NiceSpacingPipe } from "src/app/common/o/pipes/nice-spacing.pipe";
+import { environment } from "src/environments/environment";
 
 describe("AdminBookComponent", () => {
   let component: AdminBookComponent;
@@ -97,6 +98,8 @@ describe("AdminBookComponent", () => {
       of(mockGenres),
       of(mockPublishers)
     );
+    spyOn(lmsService, "post").and.returnValue(of(null));
+    spyOn(lmsService, "put").and.returnValue(of(null));
   });
 
   it("should create", () => {
@@ -128,6 +131,40 @@ describe("AdminBookComponent", () => {
     );
     expect(component.writeBookForm.value.genres).toEqual(
       mockGenres.slice(0, 2)
+    );
+  }));
+
+  it("should send a POST request to the backend's create URL", fakeAsync(() => {
+    spyOn(window, "confirm").and.returnValue(true);
+    component.initializeWriteBookForm(null);
+    component.writeBookForm.value.title = "New Mock Book";
+    component.writeBookForm.value.publisher = [mockPublishers[1]];
+    component.writeBookForm.value.authors = mockAuthors.slice(1, 3);
+    component.writeBookForm.value.genres = mockGenres.slice(1, 3);
+    component.writeBook("Create");
+    tick();
+    expect(lmsService.post).toHaveBeenCalledWith(
+      environment.adminBackendUrl + environment.createBookUri,
+      {
+        bookId: null,
+        title: "New Mock Book",
+        pubId: 2,
+        authorIds: [2, 3],
+        genreIds: [2, 3],
+      }
+    );
+  }));
+
+  it("should send a PUT request to the backend's update URL", fakeAsync(() => {
+    spyOn(window, "confirm").and.returnValue(true);
+    component.ngOnInit();
+    tick();
+    component.initializeWriteBookForm(mockBooks[0]);
+    component.writeBook("Update");
+    tick();
+    expect(lmsService.put).toHaveBeenCalledWith(
+      environment.adminBackendUrl + environment.createBookUri,
+      mockBooks[0]
     );
   }));
 });
