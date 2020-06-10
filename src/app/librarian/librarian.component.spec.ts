@@ -136,6 +136,7 @@ describe('LibrarianComponent', () => {
   });
 
   it('should add book copies', () => {
+    component.initializeFormGroup();
     const mockBookCopies = {
       books: [
         {
@@ -152,11 +153,13 @@ describe('LibrarianComponent', () => {
       branchId: 1,
     };
 
-    component.openAdd("AddBookCopiesForm", mockBookCopies);
+    spyOn(lmsService, "put").and.returnValue(of(null));
+    component.openAdd("addBookCopiesForm", mockBookCopies);
     component.addBookCopies();
   });
 
   it('should remove book copies', () => {
+    component.initializeFormGroup();
     const mockBookCopies = {
       books: [
         {
@@ -173,7 +176,8 @@ describe('LibrarianComponent', () => {
       branchId: 1,
     };
 
-    component.openAdd("AddBookCopiesForm", mockBookCopies);
+    spyOn(lmsService, "put").and.returnValue(of(null));
+    component.openAdd("addBookCopiesForm", mockBookCopies);
     component.subtractBookCopies();
   });
 });

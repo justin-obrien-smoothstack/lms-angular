@@ -158,7 +158,7 @@ describe('AuthorComponent', () => {
     ];
 
     spyOn(lmsService, "put").and.returnValue(of(null));
-    spyOn(component, "loadAllAuthors").and.returnValue(of(mockAuthorUpdated));
+    spyOn(lmsService, "get").and.returnValue(of(mockAuthorUpdated));
 
     component.open("updateAuthorModal", mockAuthorUpdated);
     component.updateAuthorForm.value.authorId = 1;

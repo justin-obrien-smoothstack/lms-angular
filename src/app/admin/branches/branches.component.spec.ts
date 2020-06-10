@@ -130,4 +130,25 @@ describe('BranchesComponent', () => {
     expect(component.branches).toEqual(deleteBranch);
   });
 
+  it("should update a branch with a new name", () => {
+    component.initializeFormGroup();
+    const mockUpdateBranch = [
+      {
+        branchId: 1,
+        branchName: "branch",
+        branchAddress: "Address"
+      }
+    ];
+
+    spyOn(lmsService, "put").and.returnValue(of(null));
+    spyOn(lmsService, "get").and.returnValue(of(mockUpdateBranch));
+
+    component.open("updateAuthorModal", mockUpdateBranch);
+    component.updateBranchForm.value.branchId = 1;
+    component.updateBranchForm.value.branchName = "branch";
+    component.updateBranchForm.value.branchAddress = "Address";
+
+    component.updateBranch();
+    expect(component.branches).toEqual(mockUpdateBranch);
+  });
 });

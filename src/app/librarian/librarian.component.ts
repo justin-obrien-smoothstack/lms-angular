@@ -128,7 +128,7 @@ export class LibrarianComponent implements OnInit {
           this.loadAllBranches();
         },
         (error) => {
-          alert(errro);
+          alert(error);
         }
       );
   }
