@@ -98,11 +98,17 @@ export class AdminPublisherComponent implements OnInit {
             environment.adminBackendUrl + environment.createPublisherUri,
             publisher
           )
-          .subscribe(null, (error) => alert(error.error))
-          .add(() => {
-            this.readPublishers();
-            this.readBooks();
-          });
+          .subscribe(
+            () => {
+              this.readPublishers();
+              this.readBooks();
+            },
+            (error) => {
+              alert(error.error);
+              this.readPublishers();
+              this.readBooks();
+            }
+          );
         break;
       case "Update":
         this.lmsService
@@ -110,11 +116,17 @@ export class AdminPublisherComponent implements OnInit {
             environment.adminBackendUrl + environment.updatePublisherUri,
             publisher
           )
-          .subscribe(null, (error) => alert(error.error))
-          .add(() => {
-            this.readPublishers();
-            this.readBooks();
-          });
+          .subscribe(
+            () => {
+              this.readPublishers();
+              this.readBooks();
+            },
+            (error) => {
+              alert(error.error);
+              this.readPublishers();
+              this.readBooks();
+            }
+          );
         break;
     }
   }
