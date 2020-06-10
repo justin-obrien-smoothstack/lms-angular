@@ -86,6 +86,17 @@ describe("AdminBookComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AdminBookComponent);
     fixture.detectChanges();
+    spyOn(modalService, "open").and.returnValue(null);
+    spyOn(lmsService, "get").and.returnValues(
+      of(mockBooks),
+      of(mockAuthors),
+      of(mockGenres),
+      of(mockPublishers),
+      of(mockBooks),
+      of(mockAuthors),
+      of(mockGenres),
+      of(mockPublishers)
+    );
   });
 
   it("should create", () => {
@@ -93,7 +104,6 @@ describe("AdminBookComponent", () => {
   });
 
   it("should open a modal window if book is not given", () => {
-    spyOn(modalService, "open").and.returnValue(null);
     component.openWriteModal("Create", "writeBookModal", undefined);
     expect(modalService.open).toHaveBeenCalled();
     expect(component.writeBookForm.value.bookId).toBeNull();
@@ -103,15 +113,9 @@ describe("AdminBookComponent", () => {
     expect(component.writeBookForm.value.genres).toEqual([]);
   });
 
-  it("should open a modal window if book is given", () => {
-    spyOn(lmsService, "get").and.returnValues(
-      of(mockBooks),
-      of(mockAuthors),
-      of(mockGenres),
-      of(mockPublishers)
-    );
-    spyOn(modalService, "open").and.returnValue(null);
+  it("should open a modal window if book is given", fakeAsync(() => {
     component.ngOnInit();
+    tick();
     component.openWriteModal("Update", "writeBookModal", component.books[0]);
     expect(modalService.open).toHaveBeenCalled();
     expect(component.writeBookForm.value.bookId).toEqual(1);
@@ -125,5 +129,5 @@ describe("AdminBookComponent", () => {
     expect(component.writeBookForm.value.genres).toEqual(
       mockGenres.slice(0, 2)
     );
-  });
+  }));
 });
