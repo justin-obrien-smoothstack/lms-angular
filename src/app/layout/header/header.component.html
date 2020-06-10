@@ -1,15 +1,8 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" routerLink="/lms/home">LMS</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarColor01"
-      aria-controls="navbarColor01"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+      aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -23,7 +16,7 @@
             role="button"
             aria-haspopup="true"
             aria-expanded="true"
-            >Admin</a
+            >Administrator</a
           >
           <div
             class="dropdown-menu"
@@ -36,18 +29,17 @@
               will-change: transform;
             "
           >
-            <a class="dropdown-item" routerLink="/lms/admin/author">Author</a>
-            <a class="dropdown-item" routerLink="/lms/admin/book">Book</a>
+            <a class="dropdown-item" routerLink="/lms/admin/author">Authors</a>
+            <a class="dropdown-item" routerLink="/lms/admin/book">Books</a>
             <a class="dropdown-item" routerLink="/lms/admin/borrower"
-              >Borrower</a
+              >Borrowers</a
             >
-            <a class="dropdown-item" routerLink="/lms/admin/branch">Branch</a>
-            <a class="dropdown-item" routerLink="/lms/admin/genre">Genre</a>
-            <a class="dropdown-item" routerLink="/lms/admin/override"
-              >Override Loan</a
-            >
+            <a class="dropdown-item" routerLink="/lms/admin/branch">Branches</a>
+            <a class="dropdown-item" routerLink="/lms/admin/genre">Genres</a>
             <a class="dropdown-item" routerLink="/lms/admin/publisher"
-              >Publisher</a
+              >Publishers</a
+            ><a class="dropdown-item" routerLink="/lms/admin/override"
+              >Due Dates</a
             >
           </div>
         </li>
