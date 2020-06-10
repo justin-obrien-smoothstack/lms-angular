@@ -24,56 +24,44 @@ export class OLmsService {
     return this.httpClient.delete(url);
   }
 
-  setBorrowerNameOf(input: any) {
-    this.httpClient
-      .get(
-        `${environment.adminBackendUrl}${environment.readBorrowerUri}/${input.cardNo}`
-      )
-      .subscribe(
-        (borrowers: any[]) =>
-          (input.borrowerName =
-            borrowers[0].name !== null
-              ? borrowers[0].name
-              : "(borrower name not found)"),
-        (error: any) => {
-          input.borrowerName = "(error retrieving borrower name)";
-        }
-      );
+  getBorrower(input: any) {
+    return this.httpClient.get(
+      `${environment.adminBackendUrl}${environment.readBorrowerUri}/${input.cardNo}`
+    );
   }
 
-  setBranchNameOf(input: any) {
-    this.httpClient
-      .get(
-        `${environment.adminBackendUrl}${environment.readBranchUri}/${input.branchId}`
-      )
-      .subscribe(
-        (branches: any[]) =>
-          (input.branchName =
-            branches[0].branchName !== null
-              ? branches[0].branchName
-              : "(branch name not found)"),
-        (error: any) => {
-          input.branchName = "(error retrieving branch name)";
-        }
-      );
+  getBranch(input: any) {
+    return this.httpClient.get(
+      `${environment.adminBackendUrl}${environment.readBranchUri}/${input.branchId}`
+    );
   }
 
-  setBookTitleOf(input: any) {
-    this.httpClient
-      .get(
-        `${environment.adminBackendUrl}${environment.readBookUri}/${input.bookId}`
-      )
-      .subscribe(
-        (books) => (input.bookTitle = books[0].title),
-        (error) => {
-          input.bookTitle = "(error retrieving book title)";
-        }
-      );
+  getBook(input: any) {
+    return this.httpClient.get(
+      `${environment.adminBackendUrl}${environment.readBookUri}/${input.bookId}`
+    );
   }
 
   processLoan(loan: any) {
-    loan.borrowerName = this.setBorrowerNameOf(loan);
-    loan.branchName = this.setBranchNameOf(loan);
-    loan.bookTitle = this.setBookTitleOf(loan);
+    this.getBorrower(loan).subscribe(
+      (borrower) =>
+        (loan.borrowerName =
+          borrower[0].name !== null
+            ? borrower[0].name
+            : "(borrower name not found)"),
+      (error) => (loan.borrowerName = "(error retrieving borrower name)")
+    );
+    this.getBranch(loan).subscribe(
+      (branch) =>
+        (loan.branchName =
+          branch[0].branchName !== null
+            ? branch[0].branchName
+            : "(branch name not found)"),
+      (error) => (loan.branchName = "(error retrieving branch name)")
+    );
+    this.getBook(loan).subscribe(
+      (book) => (loan.bookTitle = book[0].title),
+      (error) => (loan.bookTitle = "(error retrieving book title)")
+    );
   }
 }
