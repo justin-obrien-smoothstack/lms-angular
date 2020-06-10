@@ -18,7 +18,7 @@ export class HLmsService {
 
   readBorrower(cardNumber) {
     let promise = new Promise((resolve, reject) => {
-      this.get(`${environment.borrowerBackendUrl}/${cardNumber}`)
+      this.get(`${environment.borrowerBackendUrl}/user/${cardNumber}`)
         .toPromise()
         .then((result) => {
           resolve(result);

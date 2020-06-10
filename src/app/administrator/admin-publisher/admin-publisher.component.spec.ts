@@ -1,16 +1,17 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { AdminPublisherComponent } from './admin-publisher.component';
+import { AdminPublisherComponent } from "./admin-publisher.component";
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
-describe('AdminPublisherComponent', () => {
+describe("AdminPublisherComponent", () => {
   let component: AdminPublisherComponent;
   let fixture: ComponentFixture<AdminPublisherComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminPublisherComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminPublisherComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +20,7 @@ describe('AdminPublisherComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

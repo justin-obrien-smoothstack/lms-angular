@@ -1,16 +1,17 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { OverrideComponent } from './override.component';
+import { OverrideComponent } from "./override.component";
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
-describe('OverrideComponent', () => {
+describe("OverrideComponent", () => {
   let component: OverrideComponent;
   let fixture: ComponentFixture<OverrideComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OverrideComponent ]
-    })
-    .compileComponents();
+      declarations: [OverrideComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +20,7 @@ describe('OverrideComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
