@@ -1,9 +1,11 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 
+import { environment } from "src/environments/environment";
 import { HttpClientModule } from "@angular/common/http";
 import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
 import { of } from "rxjs";
+import * as moment from "moment";
 
 import { OverrideComponent } from "./override.component";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
@@ -93,13 +95,6 @@ describe("OverrideComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(OverrideComponent);
     fixture.detectChanges();
-  });
-
-  it("should create", () => {
-    expect(component).toBeTruthy();
-  });
-
-  it("should load overridable loans on initialization", () => {
     spyOn(lmsService, "get").and.returnValue(of(mockLoans));
     spyOn(lmsService, "getBorrower").and.returnValues(
       of([mockBorrowers[0]]),
@@ -113,7 +108,36 @@ describe("OverrideComponent", () => {
       of([mockBooks[0]]),
       of([mockBooks[1]])
     );
+  });
+
+  it("should create", () => {
+    expect(component).toBeTruthy();
+  });
+
+  it("should load overridable loans on initialization", () => {
     component.ngOnInit();
     expect(component.overridableLoans).toEqual(mockLoansProcessed);
+  });
+
+  it("should send a PUT request to the backend's override URL", () => {
+    const mockLoan = mockLoansProcessed[0],
+      overrideUri = `/loans/book/${mockLoan.bookId}/borrower/${
+        mockLoan.cardNo
+      }/branch/${mockLoan.branchId}/dateout/${moment(mockLoan.dateOut).format(
+        "YYYY-MM-DDTHH_mm_ss"
+      )}`;
+    spyOn(window, "confirm").and.returnValue(true);
+    spyOn(lmsService, "put").and.returnValue(of(null));
+    component.doOverride(mockLoan);
+    expect(lmsService.put).toHaveBeenCalledWith(
+      environment.adminBackendUrl + overrideUri
+    );
+  });
+
+  it("should not send a PUT request to the backend's override URL", () => {
+    spyOn(window, "confirm").and.returnValue(false);
+    spyOn(lmsService, "put").and.returnValue(of(null));
+    component.doOverride(mockLoansProcessed[0]);
+    expect(lmsService.put).not.toHaveBeenCalled();
   });
 });
