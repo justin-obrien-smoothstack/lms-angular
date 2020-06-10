@@ -146,4 +146,22 @@ describe('AuthorComponent', () => {
     component.deleteAuthor(2);
     expect(component.authors).toEqual(mockAuthor);
   });
+
+  it("should update an author with a new name", () => {
+    component.initializeFormGroup();
+    const mockAuthorUpdated = [
+      {
+        auhtorId: 1,
+        authorName: "authorUpdated",
+        books: [{ bookId: 1, title: "book1" }, { bookId: 2, title: "book2" }]
+      }
+    ];
+
+    spyOn(lmsService, "put").and.returnValue(of(null));
+    spyOn(component, "loadAllAuthors").and.returnValue(of(mockAuthorUpdated));
+
+    component.open("updateAuthorModal", mockAuthorUpdated);
+    component.updateAuthor();
+    expect(component.authors).toEqual(mockAuthorUpdated);
+  });
 });
