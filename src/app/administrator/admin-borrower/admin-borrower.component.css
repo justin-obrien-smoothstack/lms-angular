@@ -1,0 +1,19 @@
+.borrower-table {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.borrower-table .table th,
+.borrower-table .table td {
+  padding: 0.8rem;
+}
+
+.borrower-title {
+  text-align: center;
+}
+
+.create-button {
+  text-align: center;
+  margin: 10px;
+}

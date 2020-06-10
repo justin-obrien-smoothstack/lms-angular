@@ -1,3 +1,132 @@
-<p>
-  admin-borrower works!
-</p>
+<div class="borrower-header">
+  <h1 class="borrower-title">Borrowers</h1>
+  <div class="create-button">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="openWriteModal('Create', writeBorrowerModal)"
+    >
+      Create New Borrower
+    </button>
+  </div>
+</div>
+
+<div class="borrower-table">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Card Number</th>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let borrower of borrowers
+            | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize
+        "
+      >
+        <td scope="row">{{ borrower.cardNo }}</td>
+        <td scope="row">{{ borrower.name }}</td>
+        <td scope="row">{{ borrower.address }}</td>
+        <td scope="row">{{ borrower.phone }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-info btn-sm"
+            (click)="openWriteModal('Update', writeBorrowerModal, borrower)"
+          >
+            Update
+          </button>
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            (click)="deleteBorrower(bor.cardNo)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ngb-pagination
+    [collectionSize]="borrowers.length"
+    [(page)]="page"
+    aria-label="Default pagination"
+  >
+  </ngb-pagination>
+</div>
+
+<ng-template #writeBorrowerModal let-close="close">
+  <form [formGroup]="writeBorrowerForm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>{{ operation }} Borrower</h5>
+          <button type="button" class="btn btn-primary" (click)="close()">
+            <span>&#215;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="col-form-label">Name:</label>
+            <input class="form-control" formControlName="name" />
+            <div
+              *ngIf="
+                errorsDirty('name') &&
+                writeBorrowerForm.controls.name.errors.required
+              "
+            >
+              Required
+            </div>
+            <div
+              *ngIf="
+                errorsDirty('name') &&
+                writeBorrowerForm.controls.name.errors.maxlength
+              "
+            >
+              Maximum length is {{ maxLength }} characters
+            </div>
+            <label class="col-form-label">Address:</label>
+            <input class="form-control" formControlName="address" />
+            <div
+              *ngIf="
+                errorsDirty('name') &&
+                writeBorrowerForm.controls.name.address.maxlength
+              "
+            >
+              Maximum length is {{ maxLength }} characters
+            </div>
+            <label class="col-form-label">Phone Number:</label>
+            <input class="form-control" formControlName="phone" />
+            <div
+              *ngIf="
+                errorsDirty('name') &&
+                writeBorrowerForm.controls.phone.errors.maxlength
+              "
+            >
+              Maximum length is {{ maxLength }} characters
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-primary"
+            type="button"
+            (click)="writeBorrower(operation); close()"
+            [disabled]="writeBorrowerForm.invalid"
+          >
+            {{ operation }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>

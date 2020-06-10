@@ -28,6 +28,9 @@ export const environment = {
   updateBookUri: "/book",
   deleteBookUri: "/books",
   deletePublisherUri: "/publishers",
+  returnBookUri: "/returnBook",
+  checkOutBookUri: "/checkOutBook",
+  copiesUri: "/copies",
 };
 
 /*
