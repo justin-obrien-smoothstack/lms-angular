@@ -78,7 +78,7 @@ export class AuthorComponent implements OnInit {
           this.authors = res;
         },
         (error) => {
-          debugger;
+          alert(error);
         }
       );
   }
@@ -91,7 +91,7 @@ export class AuthorComponent implements OnInit {
           this.totalBooks = res;
         },
         (error) => {
-          debugger;
+          alert(error);
         }
       );
   }
@@ -104,7 +104,7 @@ export class AuthorComponent implements OnInit {
           this.loadAllAuthors();
         },
         (error) => {
-          debugger;
+          alert(error);
         }
       );
   }
@@ -125,7 +125,7 @@ export class AuthorComponent implements OnInit {
             this.modalService.dismissAll();
           },
           (error) => {
-            debugger;
+            alert(error);
           }
         )
     }
@@ -138,7 +138,7 @@ export class AuthorComponent implements OnInit {
             this.modalService.dismissAll();
           },
           (error) => {
-            debugger;
+            alert(error);
           }
         );
     }

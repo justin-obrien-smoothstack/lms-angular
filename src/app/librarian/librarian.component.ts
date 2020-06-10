@@ -67,7 +67,7 @@ export class LibrarianComponent implements OnInit {
           console.log(this.branches[0].bookCopies);
         },
         (error) => {
-          debugger;
+          alert(error);
         }
       );
   }
@@ -81,7 +81,7 @@ export class LibrarianComponent implements OnInit {
 
         },
         (error) => {
-          debugger;
+          alert(error);
         }
       );
   }
@@ -128,7 +128,7 @@ export class LibrarianComponent implements OnInit {
           this.loadAllBranches();
         },
         (error) => {
-          this.modalService.dismissAll();
+          alert(errro);
         }
       );
   }

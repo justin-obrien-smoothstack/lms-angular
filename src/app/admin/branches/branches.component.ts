@@ -77,7 +77,6 @@ export class BranchesComponent implements OnInit {
         .post(`${environment.adminBackendUrl}${environment.createBranchURI}`, branch)
         .subscribe(
           (res) => {
-            console.log(res);
             this.loadAllBranches();
             this.modalService.dismissAll();
           },
@@ -90,12 +89,11 @@ export class BranchesComponent implements OnInit {
         .put(`${environment.adminBackendUrl}${environment.updateBanchUri}`, branch)
         .subscribe(
           (res) => {
-            console.log(res);
             this.loadAllBranches();
             this.modalService.dismissAll();
           },
           (error) => {
-            console.log(error);
+            alert(error);
           }
         );
     }
@@ -107,12 +105,11 @@ export class BranchesComponent implements OnInit {
       .delete(`${environment.adminBackendUrl}${environment.deleteBranchUri}/${branch}`)
       .subscribe(
         (res) => {
-          console.log(res);
           this.loadAllBranches();
           this.modalService.dismissAll();
         },
         (error) => {
-          console.log(error);
+          alert(error);
         }
       )
   }
@@ -135,7 +132,6 @@ export class BranchesComponent implements OnInit {
 
   open(content, obj) {
     if (obj !== null) {
-      //this is edit/update mode
       this.updateBranchForm = this.fb.group({
         branchId: obj.branchId,
         branchName: obj.branchName,
