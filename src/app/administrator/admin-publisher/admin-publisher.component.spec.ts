@@ -20,6 +20,7 @@ import { AdminPublisherComponent } from "./admin-publisher.component";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
 import { GetPropertyPipe } from "src/app/common/o/pipes/get-property.pipe";
 import { NiceSpacingPipe } from "src/app/common/o/pipes/nice-spacing.pipe";
+import { environment } from "src/environments/environment";
 
 describe("AdminPublisherComponent", () => {
   let component: AdminPublisherComponent;
@@ -139,11 +140,25 @@ describe("AdminPublisherComponent", () => {
     );
   });
 
-  xit("should send a request to the backend's create URL", () => {
+  it("should send a POST request to the backend's create URL", () => {
     spyOn(window, "confirm").and.returnValue(true);
     spyOn(lmsService, "post").and.returnValue(of(null));
+    component.initializeWritePublisherForm(null);
+    component.writePublisherForm.value.publisherName = "New Mock Publisher";
+    component.writePublisherForm.value.publisherAddress = "New Mock Address";
+    component.writePublisherForm.value.publisherPhone = "New Mock Phone";
+    component.writePublisherForm.value.books = mockBooks.slice(2, 4);
     component.writePublisher("Create");
-    expect(lmsService.post).toHaveBeenCalledWith();
+    expect(lmsService.post).toHaveBeenCalledWith(
+      environment.adminBackendUrl + environment.createPublisherUri,
+      {
+        publisherId: null,
+        publisherName: "New Mock Publisher",
+        publisherAddress: "New Mock Address",
+        publisherPhone: "New Mock Phone",
+        bookIds: [3, 4],
+      }
+    );
   });
 
   it("should not send a request to the backend's create or update URLs", () => {
