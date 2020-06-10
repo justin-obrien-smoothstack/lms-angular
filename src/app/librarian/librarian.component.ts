@@ -60,7 +60,7 @@ export class LibrarianComponent implements OnInit {
 
   loadAllBranches() {
     this.lmsService
-      .get(`${environment.adminBackendUrl}${environment.readBanchUri}`)
+      .get(`${environment.adminBackendUrl}${environment.readBranchUri}`)
       .subscribe(
         (res) => {
           this.branches = res;

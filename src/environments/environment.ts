@@ -7,7 +7,7 @@ export const environment = {
   adminBackendUrl: "http://localhost:3000/lms/admin",
   libUrl: "http://localhost:3001/lms/librarian",
   borrUrl: "http://localhost:3002/lms/borrower",
-  readBanchUri: "/branches",
+  readBranchUri: "/branches",
   updateBanchUri: "/branches",
   createBranchURI: "/branches",
   deleteBranchUri: "/branches",
