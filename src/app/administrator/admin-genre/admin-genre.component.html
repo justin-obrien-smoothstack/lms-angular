@@ -1,3 +1,107 @@
-<p>
-  admin-genre works!
-</p>
+<div class="genre-header">
+  <h1 class="genre-title">Genres</h1>
+  <div class="create-button">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="openWriteModal('Create', writeGenreModal)"
+    >
+      Create New Genre
+    </button>
+  </div>
+</div>
+
+<div class="genre-table">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Genre</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let genre of genres
+            | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize
+        "
+      >
+        <td scope="row">{{ genre.genre_name }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-info btn-sm"
+            (click)="openWriteModal('Update', writeGenreModal, genre)"
+          >
+            Update
+          </button>
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            (click)="deleteGenre(genre.genre_id)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ngb-pagination
+    *ngIf="genres"
+    [collectionSize]="genres.length"
+    [(page)]="page"
+    aria-label="Default pagination"
+  >
+  </ngb-pagination>
+</div>
+
+<ng-template #writeGenreModal let-close="close">
+  <form [formGroup]="writeGenreForm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>{{ operation }} Genre</h5>
+          <button type="button" (click)="close()" class="btn btn-primary">
+            <span>&#215;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="col-form-label">Genre:</label>
+            <input class="form-control" formControlName="name" />
+            <div
+              *ngIf="
+                errorsDirty('name') &&
+                writeGenreForm.controls.name.errors.required
+              "
+            >
+              Required
+            </div>
+            <div
+              *ngIf="
+                errorsDirty('name') &&
+                writeGenreForm.controls.name.errors.maxlength
+              "
+            >
+              Maximum length is {{ maxLength }} characters
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="writeGenre(operation); close()"
+            [disabled]="writeGenreForm.invalid"
+          >
+            {{ operation }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>
