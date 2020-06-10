@@ -42,7 +42,9 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+
         <div class="modal-body">
+
           <div class="form-group">
             Enter Branch Name and address:
             <input class="form-control" id="branchName" formControlName="branchName" [ngClass]="{
@@ -97,6 +99,21 @@
           </button>
         </div>
         <div class="modal-body">
+          <!-- <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">title</th>
+                <th scope="col">copies</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="
+              let c of (bookCopies)">
+                <td>{{ c.title }}</td>
+                <td>{{ c.noOfCopies }}</td>
+              </tr>
+            </tbody>
+          </table> -->
           <div class="form-group">
             <ng-multiselect-dropdown [placeholder]="'Select Books(s)'" [data]="totalBooks" formControlName="books"
               [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
@@ -124,3 +141,20 @@
 
 <ngb-pagination [collectionSize]="branches.length" [(page)]="currentPage">
 </ngb-pagination>
+
+<!-- 
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">title</th>
+      <th scope="col">copies</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="
+    let c of b.bookCopies">
+      <td>{{ c.title }}</td>
+      <td>{{ c.noOfCopies }}</td>
+    </tr>
+  </tbody>
+</table> -->

@@ -28,6 +28,7 @@ export class LibrarianComponent implements OnInit {
   totalBooks: any;
   currentPage: number = 1;
   rowsPerPage: number = 10;
+  bookCopies: any;
 
   private modalRef: NgbModalRef;
   closeResult: any;
@@ -64,7 +65,6 @@ export class LibrarianComponent implements OnInit {
       .subscribe(
         (res) => {
           this.branches = res;
-          console.log(this.branches[0].bookCopies);
         },
         (error) => {
           alert(error);
@@ -110,6 +110,7 @@ export class LibrarianComponent implements OnInit {
       ]),
       branchId: new FormControl(this.branchId),
       books: new FormControl(this.books),
+      bookCopies: new FormControl(this.bookCopies)
     })
   }
 
