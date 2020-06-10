@@ -10,12 +10,11 @@ import {
 } from "@angular/forms";
 
 @Component({
-  selector: 'app-branches',
-  templateUrl: './branches.component.html',
-  styleUrls: ['./branches.component.css']
+  selector: "app-branches",
+  templateUrl: "./branches.component.html",
+  styleUrls: ["./branches.component.css"],
 })
-// the library branch has book copies which the librarian can change 
-
+// the library branch has book copies which the librarian can change
 export class BranchesComponent implements OnInit {
   branches: any;
   books: any;
@@ -45,7 +44,7 @@ export class BranchesComponent implements OnInit {
       textField: "title",
       itemsShowLimit: 5,
       allowSearchFilter: true,
-    }
+    };
   }
 
   ngOnInit() {
@@ -97,7 +96,6 @@ export class BranchesComponent implements OnInit {
           }
         );
     }
-
   }
 
   deleteBranch(branch) {

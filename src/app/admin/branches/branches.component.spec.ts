@@ -53,14 +53,13 @@ describe('BranchesComponent', () => {
     lmsService = new LmsService(null);
     modalService = TestBed.get(NgbModal);
     fb = new FormBuilder();
-    component = new BranchesComponent(lmsService, modalService, fb);
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BranchesComponent);
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 

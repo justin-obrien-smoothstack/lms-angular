@@ -10,12 +10,12 @@ import {
 } from "@angular/forms";
 
 @Component({
-  selector: 'app-librarian',
-  templateUrl: './librarian.component.html',
-  styleUrls: ['./librarian.component.css']
+  selector: "app-librarian",
+  templateUrl: "./librarian.component.html",
+  styleUrls: ["./librarian.component.css"],
 })
 
-// the librarian has the right to change the  number of copies held by a branch at any given time. 
+// the librarian has the right to change the  number of copies held by a branch at any given time.
 export class LibrarianComponent implements OnInit {
   branches: any;
   branchId: number;
@@ -49,9 +49,8 @@ export class LibrarianComponent implements OnInit {
       textField: "title",
       itemsShowLimit: 5,
       allowSearchFilter: true,
-    }
+    };
   }
-
 
   ngOnInit() {
     this.loadAllBranches();
@@ -78,7 +77,6 @@ export class LibrarianComponent implements OnInit {
       .subscribe(
         (res) => {
           this.totalBooks = res;
-
         },
         (error) => {
           alert(error);
@@ -114,13 +112,12 @@ export class LibrarianComponent implements OnInit {
     })
   }
 
-
   updateBranch() {
     const branch = {
       branchId: this.updateBranchForm.value.branchId,
       branchName: this.updateBranchForm.value.branchName,
       branchAddress: this.updateBranchForm.value.branchAddress,
-    }
+    };
     this.lmsService
       .put(`${environment.libUrl}${environment.updateBanchUri}`, branch)
       .subscribe(
@@ -133,7 +130,6 @@ export class LibrarianComponent implements OnInit {
         }
       );
   }
-
 
   openUpdate(content, obj) {
     if (obj !== null) {
@@ -165,7 +161,7 @@ export class LibrarianComponent implements OnInit {
         bookId: obj.bookCopies.bookId,
         branchId: obj.branchId,
         bookCopies: obj.bookCopies,
-      })
+      });
     }
 
     this.modalRef = this.modalService.open(content);
@@ -188,11 +184,14 @@ export class LibrarianComponent implements OnInit {
       branchId: this.addBookCopiesForm.value.branchId,
       noOfCopies: this.addBookCopiesForm.value.noOfCopies,
       originalBookCopies: this.addBookCopiesForm.value.bookCopies,
-      sign: '+',
-    }
+      sign: "+",
+    };
     bookCopies.bookId = bookCopies.books[0].bookId;
     this.lmsService
-      .put(`${environment.libUrl}${environment.updateBanchUri}/${bookCopies.branchId}/copies`, bookCopies)
+      .put(
+        `${environment.libUrl}${environment.updateBanchUri}/${bookCopies.branchId}/copies`,
+        bookCopies
+      )
       .subscribe(
         (res) => {
           this.modalService.dismissAll();
@@ -200,7 +199,7 @@ export class LibrarianComponent implements OnInit {
         (error) => {
           alert(error);
         }
-      )
+      );
   }
 
   subtractBookCopies() {
@@ -210,12 +209,15 @@ export class LibrarianComponent implements OnInit {
       branchId: this.addBookCopiesForm.value.branchId,
       noOfCopies: this.addBookCopiesForm.value.noOfCopies,
       originalBookCopies: this.addBookCopiesForm.value.bookCopies,
-      sign: '-',
-    }
+      sign: "-",
+    };
 
     bookCopies.bookId = bookCopies.books[0].bookId;
     this.lmsService
-      .put(`${environment.libUrl}${environment.updateBanchUri}/${bookCopies.branchId}/copies`, bookCopies)
+      .put(
+        `${environment.libUrl}${environment.updateBanchUri}/${bookCopies.branchId}/copies`,
+        bookCopies
+      )
       .subscribe(
         (res) => {
           this.modalService.dismissAll();
@@ -223,8 +225,6 @@ export class LibrarianComponent implements OnInit {
         (error) => {
           alert(error);
         }
-      )
+      );
   }
-
-
 }
