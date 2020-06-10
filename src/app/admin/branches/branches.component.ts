@@ -10,12 +10,11 @@ import {
 } from "@angular/forms";
 
 @Component({
-  selector: 'app-branches',
-  templateUrl: './branches.component.html',
-  styleUrls: ['./branches.component.css']
+  selector: "app-branches",
+  templateUrl: "./branches.component.html",
+  styleUrls: ["./branches.component.css"],
 })
-// the library branch has book copies which the librarian can change 
-
+// the library branch has book copies which the librarian can change
 export class BranchesComponent implements OnInit {
   branches: any;
   books: any;
@@ -23,55 +22,42 @@ export class BranchesComponent implements OnInit {
   selectedBranch: any;
   branchName: string;
   branchAddress: string;
-  totalBooks: any;
+  currentPage: number = 1;
+  rowsPerPage: number = 10;
 
   private modalRef: NgbModalRef;
-  closeResult: any; 
+  closeResult: any;
   searchString: any;
   updateBranchForm: FormGroup;
   searchBranchForm: FormGroup;
   dropdownSettings: any;
   errMsg: any;
 
-  constructor(    
+  constructor(
     private lmsService: LmsService,
     private modalService: NgbModal,
     private fb: FormBuilder
-    ) {
-      this.dropdownSettings = {
-        singleSelection: false,
-        idField: "bookId",
-        textField: "title",
-        itemsShowLimit: 5,
-        allowSearchFilter: true,
-      }
-     }
+  ) {
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: "bookId",
+      textField: "title",
+      itemsShowLimit: 5,
+      allowSearchFilter: true,
+    };
+  }
 
   ngOnInit() {
     this.loadAllBranches();
-    this.loadAllBooks();
     this.initializeFormGroup();
   }
 
   loadAllBranches() {
     this.lmsService
-      .get(`${environment.adminBackendUrl}${environment.readBanchUri}`)
+      .get(`${environment.adminBackendUrl}${environment.readBranchUri}`)
       .subscribe(
         (res) => {
           this.branches = res;
-        },
-        (error) => {
-          debugger;
-        }
-      );
-  }
-
-  loadAllBooks() {
-    this.lmsService
-      .get(`${environment.adminBackendUrl}${environment.readBookUri}`)
-      .subscribe(
-        (res) => {
-          this.totalBooks = res;
         },
         (error) => {
           debugger;
@@ -83,47 +69,47 @@ export class BranchesComponent implements OnInit {
     const branch = {
       branchId: this.updateBranchForm.value.branchId,
       branchName: this.updateBranchForm.value.branchName,
-      branchAddress: this.updateBranchForm.value.branchAddress, 
+      branchAddress: this.updateBranchForm.value.branchAddress,
     }
     if (!branch.branchId) {
       this.lmsService
-      .post(`${environment.adminBackendUrl}${environment.createBranchURI}`, branch)
-      .subscribe(
-        (res) => {
-          console.log(res);
-          this.loadAllBranches();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        .post(`${environment.adminBackendUrl}${environment.createBranchURI}`, branch)
+        .subscribe(
+          (res) => {
+            this.loadAllBranches();
+            this.modalService.dismissAll();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     } else {
       this.lmsService
-      .put(`${environment.adminBackendUrl}${environment.updateBanchUri}`, branch)
-      .subscribe(
-        (res) => {
-          console.log(res);
-          this.loadAllBranches();
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        .put(`${environment.adminBackendUrl}${environment.updateBanchUri}`, branch)
+        .subscribe(
+          (res) => {
+            this.loadAllBranches();
+            this.modalService.dismissAll();
+          },
+          (error) => {
+            alert(error);
+          }
+        );
     }
-    
   }
 
   deleteBranch(branch) {
     this.lmsService
-    .delete(`${environment.adminBackendUrl}${environment.deleteBranchUri}/${branch}`)
-    .subscribe(
-      (res) => {
-        this.loadAllBranches();
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
+      .delete(`${environment.adminBackendUrl}${environment.deleteBranchUri}/${branch}`)
+      .subscribe(
+        (res) => {
+          this.loadAllBranches();
+          this.modalService.dismissAll();
+        },
+        (error) => {
+          alert(error);
+        }
+      )
   }
 
   initializeFormGroup() {
@@ -144,7 +130,6 @@ export class BranchesComponent implements OnInit {
 
   open(content, obj) {
     if (obj !== null) {
-      //this is edit/update mode
       this.updateBranchForm = this.fb.group({
         branchId: obj.branchId,
         branchName: obj.branchName,

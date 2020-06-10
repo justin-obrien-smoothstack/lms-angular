@@ -1,13 +1,10 @@
 <table class="table table-dark">
   <h3>
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="open(updateBranchModal, null)"
-    >
+    <button type="button" class="btn btn-primary" (click)="open(updateBranchModal, null)">
       Add Branch
     </button>
-  </h3>  <thead>
+  </h3>
+  <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Branch</th>
@@ -17,25 +14,20 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let b of branches; let i = index">
+    <tr *ngFor="
+    let b of branches
+      | slice: (currentPage - 1) * rowsPerPage:currentPage * rowsPerPage; let i = index
+  ">
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ b.branchName }}</td>
       <td>{{ b.branchAddress }}</td>
       <td>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          (click)="open(updateBranchModal, b)"
-        >
+        <button type="button" class="btn btn-secondary" (click)="open(updateBranchModal, b)">
           Edit
         </button>
       </td>
       <td>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          (click)="deleteBranch(b.branchId)"
-        >
+        <button type="button" class="btn btn-secondary" (click)="deleteBranch(b.branchId)">
           Delete
         </button>
       </td>
@@ -50,90 +42,46 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Update Branch</h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-            (click)="c()"
-          >
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="c()">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <div class="form-group">
             Enter Branch Name and address:
-            <input
-              class="form-control"
-              id="branchName"
-              formControlName="branchName"
-              [ngClass]="{
+            <input class="form-control" id="branchName" formControlName="branchName" [ngClass]="{
                 'is-invalid': updateBranchForm.controls['branchName'].errors
-              }"
-            />
-            <input
-            class="form-control"
-            id="branchAddress"
-            formControlName="branchAddress"
-            [ngClass]="{
+              }" />
+            <input class="form-control" id="branchAddress" formControlName="branchAddress" [ngClass]="{
               'is-invalid': updateBranchForm.controls['branchAddress'].errors
-            }"
-          />
-            <div
-              *ngIf="updateBranchForm.controls['branchName'].errors"
-              class="error-msg"
-            >
-              <div
-                [hidden]="
+            }" />
+            <div *ngIf="updateBranchForm.controls['branchName'].errors" class="error-msg">
+              <div [hidden]="
                   !updateBranchForm.controls['branchName'].errors.required
-                "
-              >
+                ">
                 Branch Name is required
               </div>
-              <div
-                [hidden]="
+              <div [hidden]="
                   !updateBranchForm.controls['branchAddress'].errors.required
-                "
-              >
+                ">
                 Branch address is required
               </div>
-              <div
-                [hidden]="
+              <div [hidden]="
                   updateBranchForm.controls['branchName'].errors.maxLength ||
                   updateBranchForm.controls['branchName'].errors.minLength ||
                   updateBranchForm.controls['branchAddress'].errors.maxLength ||
                   updateBranchForm.controls['branchAddress'].errors.minLength
-                "
-              >
+                ">
                 Text fields should be between 3-45 chars in length
               </div>
             </div>
-            <!-- <ng-multiselect-dropdown
-              [placeholder]="'Select Books(s)'"
-              [data]="totalBooks"
-              formControlName="books"
-              [settings]="dropdownSettings"
-              (onSelect)="onItemSelect($event)"
-              (onSelectAll)="onSelectAll($event)"
-            >
-            </ng-multiselect-dropdown> -->
           </div>
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-dismiss="modal"
-            (click)="c()"
-          >
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="c()">
             Close
           </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="updateBranch()"
-            [disabled]="updateBranchForm.invalid"
-          >
+          <button type="button" class="btn btn-primary" (click)="updateBranch()" [disabled]="updateBranchForm.invalid">
             Save changes
           </button>
         </div>
@@ -141,3 +89,6 @@
     </div>
   </form>
 </ng-template>
+
+<ngb-pagination [collectionSize]="branches.length" [(page)]="currentPage">
+</ngb-pagination>

@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
+  borrowerBackendUrl: "http://localhost:3002/lms/borrower",
   adminBackendUrl: "http://localhost:3000/lms/admin",
   libUrl: "http://localhost:3001/lms/librarian",
   borrUrl: "http://localhost:3002/lms/borrower",
-  readBanchUri: "/branches",
   readBranchUri: "/branches",
   updateBanchUri: "/branches",
   createBranchURI: "/branches",
@@ -15,6 +15,9 @@ export const environment = {
   readAuthorsUri: "/authors",
   readAuthorUri: "/authors",
   createBookUri: "/book",
+  returnBookUri: "/returnBook",
+  checkOutBookUri: "/checkOutBook",
+  copiesUri: "/copies",
   createPublisherUri: "/publisher",
   updatePublisherUri: "/publisher",
   readBookUri: "/books",

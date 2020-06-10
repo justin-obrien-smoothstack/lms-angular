@@ -14,10 +14,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let a of authors; let i = index">
+    <tr *ngFor="
+        let a of authors
+          | slice: (currentPage - 1) * rowsPerPage:currentPage * rowsPerPage; let i = index
+      ">
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ a.authorName }}</td>
-      <td>{{ a.showBooks }}</td>
+      <td>
+        <span *ngFor="let b of a.books">{{ b.title }}</span>
+      </td>
       <td>
         <button type="button" class="btn btn-secondary" (click)="open(updateAuthorModal, a)">
           Edit
@@ -79,3 +84,6 @@
     </div>
   </form>
 </ng-template>
+
+<ngb-pagination [collectionSize]="authors.length" [(page)]="currentPage">
+</ngb-pagination>

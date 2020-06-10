@@ -22,7 +22,9 @@ export class AuthorComponent implements OnInit {
   authorId: number;
   books: any;
   totalBooks: any;
-  
+  currentPage: number = 1;
+  rowsPerPage: number = 10;
+
   private modalRef: NgbModalRef;
   errMsg: any;
   closeResult: any;
@@ -35,7 +37,7 @@ export class AuthorComponent implements OnInit {
     private lmsService: LmsService,
     private modalService: NgbModal,
     private fb: FormBuilder
-  ) { 
+  ) {
     this.dropdownSettings = {
       singleSelection: false,
       idField: "bookId",
@@ -74,15 +76,9 @@ export class AuthorComponent implements OnInit {
       .subscribe(
         (res) => {
           this.authors = res;
-          this.authors.forEach(author => {
-            author.showBooks = [];
-            author.books.forEach(element => {
-              author.showBooks.push(element.title);
-            });
-          });
         },
         (error) => {
-          debugger;
+          alert(error);
         }
       );
   }
@@ -95,7 +91,7 @@ export class AuthorComponent implements OnInit {
           this.totalBooks = res;
         },
         (error) => {
-          debugger;
+          alert(error);
         }
       );
   }
@@ -108,7 +104,7 @@ export class AuthorComponent implements OnInit {
           this.loadAllAuthors();
         },
         (error) => {
-          debugger;
+          alert(error);
         }
       );
   }
@@ -120,19 +116,18 @@ export class AuthorComponent implements OnInit {
       books: this.updateAuthorForm.value.books,
     };
 
-    if (!author.authorId)
-    {
+    if (!author.authorId) {
       this.lmsService
-      .post(`${environment.adminBackendUrl}${environment.readAuthorsUri}`, author)
-      .subscribe(
-        (res) => {
-          this.loadAllAuthors();
-          this.modalService.dismissAll();
-        },
-        (error) => {
-          debugger;
-        }
-      )
+        .post(`${environment.adminBackendUrl}${environment.readAuthorsUri}`, author)
+        .subscribe(
+          (res) => {
+            this.loadAllAuthors();
+            this.modalService.dismissAll();
+          },
+          (error) => {
+            alert(error);
+          }
+        )
     }
     else {
       this.lmsService
@@ -143,7 +138,7 @@ export class AuthorComponent implements OnInit {
             this.modalService.dismissAll();
           },
           (error) => {
-            debugger;
+            alert(error);
           }
         );
     }
