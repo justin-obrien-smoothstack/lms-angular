@@ -14,7 +14,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { NgbPaginationModule } from "@ng-bootstrap/ng-bootstrap";
-import { of } from "rxjs";
+import { of, throwError } from "rxjs";
 
 import { AdminBookComponent } from "./admin-book.component";
 import { OLmsService } from "src/app/common/o/services/oLms.service";
@@ -96,10 +96,14 @@ describe("AdminBookComponent", () => {
       of(mockBooks),
       of(mockAuthors),
       of(mockGenres),
+      of(mockPublishers),
+      of(mockBooks),
+      of(mockAuthors),
+      of(mockGenres),
       of(mockPublishers)
     );
-    spyOn(lmsService, "post").and.returnValue(of(null));
-    spyOn(lmsService, "put").and.returnValue(of(null));
+
+    spyOn(lmsService, "delete").and.returnValue(of(null));
   });
 
   it("should create", () => {
@@ -136,6 +140,7 @@ describe("AdminBookComponent", () => {
 
   it("should send a POST request to the backend's create URL", fakeAsync(() => {
     spyOn(window, "confirm").and.returnValue(true);
+    spyOn(lmsService, "post").and.returnValue(of(null));
     component.initializeWriteBookForm(null);
     component.writeBookForm.value.title = "New Mock Book";
     component.writeBookForm.value.publisher = [mockPublishers[1]];
@@ -157,6 +162,7 @@ describe("AdminBookComponent", () => {
 
   it("should send a PUT request to the backend's update URL", fakeAsync(() => {
     spyOn(window, "confirm").and.returnValue(true);
+    spyOn(lmsService, "put").and.returnValue(of(null));
     component.ngOnInit();
     tick();
     component.initializeWriteBookForm(mockBooks[0]);
@@ -166,5 +172,52 @@ describe("AdminBookComponent", () => {
       environment.adminBackendUrl + environment.createBookUri,
       mockBooks[0]
     );
+  }));
+
+  it("should show an alert with an error message", fakeAsync(() => {
+    spyOn(window, "alert");
+    spyOn(window, "confirm").and.returnValue(true);
+    spyOn(lmsService, "post").and.returnValue(
+      throwError({ error: "Mock error message 1" })
+    );
+    spyOn(lmsService, "put").and.returnValue(
+      throwError({ error: "Mock error message 2" })
+    );
+    component.ngOnInit();
+    tick();
+    component.initializeWriteBookForm(mockBooks[0]);
+    component.writeBook("Create");
+    tick();
+    component.initializeWriteBookForm(mockBooks[0]);
+    component.writeBook("Update");
+    tick();
+    expect(window.alert).toHaveBeenCalledWith("Mock error message 1");
+    expect(window.alert).toHaveBeenCalledWith("Mock error message 2");
+  }));
+
+  it("should not send a request to the backend's create or update URLs", () => {
+    spyOn(window, "confirm").and.returnValue(false);
+    spyOn(lmsService, "post").and.returnValue(of(null));
+    spyOn(lmsService, "put").and.returnValue(of(null));
+    component.writeBook("Create");
+    component.writeBook("Update");
+    expect(lmsService.post).not.toHaveBeenCalled();
+    expect(lmsService.put).not.toHaveBeenCalled();
+  });
+
+  it("should send a request to the backend's delete URL", fakeAsync(() => {
+    spyOn(window, "confirm").and.returnValue(true);
+    component.deleteBook(1);
+    tick();
+    expect(lmsService.delete).toHaveBeenCalledWith(
+      environment.adminBackendUrl + environment.deleteBookUri + "/1"
+    );
+  }));
+
+  it("should not send a request to the backend's delete URL", fakeAsync(() => {
+    spyOn(window, "confirm").and.returnValue(false);
+    component.deleteBook(1);
+    tick();
+    expect(lmsService.delete).not.toHaveBeenCalled();
   }));
 });
