@@ -1,3 +1,5 @@
+import { BranchesComponent } from './admin/branches/branches.component';
+import { AuthorComponent } from './admin/author/author.component';
 import { NgModule } from "@angular/core";
 import { LayoutComponent } from "./layout/layout.component";
 import { HomeComponent } from "./home/home.component";
@@ -6,18 +8,14 @@ import { FooterComponent } from "./layout/footer/footer.component";
 import { ErrorComponent } from "./error/error.component";
 import { LibrarianComponent } from "./librarian/librarian.component";
 import { BorrowerComponent } from "./borrower/borrower.component";
-import { AdministratorComponent } from "./administrator/administrator.component";
 import { AdminAuthorComponent } from "./administrator/admin-author/admin-author.component";
 import { AdminBookComponent } from "./administrator/admin-book/admin-book.component";
 import { AdminBorrowerComponent } from "./administrator/admin-borrower/admin-borrower.component";
 import { AdminBranchComponent } from "./administrator/admin-branch/admin-branch.component";
 import { AdminGenreComponent } from "./administrator/admin-genre/admin-genre.component";
 import { AdminPublisherComponent } from "./administrator/admin-publisher/admin-publisher.component";
-import { OverrideComponent } from "./administrator/override/override.component";
 import { Routes, RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
-import { AdministratorComponent } from "./administrator/administrator.component";
-import { OverrideComponent } from "./administrator/override/override.component";
 
 const routes: Routes = [
   {
@@ -39,7 +37,7 @@ const routes: Routes = [
       },
       {
         path: "lms/admin/author",
-        component: AdminAuthorComponent,
+        component: AuthorComponent,
       },
       {
         path: "lms/admin/book",
@@ -51,7 +49,7 @@ const routes: Routes = [
       },
       {
         path: "lms/admin/branch",
-        component: AdminBranchComponent,
+        component: BranchesComponent,
       },
       {
         path: "lms/admin/genre",
@@ -85,4 +83,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
