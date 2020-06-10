@@ -1,5 +1,5 @@
-import { BranchesComponent } from './admin/branches/branches.component';
-import { AuthorComponent } from './admin/author/author.component';
+import { BranchesComponent } from "./admin/branches/branches.component";
+import { AuthorComponent } from "./admin/author/author.component";
 import { NgModule } from "@angular/core";
 import { LayoutComponent } from "./layout/layout.component";
 import { HomeComponent } from "./home/home.component";
@@ -14,6 +14,8 @@ import { AdminGenreComponent } from "./administrator/admin-genre/admin-genre.com
 import { AdminPublisherComponent } from "./administrator/admin-publisher/admin-publisher.component";
 import { Routes, RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
+import { AdministratorComponent } from "src/app/administrator/administrator.component";
+import { OverrideComponent } from "src/app/administrator/override/override.component";
 
 const routes: Routes = [
   {
@@ -81,4 +83,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
